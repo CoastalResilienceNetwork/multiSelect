@@ -1,0 +1,70 @@
+{
+    "name": "Flood and SLR",
+	"pluginHeight": 450,
+	"regions": [
+		{
+			"name": "Ventura",
+            "extent": {
+                "xmin": -13288721.369912772,
+                "ymin": 4035936.3860100782,
+                "xmax": -13245012.962495957,
+                "ymax": 4075072.7842828752,
+                "spatialReference": {
+                    "wkid": 102100,
+                    "latestWkid": 3857
+                }
+            },
+			"methods": "methods/SLR.pdf",
+			"tabs" : [
+				{
+					"name": "Management Actions",
+					"controls": [
+						{"name":"Select the hazard to view", "group": "main", "values":[{"name":"Rising Tide","value":"RT", "help": "Year 2010"},{"name":"Aggregated Rising Tide", "value":"ART"},{"name":"Dune Erosion Hazard Zone", "value":"DEHZ"}], "type": "radio"},
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT"},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true},{"name":"Medium", "value":"Med"},{"name":"High", "value":"High"}], "type": "slider"},	
+						{"name":"Erosion projection", "group": "main", "values":[{"name":"Long Term","value":"LT", "selected": true},{"name":"Long Term and Large Storm", "value":"LTLS"}], "type": "radio"},
+						{"name":"Future Erosion Scenarios", "group": "main", "values":[{"name":"No Change","value":"NC", "selected": true},{"name":"Sand Mining Cessation", "value":"SMC"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"DEL"}], "type": "radio"}
+					
+					], 
+					"combos": {
+
+					},
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer"
+				
+				}			
+			]
+		},
+		{
+			"name": "Monterey",
+            "extent": {
+                "xmin": -13288721.369912772,
+                "ymin": 4035936.3860100782,
+                "xmax": -13245012.962495957,
+                "ymax": 4075072.7842828752,
+                "spatialReference": {
+                    "wkid": 102100,
+                    "latestWkid": 3857
+                }
+            },
+			"methods": "methods/SLR.pdf",
+			"tabs" : [
+				{
+					"name": "Management Actions",
+					"controls": [
+						{"name":"Select the hazard to view", "group": "main", "values":[{"name":"Rising Tide","value":"RT", "help": "Year 2010"},{"name":"Aggregated Rising Tide", "value":"ART"},{"name":"Dune Erosion Hazard Zone", "value":"DEHZ"}], "type": "radio"},
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT"},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true},{"name":"Medium", "value":"Med"},{"name":"High", "value":"High"}], "type": "slider"},	
+						{"name":"Erosion projection", "group": "main", "values":[{"name":"Long Term","value":"LT", "selected": true},{"name":"Long Term and Large Storm", "value":"LTLS"}], "type": "radio"},
+						{"name":"Future Erosion Scenarios", "group": "main", "values":[{"name":"No Change","value":"NC", "selected": true},{"name":"Sand Mining Cessation", "value":"SMC"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"DEL"}], "type": "radio"}
+					
+					], 
+					"combos": {
+
+					},
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer"
+				
+				}			
+			]
+		}
+	]
+}

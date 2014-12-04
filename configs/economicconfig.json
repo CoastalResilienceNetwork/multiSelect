@@ -1,0 +1,1618 @@
+{
+    "name": "Economic App",
+	"pluginHeight": 450,
+	"regions": [
+		{
+			"name": "Ventura",
+            "extent": {
+                "xmin": -13288721.369912772,
+                "ymin": 4035936.3860100782,
+                "xmax": -13245012.962495957,
+                "ymax": 4075072.7842828752,
+                "spatialReference": {
+                    "wkid": 102100,
+                    "latestWkid": 3857
+                }
+            },
+			"methods": "methods/SLR.pdf",
+			"tabs" : [
+				{
+					"name": "Management Actions",
+					"controls": [
+						{"name": "Management Scenarios", "group": "MS", "values": [{"name":"Using Concrete","value":"Concrete", "help": "Year 2010"},{"name":"Using Marshmallows Stuff", "value":"marshmallows"}], "type": "checkbox"},
+						{"name":"Hazard Zone Approach", "group": "main", "values":[{"name":"Engineered Based Approach","value":"EBA", "help": "Year 2010"},{"name":"Nature Based Approach", "value":"NBA"}], "type": "radio"},
+						{"name":"Hazard Zone Type", "group": "main", "values":[{"name":"Coastal Erosion","value":"CE"},{"name":"Rising Tide", "value":"RT"},{"name":"Coastal Storm Flood", "value":"CSF"},{"name":"Coastal Storm Wave Impact", "value":"CSWI"}], "type": "radio"},
+						{"name":"Year / Sea Level Rise", "group": "main", "values":[{"name":"Current / Existing Conditions","value":"CEC", "selected": true},{"name":"2030 / High", "value":"2030"},{"name":"2060 / High", "value":"2060"},{"name":"2100 / High", "value":"2100"}], "type": "radio"}	
+					
+					], 
+					"combos": {
+						"Concrete": [{"type":"dynamic","show":[2,4]}],
+						"marshmallows":  [{"type":"dynamic","show":[1,3,5]}],
+						"EBA|CE|CEC": [{"type":"dynamic","show":[15]}],
+						"EBA|CE|2030": [{"type":"dynamic","show":[16]}],
+						"EBA|CE|2060": [{"type":"dynamic","show":[17]}],
+						"EBA|CE|2100": [{"type":"dynamic","show":[18]}],
+						"EBA|RT|CEC": [{"type":"dynamic","show":[19]}],
+						"EBA|RT|2030": [{"type":"dynamic","show":[20]}],
+						"EBA|RT|2060": [{"type":"dynamic","show":[21]}],
+						"EBA|RT|2100": [{"type":"dynamic","show":[22]}],
+						"EBA|CSF|CEC": [{"type":"dynamic","show":[7]}],
+						"EBA|CSF|2030": [{"type":"dynamic","show":[8]}],
+						"EBA|CSF|2060": [{"type":"dynamic","show":[9]}],
+						"EBA|CSF|2100": [{"type":"dynamic","show":[10]}],
+						"EBA|CSWI|CEC": [{"type":"dynamic","show":[11]}],
+						"EBA|CSWI|2030": [{"type":"dynamic","show":[12]}],
+						"EBA|CSWI|2060": [{"type":"dynamic","show":[13]}],
+						"EBA|CSWI|2100": [{"type":"dynamic","show":[14]}],
+						"NBA|CE|CEC": [{"type":"dynamic","show":[32]}],
+						"NBA|CE|2030": [{"type":"dynamic","show":[33]}],
+						"NBA|CE|2060": [{"type":"dynamic","show":[34]}],
+						"NBA|CE|2100": [{"type":"dynamic","show":[35]}],
+						"NBA|RT|CEC": [{"type":"dynamic","show":[36]}],
+						"NBA|RT|2030": [{"type":"dynamic","show":[37]}],
+						"NBA|RT|2060": [{"type":"dynamic","show":[38]}],
+						"NBA|RT|2100": [{"type":"dynamic","show":[39]}],
+						"NBA|CSF|CEC": [{"type":"dynamic","show":[24]}],
+						"NBA|CSF|2030": [{"type":"dynamic","show":[25]}],
+						"NBA|CSF|2060": [{"type":"dynamic","show":[26]}],
+						"NBA|CSF|2100": [{"type":"dynamic","show":[27]}],
+						"NBA|CSWI|CEC": [{"type":"dynamic","show":[28]}],
+						"NBA|CSWI|2030": [{"type":"dynamic","show":[29]}],
+						"NBA|CSWI|2060": [{"type":"dynamic","show":[30]}],
+						"NBA|CSWI|2100": [{"type":"dynamic","show":[31]}]
+					},
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_Economics/Ventura_Economics_Scenarios/MapServer"
+				},
+				{
+					"name": "EBA NBA Damage Estimates",
+					"controls": [
+						{"name": "Management Scenarios", "group": "main", "values": [{"name":"Existing Conditions","value":"Cur"},{"name":"Engineered Based Approach","value":"EBA"},{"name":"Nature Based Approach","value":"NBA"}], "type": "radio"},
+						{"name":"Damage Estimates", "group": "main", "values":[{"name":"$ value amount of public buildings losses","value":"Pub"},{"name":"$ value amount of residential losses", "value":"Res"},{"name":"$ value amount of agricultural losses", "value":"Ag"},{"name":"$ value amount of recreational losses", "value":"Rec"}], "type": "radio"},
+						{"name":"Hazard Zones", "group": "main", "values":[{"name":"Coastal Erosion","value":"ED"},{"name":"Rising Tide", "value":"DD"},{"name":"Coastal Storm Flood", "value":"SD"},{"name":"Coastal Storm Wave Impact", "value":"WD"}], "type": "radio"},
+						{"name":"Year / Sea Level Rise", "group": "main", "values":[{"name":"Current / Existing Conditions","value":"ex"},{"name":"2030 / High", "value":"2030"},{"name":"2060 / High", "value":"2060"},{"name":"2100 / High", "value":"2100"}], "type": "radio"}	
+					
+					], 
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_Economics/Ventura_Damage_Estimates/MapServer",
+					"combos": {
+							"Cur|Ag|DD|2030": [
+								{
+									"show": [
+										0
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|DD|2060": [
+								{
+									"show": [
+										1
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|DD|2100": [
+								{
+									"show": [
+										2
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|DD|ex": [
+								{
+									"show": [
+										3
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|2030": [
+								{
+									"show": [
+										4
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|2060": [
+								{
+									"show": [
+										5
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|2100": [
+								{
+									"show": [
+										6
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|2030": [
+								{
+									"show": [
+										7
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|2060": [
+								{
+									"show": [
+										8
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|2100": [
+								{
+									"show": [
+										9
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|ex": [
+								{
+									"show": [
+										10
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|2030": [
+								{
+									"show": [
+										11
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|2060": [
+								{
+									"show": [
+										12
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|2100": [
+								{
+									"show": [
+										13
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|ex": [
+								{
+									"show": [
+										14
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|2030": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|2060": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|2100": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|2030": [
+								{
+									"show": [
+										15
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|2060": [
+								{
+									"show": [
+										16
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|2100": [
+								{
+									"show": [
+										17
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|2030": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|2060": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|2100": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|2030": [
+								{
+									"show": [
+										18
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|2060": [
+								{
+									"show": [
+										19
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|2100": [
+								{
+									"show": [
+										20
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|ex": [
+								{
+									"show": [
+										21
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|2030": [
+								{
+									"show": [
+										22
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|2060": [
+								{
+									"show": [
+										23
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|2100": [
+								{
+									"show": [
+										24
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|ex": [
+								{
+									"show": [
+										25
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|2030": [
+								{
+									"show": [
+										26
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|2060": [
+								{
+									"show": [
+										27
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|2100": [
+								{
+									"show": [
+										28
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|2030": [
+								{
+									"show": [
+										29
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|2060": [
+								{
+									"show": [
+										30
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|2100": [
+								{
+									"show": [
+										31
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|ex": [
+								{
+									"show": [
+										32
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|2030": [
+								{
+									"show": [
+										33
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|2060": [
+								{
+									"show": [
+										34
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|2100": [
+								{
+									"show": [
+										35
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|ex": [
+								{
+									"show": [
+										36
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|2030": [
+								{
+									"show": [
+										37
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|2060": [
+								{
+									"show": [
+										38
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|2100": [
+								{
+									"show": [
+										39
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|ex": [
+								{
+									"show": [
+										40
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|2030": [
+								{
+									"show": [
+										41
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|2060": [
+								{
+									"show": [
+										42
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|2100": [
+								{
+									"show": [
+										43
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|2030": [
+								{
+									"show": [
+										44
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|2060": [
+								{
+									"show": [
+										45
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|2100": [
+								{
+									"show": [
+										46
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|ex": [
+								{
+									"show": [
+										47
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|2030": [
+								{
+									"show": [
+										48
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|2060": [
+								{
+									"show": [
+										49
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|2100": [
+								{
+									"show": [
+										50
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|ex": [
+								{
+									"show": [
+										51
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|2030": [
+								{
+									"show": [
+										52
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|2060": [
+								{
+									"show": [
+										53
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|2100": [
+								{
+									"show": [
+										54
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|ex": [
+								{
+									"show": [
+										55
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|2030": [
+								{
+									"show": [
+										56
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|2060": [
+								{
+									"show": [
+										57
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|2100": [
+								{
+									"show": [
+										58
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|2030": [
+								{
+									"show": [
+										59
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|2060": [
+								{
+									"show": [
+										60
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|2100": [
+								{
+									"show": [
+										61
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|ex": [
+								{
+									"show": [
+										62
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|2030": [
+								{
+									"show": [
+										63
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|2060": [
+								{
+									"show": [
+										64
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|2100": [
+								{
+									"show": [
+										65
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|ex": [
+								{
+									"show": [
+										66
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|2030": [
+								{
+									"show": [
+										67
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|2060": [
+								{
+									"show": [
+										68
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|2100": [
+								{
+									"show": [
+										69
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|ex": [
+								{
+									"show": [
+										70
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|2030": [
+								{
+									"show": [
+										71
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|2060": [
+								{
+									"show": [
+										72
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|2100": [
+								{
+									"show": [
+										73
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|2030": [
+								{
+									"show": [
+										74
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|2060": [
+								{
+									"show": [
+										75
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|2100": [
+								{
+									"show": [
+										76
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|ex": [
+								{
+									"show": [
+										77
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|2030": [
+								{
+									"show": [
+										78
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|2060": [
+								{
+									"show": [
+										79
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|2100": [
+								{
+									"show": [
+										80
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|ex": [
+								{
+									"show": [
+										81
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|2030": [
+								{
+									"show": [
+										82
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|2060": [
+								{
+									"show": [
+										83
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|2100": [
+								{
+									"show": [
+										84
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|ex": [
+								{
+									"show": [
+										85
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|2030": [
+								{
+									"show": [
+										86
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|2060": [
+								{
+									"show": [
+										87
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|2100": [
+								{
+									"show": [
+										88
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|2030": [
+								{
+									"show": [
+										89
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|2060": [
+								{
+									"show": [
+										90
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|2100": [
+								{
+									"show": [
+										91
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|ex": [
+								{
+									"show": [
+										92
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|2030": [
+								{
+									"show": [
+										93
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|2060": [
+								{
+									"show": [
+										94
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|2100": [
+								{
+									"show": [
+										95
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|ex": [
+								{
+									"show": [
+										96
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|2030": [
+								{
+									"show": [
+										97
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|2060": [
+								{
+									"show": [
+										98
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|2100": [
+								{
+									"show": [
+										99
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|ex": [
+								{
+									"show": [
+										100
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|2030": [
+								{
+									"show": [
+										101
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|2060": [
+								{
+									"show": [
+										102
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|2100": [
+								{
+									"show": [
+										103
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|2030": [
+								{
+									"show": [
+										104
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|2060": [
+								{
+									"show": [
+										105
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|2100": [
+								{
+									"show": [
+										106
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|ex": [
+								{
+									"show": [
+										107
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|2030": [
+								{
+									"show": [
+										108
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|2060": [
+								{
+									"show": [
+										109
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|2100": [
+								{
+									"show": [
+										110
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|ex": [
+								{
+									"show": [
+										111
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|2030": [
+								{
+									"show": [
+										112
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|2060": [
+								{
+									"show": [
+										113
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|2100": [
+								{
+									"show": [
+										114
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|ex": [
+								{
+									"show": [
+										115
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|2030": [
+								{
+									"show": [
+										116
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|2060": [
+								{
+									"show": [
+										117
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|2100": [
+								{
+									"show": [
+										118
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|2030": [
+								{
+									"show": [
+										119
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|2060": [
+								{
+									"show": [
+										120
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|2100": [
+								{
+									"show": [
+										121
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|ex": [
+								{
+									"show": [
+										122
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|2030": [
+								{
+									"show": [
+										123
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|2060": [
+								{
+									"show": [
+										124
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|2100": [
+								{
+									"show": [
+										125
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|ex": [
+								{
+									"show": [
+										126
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|2030": [
+								{
+									"show": [
+										127
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|2060": [
+								{
+									"show": [
+										128
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|2100": [
+								{
+									"show": [
+										129
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|ex": [
+								{
+									"show": [
+										130
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|2030": [
+								{
+									"show": [
+										131
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|2060": [
+								{
+									"show": [
+										132
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|2100": [
+								{
+									"show": [
+										133
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|2030": [
+								{
+									"show": [
+										134
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|2060": [
+								{
+									"show": [
+										135
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|2100": [
+								{
+									"show": [
+										136
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|ex": [
+								{
+									"show": [
+										137
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|2030": [
+								{
+									"show": [
+										138
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|2060": [
+								{
+									"show": [
+										139
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|2100": [
+								{
+									"show": [
+										140
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|ex": [
+								{
+									"show": [
+										141
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|2030": [
+								{
+									"show": [
+										142
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|2060": [
+								{
+									"show": [
+										143
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|2100": [
+								{
+									"show": [
+										144
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|ex": [
+								{
+									"show": [
+										145
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|2030": [
+								{
+									"show": [
+										146
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|2060": [
+								{
+									"show": [
+										147
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|2100": [
+								{
+									"show": [
+										148
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|2030": [
+								{
+									"show": [
+										149
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|2060": [
+								{
+									"show": [
+										150
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|2100": [
+								{
+									"show": [
+										151
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|ex": [
+								{
+									"show": [
+										152
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|2030": [
+								{
+									"show": [
+										153
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|2060": [
+								{
+									"show": [
+										154
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|2100": [
+								{
+									"show": [
+										155
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|ex": [
+								{
+									"show": [
+										156
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|2030": [
+								{
+									"show": [
+										157
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|2060": [
+								{
+									"show": [
+										158
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|2100": [
+								{
+									"show": [
+										159
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|ex": [
+								{
+									"show": [
+										160
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|2030": [
+								{
+									"show": [
+										161
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|2060": [
+								{
+									"show": [
+										162
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|2100": [
+								{
+									"show": [
+										163
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|2030": [
+								{
+									"show": [
+										164
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|2060": [
+								{
+									"show": [
+										165
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|2100": [
+								{
+									"show": [
+										166
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|ex": [
+								{
+									"show": [
+										167
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|2030": [
+								{
+									"show": [
+										168
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|2060": [
+								{
+									"show": [
+										169
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|2100": [
+								{
+									"show": [
+										170
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|ex": [
+								{
+									"show": [
+										171
+									],
+									"type": "dynamic"
+								}
+							]
+						}
+				}			
+			]
+		}
+	]
+}
