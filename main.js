@@ -401,6 +401,8 @@ define([
 					
 					sandWitchList = [];
 					
+					//CHECKDEP
+					
 					for (key in pretabsandWitches[selectedIndex]) {
 					
 						cgroup = pretabsandWitches[selectedIndex][key];
@@ -592,7 +594,8 @@ define([
 						
 						array.forEach(ctabrec.controls, lang.hitch(this,function(control, c){
 						
-						
+									//dep = control.dependent;
+					//			if (dep == undefined) {dep = ""};					
 						
 						  if (control.type == "slider") {
 						  
@@ -648,6 +651,8 @@ define([
 								
 								labelsnode = domConstruct.create("ol", {"data-dojo-type":"dijit/form/HorizontalRuleLabels", container:"bottomDecoration", style:"height:0.25em;padding-top: 10px !important;color:black !important", innerHTML: outslid})
 								nslidernode.appendChild(labelsnode);
+								
+
 								
 								slider = new HorizontalSlider({
 									name: "tab_" + i + "_group_" + c,
