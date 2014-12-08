@@ -362,6 +362,7 @@ define([
 					
 					pretabsandWitches = [];
 					
+					
 					array.forEach(this.currentgeography.tabs, lang.hitch(this,function(ctabrec, i){
 						
 						var sandWitch = {};
@@ -371,7 +372,7 @@ define([
 							array.forEach(control.values, lang.hitch(this,function(val, v){
 							
 								if (val.selected == true) {
-									console.log(control.group, control.type, val.value);
+									console.log(control.group, control.type, val.value, control.dependent);
 								
 									if (sandWitch[control.group] == undefined) {
 									
@@ -387,6 +388,20 @@ define([
 									}									
 								
 									sandWitch[control.group][c].push(val.value);
+									
+									//im in  here
+										if (control.dependent != undefined) {
+										
+											depmet = false;
+											console.log("Happy");
+											for (key in sandWitch[control.group]) {
+												array.forEach(sandWitch[control.group][key], lang.hitch(this,function(val, v){
+															console.log(val);
+															//alert(control.dependent)
+														}));
+											}
+										
+										}
 								}
 							
 							}));
@@ -402,6 +417,8 @@ define([
 					sandWitchList = [];
 					
 					//CHECKDEP
+					console.log('yo');
+					console.log(this.tabpan);
 					
 					for (key in pretabsandWitches[selectedIndex]) {
 					
