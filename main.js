@@ -309,8 +309,6 @@ define([
 			
 			   updateChecks: function(ctl, e) {
 
-				console.log(ctl, e)
-				
 				this.currentgeography.tabs[ctl.tab].controls[ctl.control].values[ctl.value].selected = e;
 				
 				doit = false;
@@ -333,8 +331,6 @@ define([
 			   
 			   updateSlider: function(ctl,e) {
 			   
-				//console.log(e);
-			   
 					array.forEach(this.currentgeography.tabs[ctl.tab].controls[ctl.control].values, lang.hitch(this,function(v, i) {
 
 						v.selected = false;
@@ -347,11 +343,28 @@ define([
 					a = lang.hitch(this,this.makeSandwidches);
 			
 					a();
-					
+						
 			   },
 				 
 			   makeSandwidches: function() {
 			   
+				//enable all widgets from current tab or layout	
+				if (this.tabpan.selectedChildWidget != undefined) {
+					formWidgets = registry.findWidgets(this.tabpan.selectedChildWidget.domNode);
+				} else {
+					formWidgets1 = registry.findWidgets(this.tabpan.domNode);
+					formWidgets = registry.findWidgets(formWidgets1[0].domNode);
+				}
+				
+				//formWidgets = registry.findWidgets(this.tabpan.selectedChildWidget.domNode);
+				console.log("FORM ******************* ", formWidgets);
+				
+				array.forEach(formWidgets, lang.hitch(this,function(widg, w){
+					widg.setAttribute('disabled', false);
+				}));
+				
+				
+				//start making the sandwidches
 					console.log(this.currentgeography);
 					
 					try {
@@ -367,12 +380,20 @@ define([
 						
 						var sandWitch = {};
 						
-						array.forEach(ctabrec.controls, lang.hitch(this,function(control, c){
+						valarr = new Array();
 						
+						
+						array.forEach(ctabrec.controls, lang.hitch(this,function(control, c){
+							
+							depmet = false;
+							nsel = 0;
+							
 							array.forEach(control.values, lang.hitch(this,function(val, v){
 							
 								if (val.selected == true) {
-									console.log(control.group, control.type, val.value, control.dependent);
+									nsel = nsel + 1;
+									console.log("depcheck", control.group, control.type, val.value, control.dependent);
+									valarr.push(val.value);
 								
 									if (sandWitch[control.group] == undefined) {
 									
@@ -386,27 +407,56 @@ define([
 										sandWitch[control.group][c] = [];
 									
 									}									
-								
-									sandWitch[control.group][c].push(val.value);
 									
 									//im in  here
 										if (control.dependent != undefined) {
 										
-											depmet = false;
-											console.log("Happy");
-											for (key in sandWitch[control.group]) {
-												array.forEach(sandWitch[control.group][key], lang.hitch(this,function(val, v){
-															console.log(val);
-															//alert(control.dependent)
-														}));
-											}
+											deper = control.dependent.split("|")
+											array.forEach(deper, lang.hitch(this,function(deptext, d){
+												array.forEach(valarr, lang.hitch(this,function(valtext, d){
+													if (deptext == valtext) {console.log("DEPMET",deptext, valtext);depmet = true;}
+												}));
+											}));
+										
+										//	depmet = false;
+										//	for (key in sandWitch[control.group]) {
+										//		array.forEach(sandWitch[control.group][key], lang.hitch(this,function(val, v){
+										//					//console.log("happy", val, control.dependent);
+										//					//alert(control.dependent)
+										//				}));
+										//	}
+										
+										} else {
+										
+											depmet = true;
 										
 										}
+										
+										if (depmet == true) {
+											//alert(val.value);
+											sandWitch[control.group][c].push(val.value);
+										} else {
+											sandWitch[control.group][c].push("");
+										}
+										
 								}
 							
 							}));
 						
+							console.log("controldep", c, depmet);
+
+							if ((depmet == false) && (nsel > 0)) {
+								//disable all widgets from current tab or layout	
+								
+								array.forEach(formWidgets, lang.hitch(this,function(widg, w){
+									if (widg.data.control == c) {
+										widg.setAttribute('disabled', true);
+									}
+								}));
+							}
+						
 						}));
+						
 						
 						console.log("sandWitch");
 						console.log(sandWitch);
@@ -432,9 +482,10 @@ define([
 							
 							arrs = (cgroup[c]);
 							
-							//console.log(arrs);
-							
-							allArrays.push(arrs);
+							//console.log("ARRR", arrs);
+							if (arrs != "") {
+								allArrays.push(arrs);
+							}
 							
 							groupc = groupc + 1;
 						}
@@ -444,7 +495,7 @@ define([
 							
 							array.forEach(r, lang.hitch(this,function(val, v){
 							
-								console.log(val, allArrays);
+								//console.log("YO", val, allArrays);
 								cand = val.split("|");
 								if (cand.length = allArrays.length) {
 								
@@ -674,7 +725,8 @@ define([
 								slider = new HorizontalSlider({
 									name: "tab_" + i + "_group_" + c,
 									//id: ctab.id + "_slider_",
-									value: 0,
+									data: {"tab": i, "control": c},
+									value: isel,
 									minimum: 0,
 									maximum: (control.values.length -1),
 									showButtons:false,
@@ -686,6 +738,7 @@ define([
 									onChange: lang.hitch(this,function(e) { this.updateSlider({"tab": i, "control": c, "type": control.type}, e) }),
 									style: "width:210px;margin-top:10px;margin-bottom:20px"
 								}, nslidernode);
+								
 								
 								parser.parse()								
 						   

@@ -28,7 +28,7 @@
 																						{"name":"Coastal Storm Flood Hazard Zone", "value":"CSFHZ"},
 																						{"name":"Aggregated Coastal Storm Flood Hazard Zone", "value":"ACSFHZ"},
 																						], "type": "radio"},
-						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT"},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "selected": true},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
 						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true},{"name":"Medium", "value":"Med"},{"name":"High", "value":"High"}], "type": "slider"},	
 						{"name":"Erosion projection", "dependent" : "DEHZ|CEHZ", "group": "main", "values":[{"name":"Long Term","value":"LT", "selected": true},{"name":"Long Term and Large Storm", "value":"LTLS"}], "type": "radio"},
 						{"name":"Future Erosion Scenarios", "group": "main", "values":[{"name":"No Change","value":"NC", "selected": true},{"name":"Sand Mining Cessation", "value":"SMC"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"DEL"}], "type": "radio"}
@@ -39,7 +39,31 @@
 					},
 					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer"
 				
-				}			
+				},
+				{
+					"name": "Management Actions",
+					"controls": [
+						{"name":"Select the hazard to view", "group": "main", "values":[{"name":"Rising Tide","value":"RT", "help": "Year 2010"},
+																						{"name":"Aggregated Rising Tide", "value":"ART"},
+																						{"name":"Dune Erosion Hazard Zone", "value":"DEHZ"},
+																						{"name":"Aggregated Dune Erosion Hazard Zone", "value":"ADEHZ"},
+																						{"name":"Cliff Erosion Hazard Zone", "value":"CEHZ"},
+																						{"name":"Aggregated Cliff Erosion Hazard Zone", "value":"ACEHZ"},
+																						{"name":"Coastal Storm Flood Hazard Zone", "value":"CSFHZ"},
+																						{"name":"Aggregated Coastal Storm Flood Hazard Zone", "value":"ACSFHZ"},
+																						], "type": "radio"},
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "selected": true},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true},{"name":"Medium", "value":"Med"},{"name":"High", "value":"High"}], "type": "slider"},	
+						{"name":"Erosion projection", "dependent" : "DEHZ|CEHZ", "group": "main", "values":[{"name":"Long Term","value":"LT", "selected": true},{"name":"Long Term and Large Storm", "value":"LTLS"}], "type": "radio"},
+						{"name":"Future Erosion Scenarios", "group": "main", "values":[{"name":"No Change","value":"NC", "selected": true},{"name":"Sand Mining Cessation", "value":"SMC"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"DEL"}], "type": "radio"}
+					
+					], 
+					"combos": {
+
+					},
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer"
+				
+				}					
 			]
 		},
 		{
