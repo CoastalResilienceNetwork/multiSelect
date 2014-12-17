@@ -376,11 +376,13 @@ define([
 					pretabsandWitches = [];
 					
 					
-					array.forEach(this.currentgeography.tabs, lang.hitch(this,function(ctabrec, i){
+					//array.forEach(this.currentgeography.tabs, lang.hitch(this,function(ctabrec, i){
 						
 						var sandWitch = {};
 						
 						valarr = new Array();
+						
+						ctabrec = this.currentgeography.tabs[selectedIndex];
 						
 						
 						array.forEach(ctabrec.controls, lang.hitch(this,function(control, c){
@@ -455,7 +457,7 @@ define([
 								}));
 							}
 						
-						}));
+						//}));
 						
 						
 						console.log("sandWitch");
@@ -470,9 +472,9 @@ define([
 					console.log('yo');
 					console.log(this.tabpan);
 					
-					for (key in pretabsandWitches[selectedIndex]) {
+					for (key in pretabsandWitches[0]) {  //Changed 0 from selectedIndex 
 					
-						cgroup = pretabsandWitches[selectedIndex][key];
+						cgroup = pretabsandWitches[0][key]; //Changed 0 from selectedIndex
 						
 						groupc = 0
 						
@@ -665,10 +667,10 @@ define([
 									//dep = control.dependent;
 					//			if (dep == undefined) {dep = ""};					
 						
+						nodetitle = domConstruct.create("div", {style:"font-weight: bold;padding-top:10px", innerHTML: control.name});
+						ctab.domNode.appendChild(nodetitle);
+						
 						  if (control.type == "slider") {
-						  
-								  nodetitle = domConstruct.create("div", {style:"font-weight: bold;", innerHTML: control.name});
-								  ctab.domNode.appendChild(nodetitle);
 								  
 								  parser.parse();
 
@@ -736,7 +738,7 @@ define([
 									//index: groupid,
 									//onChange: lang.hitch(this,function(e) {this.updateUnique(e, groupid)}),
 									onChange: lang.hitch(this,function(e) { this.updateSlider({"tab": i, "control": c, "type": control.type}, e) }),
-									style: "width:210px;margin-top:10px;margin-bottom:20px"
+									style: "width:250px;margin-top:10px;margin-bottom:20px"
 								}, nslidernode);
 								
 								
@@ -752,9 +754,8 @@ define([
 									rorc = CheckBox;
 								}
 							
-							   
-								nodetitle = domConstruct.create("div", {style:"font-weight: bold;", innerHTML: control.name});
-								ctab.domNode.appendChild(nodetitle);
+								//nodetitle = domConstruct.create("div", {style:"font-weight: bold;", innerHTML: control.name});
+								//ctab.domNode.appendChild(nodetitle);
 								
 								notSelected = true;
 								
@@ -1002,11 +1003,12 @@ define([
 					//});
 					
 					this.mainpane = new ContentPane({
-					 // style:"height:" + this.sph + "px !important",
+					  //style:"overflow:hidden !important",
 					 //style: "height: 100%; width: 100%;",
 					 // title: "Choose Parameters"
 					});
 					
+					domStyle.set(this.mainpane.domNode, 'overflow', 'hidden');
 					domClass.add(this.mainpane.domNode, "claro");
 					parser.parse();
 					domClass.add(this.mainpane.domNode, "claro");
