@@ -408,7 +408,7 @@ define([
 									
 										sandWitch[control.group][c] = [];
 									
-									}									
+									}	
 									
 									//im in  here
 										if (control.dependent != undefined) {
@@ -442,6 +442,21 @@ define([
 										}
 										
 								}
+								
+									if (val.dependent != undefined) {
+
+											deper = val.dependent.split("|");
+											dmet = false;
+											array.forEach(deper, lang.hitch(this,function(deptext, d){
+												array.forEach(valarr, lang.hitch(this,function(valtext, d){
+													if (deptext == valtext) {console.log("VAL_DEPMET",deptext, valtext);dmet = true;}
+												}));
+											}));
+											
+											if (dmet == false) {
+												alert("Make " + val.name + " disabled " + c + "_" + v)
+											}
+									}
 							
 							}));
 						
@@ -599,7 +614,17 @@ define([
 							newarry.push(Naddlayer);
 							
 							this.map.addLayer(Naddlayer);
-							console.log(Naddlayer);							
+							console.log(Naddlayer);	
+
+					Naddlayer.on("UpdateStart", lang.hitch(this,function () {
+							console.log("Update started...");
+							domAttr.set(this.refreshnode, "style", "display:");
+						} ));
+
+					Naddlayer.on("UpdateEnd", lang.hitch(this,function () {
+							console.log("Update Ended...");
+							domAttr.set(this.refreshnode, "style", "display:none");
+						} ));							
 				
 				}
 				

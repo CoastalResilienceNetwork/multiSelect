@@ -32,7 +32,7 @@
 						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"2010", "selected": true},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
 						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true},{"name":"Medium", "value":"s2"},{"name":"High", "value":"s3"}], "type": "slider"},	
 						{"name":"Erosion projection", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"Long Term","value":"longterm", "selected": true},{"name":"Long Term and Large Storm", "value":"wstorm"}], "type": "radio"},
-						{"name":"Future Erosion Scenarios", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"No Change","value":"nochange", "selected": true},{"name":"Sand Mining Cessation", "value":"stopmining"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"stormier"}], "type": "radio"}
+						{"name":"Future Erosion Scenarios", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"No Change","value":"nochange", "selected": true},{"name":"Sand Mining Cessation", "value":"stopmining", "dependent" : "dhz"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"stormier"}], "type": "radio"}
 					
 					], 
 					"combos": {
