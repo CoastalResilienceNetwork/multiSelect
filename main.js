@@ -518,10 +518,9 @@ define([
 			   },
 			   
 			   updateMap: function(sandWitchList) {
-			   
-			   
+			   			   
 			   comboLookups = []
-			   
+
 			   combos = this.currentgeography.tabs[selectedIndex].combos;
 			   console.log(combos);
 			   
@@ -623,7 +622,11 @@ define([
 				 
 			   changeGeography: function(geography, zoomto) {
 			   
+					domConstruct.empty(this.mainpane.domNode);
+			   
 					this.currentgeography = geography;
+					
+					console.log(geography);
 					
 					ext = new Extent(this.currentgeography.extent);
 					this.map.setExtent(ext);		
