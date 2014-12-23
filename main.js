@@ -454,7 +454,7 @@ define([
 											}));
 											
 											if (dmet == false) {
-												alert("Make " + val.name + " disabled " + c + "_" + v)
+												console.log("Make " + val.name + " disabled " + c + "_" + v)
 											}
 									}
 							
@@ -693,10 +693,19 @@ define([
 						array.forEach(ctabrec.controls, lang.hitch(this,function(control, c){
 						
 									//dep = control.dependent;
-					//			if (dep == undefined) {dep = ""};					
+					//			if (dep == undefined) {dep = ""};	
+
+					   if (ctabrec.titles != undefined) {
+							if (ctabrec.titles[c] != undefined) {
+							
+								nodetitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;font-size: 120%;", innerHTML: ctabrec.titles[c].name});
+								ctab.domNode.appendChild(nodetitle);
+							
+							}
+						}
 						
-						nodetitle = domConstruct.create("div", {style:"font-weight: bold;padding-top:10px", innerHTML: control.name});
-						ctab.domNode.appendChild(nodetitle);
+						nodesubtitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;", innerHTML: control.name});
+						ctab.domNode.appendChild(nodesubtitle);
 						
 						  if (control.type == "slider") {
 								  
@@ -790,8 +799,14 @@ define([
 								array.forEach(control.values, lang.hitch(this,function(val, v){
 								
 								//console.log(vars);
-									
-								   ncontrolsnode = domConstruct.create("span");
+
+								if (val.style != undefined) {
+									styleadds = val.style;
+								} else {
+									styleadds = ""
+								}
+								
+								   ncontrolsnode = domConstruct.create("div", {style:val.style});
 								   ctab.domNode.appendChild(ncontrolsnode);
 								   
 								   
@@ -839,7 +854,9 @@ define([
 										
 										console.log(ncontrol);
 										
-										textNode = domConstruct.create("span", {style:"display:inline", innerHTML: "<span style='color:#000' >" + val.name + "</span><br>"});									
+
+										
+										textNode = domConstruct.create("span", {innerHTML: "<span style='color:#000' >" + val.name + "</span>"});									
 										
 									
 									//on(nslidernodeheader, "click", lang.hitch(this,function(e){
@@ -847,7 +864,7 @@ define([
 										//this.infoareacontent.innerHTML = option.help;
 									//}));
 									
-									ctab.domNode.appendChild(textNode);
+									ncontrolsnode.appendChild(textNode);
 									
 								
 								}));
