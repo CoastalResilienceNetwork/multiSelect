@@ -19,23 +19,103 @@
 				{
 					"name": "Management Actions",
 					"controls": [
-						{"name":"Select the hazard to view", "group": "main", "values":[{"name":"Rising Tiders","value":"RT", "help": "Year 2010"},
-																						{"name":"Aggregated Rising Tide", "value":"ART"},
-																						{"name":"Dune Erosion Hazard Zone", "value":"DEHZ"},
-																						{"name":"Aggregated Dune Erosion Hazard Zone", "value":"ADEHZ"},
-																						{"name":"Cliff Erosion Hazard Zone", "value":"CEHZ"},
-																						{"name":"Aggregated Cliff Erosion Hazard Zone", "value":"ACEHZ"},
-																						{"name":"Coastal Storm Flood Hazard Zone", "value":"CSFHZ"},
-																						{"name":"Aggregated Coastal Storm Flood Hazard Zone", "value":"ACSFHZ"},
+						{"name":"Select the hazard to view", "group": "main", "values":[{"name":"Tidal Inundation (monthly in feet)","value":"TI", "help": "Year 2010"},
+																						{"name":"Wave Impact (large storm)", "value":"WI"},
+																						{"name":"Flood Inundation (large storm)", "value":"FI"},
+																						{"name":"River Flood Inundation (large storm)", "value":"RFI"},
+																						{"name":"Erosion Risk", "value":"ER"},
+																						{"name":"Combined Erosion Risk", "value":"CER"},
+																						{"name":"Combined Hazards", "value":"CH"}
 																						], "type": "radio"},
-						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "selected": true},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
-						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true},{"name":"Medium", "value":"Med"},{"name":"High", "value":"High"}], "type": "slider"},	
-						{"name":"Erosion projection", "dependent" : "DEHZ|CEHZ", "group": "main", "values":[{"name":"Long Term","value":"LT", "selected": true},{"name":"Long Term and Large Storm", "value":"LTLS"}], "type": "radio"},
-						{"name":"Future Erosion Scenarios", "group": "main", "values":[{"name":"No Change","value":"NC", "selected": true},{"name":"Sand Mining Cessation", "value":"SMC"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"DEL"}], "type": "radio"}
-					
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI"},{"name":"2030", "value":"2030", "selected": true},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "dependent" : "TI|WI|FI|RFI|ER&2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true},{"name":"Medium", "value":"Med"},{"name":"High", "value":"High"}], "type": "slider"},	
+						{"name":"Large Storm Wave Event (for Erosion Risk)", "dependent" : "ER", "group": "main", "values":[{"name":"Existing Wave Climate","value":"EWC", "selected": true},{"name":"Doubling of El Nino Frequency", "value":"DENF"},{"name":"Addition of ARkStorm", "value":"AOA"}], "type": "radio"}
 					], 
 					"combos": {
+						"CER|2030": [{"type":"dynamic","show":[0]}],
+						"CER|2060": [{"type":"dynamic","show":[1]}],
+						"CER|2100": [{"type":"dynamic","show":[2]}],
+						"CH|2030": [{"type":"dynamic","show":[3]}],
+						"CH|2060": [{"type":"dynamic","show":[4]}],
+						"CH|2100": [{"type":"dynamic","show":[5]}],
+						
+						"TI|CT": [{"type":"dynamic","show":[6]}],
+						"TI|2030|Low": [{"type":"dynamic","show":[7]}],
+						"TI|2060|Low": [{"type":"dynamic","show":[8]}],
+						"TI|2100|Low": [{"type":"dynamic","show":[9]}],
+						"TI|2030|Med": [{"type":"dynamic","show":[10]}],
+						"TI|2060|Med": [{"type":"dynamic","show":[11]}],
+						"TI|2100|Med": [{"type":"dynamic","show":[12]}],
+						"TI|2030|High": [{"type":"dynamic","show":[13]}],
+						"TI|2060|High": [{"type":"dynamic","show":[14]}],
+						"TI|2100|High": [{"type":"dynamic","show":[15]}],
+						
+						"ER|2030|Low|EWC": [{"type":"dynamic","show":[16]}],
+						"ER|2030|Low|DENF": [{"type":"dynamic","show":[17]}],
+						"ER|2030|Low|AOA": [{"type":"dynamic","show":[18]}],
 
+						"ER|2030|Med|EWC": [{"type":"dynamic","show":[19]}],
+						"ER|2030|Med|DENF": [{"type":"dynamic","show":[20]}],
+						"ER|2030|Med|AOA": [{"type":"dynamic","show":[21]}],
+						
+						"ER|2030|High|EWC": [{"type":"dynamic","show":[22]}],
+						"ER|2030|High|DENF": [{"type":"dynamic","show":[23]}],
+						"ER|2030|High|AOA": [{"type":"dynamic","show":[24]}],
+
+						"ER|2060|Low|EWC": [{"type":"dynamic","show":[25]}],
+						"ER|2060|Low|DENF": [{"type":"dynamic","show":[26]}],
+						"ER|2060|Low|AOA": [{"type":"dynamic","show":[27]}],
+
+						"ER|2060|Med|EWC": [{"type":"dynamic","show":[28]}],
+						"ER|2060|Med|DENF": [{"type":"dynamic","show":[29]}],
+						"ER|2060|Med|AOA": [{"type":"dynamic","show":[30]}],
+						
+						"ER|2060|High|EWC": [{"type":"dynamic","show":[31]}],
+						"ER|2060|High|DENF": [{"type":"dynamic","show":[32]}],
+						"ER|2060|High|AOA": [{"type":"dynamic","show":[33]}],
+
+						"ER|2100|Low|EWC": [{"type":"dynamic","show":[34]}],
+						"ER|2100|Low|DENF": [{"type":"dynamic","show":[35]}],
+						"ER|2100|Low|AOA": [{"type":"dynamic","show":[36]}],
+
+						"ER|2100|Med|EWC": [{"type":"dynamic","show":[37]}],
+						"ER|2100|Med|DENF": [{"type":"dynamic","show":[38]}],
+						"ER|2100|Med|AOA": [{"type":"dynamic","show":[39]}],
+						
+						"ER|2100|High|EWC": [{"type":"dynamic","show":[40]}],
+						"ER|2100|High|DENF": [{"type":"dynamic","show":[41]}],
+						"ER|2100|High|AOA": [{"type":"dynamic","show":[42]}],
+						
+						"WI|CT": [{"type":"dynamic","show":[43]}],
+						"WI|2030|Low": [{"type":"dynamic","show":[44]}],
+						"WI|2060|Low": [{"type":"dynamic","show":[45]}],
+						"WI|2100|Low": [{"type":"dynamic","show":[46]}],
+						"WI|2030|Med": [{"type":"dynamic","show":[47]}],
+						"WI|2060|Med": [{"type":"dynamic","show":[48]}],
+						"WI|2100|Med": [{"type":"dynamic","show":[49]}],
+						"WI|2030|High": [{"type":"dynamic","show":[50]}],
+						"WI|2060|High": [{"type":"dynamic","show":[51]}],
+						"WI|2100|High": [{"type":"dynamic","show":[52]}],
+
+						"FI|CT": [{"type":"dynamic","show":[53]}],
+						"FI|2030|Low": [{"type":"dynamic","show":[54]}],
+						"FI|2060|Low": [{"type":"dynamic","show":[55]}],
+						"FI|2100|Low": [{"type":"dynamic","show":[56]}],
+						"FI|2030|Med": [{"type":"dynamic","show":[57]}],
+						"FI|2060|Med": [{"type":"dynamic","show":[58]}],
+						"FI|2100|Med": [{"type":"dynamic","show":[59]}],
+						"FI|2030|High": [{"type":"dynamic","show":[60]}],
+						"FI|2060|High": [{"type":"dynamic","show":[61]}],
+						"FI|2100|High": [{"type":"dynamic","show":[62]}],
+						
+						"RFI|CT": [{"type":"dynamic","show":[63]}],
+						"RFI|2030|Med": [{"type":"dynamic","show":[64]}],
+						"RFI|2060|Med": [{"type":"dynamic","show":[65]}],
+						"RFI|2100|Med": [{"type":"dynamic","show":[66]}],
+						"RFI|2030|High": [{"type":"dynamic","show":[67]}],
+						"RFI|2060|High": [{"type":"dynamic","show":[68]}],
+						"RFI|2100|High": [{"type":"dynamic","show":[69]}]
+						
 					},
 					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer"
 				
@@ -67,7 +147,7 @@
 																						{"name":"Cliff Erosion Hazard Zone", "value":"chz" , "style":"padding-top:7px"},
 																						{"name":"Aggregated Cliff Erosion Hazard Zone", "value":"chz_aggr"},
 																						{"name":"Coastal Storm Flood Hazard Zone", "value":"coastal_floodhz", "style":"padding-top:7px"},
-																						{"name":"Aggregated Coastal Storm Flood Hazard Zone", "value":"coastal_floodhz_aggr"},
+																						{"name":"Aggregated Coastal Storm Flood Hazard Zone", "value":"coastal_floodhz_aggr"}
 																						], "type": "radio"},
 						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"2010", "selected": true, "dependent" : "chz|dhz|coastal_floodhz|tide_area"},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
 						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true},{"name":"Medium", "value":"s2"},{"name":"High", "value":"s3"}], "type": "slider"},	
@@ -288,7 +368,7 @@
 						"chz|2100|s3|longterm|stormier": [{"type":"dynamic","show":[22]}],
 						"chz|2100|s3|wstorm|nochange": [{"type":"dynamic","show":[32]}],
 						"chz|2100|s3|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2100|s3|wstorm|stormier": [{"type":"dynamic","show":[33]}]							
+						"chz|2100|s3|wstorm|stormier": [{"type":"dynamic","show":[42]}]							
 
 						
 					},

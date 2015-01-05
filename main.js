@@ -413,12 +413,23 @@ define([
 									//im in  here
 										if (control.dependent != undefined) {
 										
-											deper = control.dependent.split("|")
-											array.forEach(deper, lang.hitch(this,function(deptext, d){
-												array.forEach(valarr, lang.hitch(this,function(valtext, d){
-													if (deptext == valtext) {console.log("DEPMET",deptext, valtext);depmet = true;}
+											adeper = control.dependent.split("&");
+											p = adeper.length;
+											m = 0;
+											array.forEach(adeper, lang.hitch(this,function(adeptext, a){
+												deper = adeptext.split("|")
+												array.forEach(deper, lang.hitch(this,function(deptext, d){
+													array.forEach(valarr, lang.hitch(this,function(valtext, d){
+														if (deptext == valtext) {console.log("DEPMET",deptext, valtext); m = m + 1}
+													}));
 												}));
 											}));
+										
+										if (p == m) {
+										
+											depmet = true;
+										
+										}
 										
 										//	depmet = false;
 										//	for (key in sandWitch[control.group]) {
