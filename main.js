@@ -153,7 +153,7 @@ define([
 			   height: _config.pluginHeight,
 			   rendered: false,
 			   
-               activate: function () { 
+               activate: function () { 					
 			   			   
 					if (this.rendered == false) {
 					
@@ -176,6 +176,7 @@ define([
 					} 
 					
 					//_eventHandles.click = dojo.connect(this.map, "onClick", function() {});
+					
 			  
 			   },
 			   
@@ -212,6 +213,15 @@ define([
 					declare.safeMixin(this, frameworkParameters);
 			
 					domClass.add(this.container, "claro");
+					
+					this.windowStyles = dojo.eval("[" + configData + "]")[0].windowStyles;
+					
+					if (this.windowStyles != undefined) {
+					
+						c = dojoquery(this.container).parent().parent();
+						domStyle.set(c[0], this.windowStyles);
+					
+					}
 					
 					this.configVizObject = dojo.eval("[" + configData + "]")[0].regions;
 					

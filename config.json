@@ -1,6 +1,7 @@
 {
     "name": "Flood and SLR",
 	"pluginHeight": 450,
+	"windowStyles": {"opacity": 0.75},
 	"regions": [
 		{
 			"name": "Ventura",
