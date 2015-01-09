@@ -391,6 +391,7 @@ define([
 						var sandWitch = {};
 						
 						valarr = new Array();
+						indivdis = new Array();
 						
 						ctabrec = this.currentgeography.tabs[selectedIndex];
 						
@@ -475,14 +476,33 @@ define([
 											}));
 											
 											if (dmet == false) {
-												console.log("Make " + val.name + " disabled " + c + "_" + v)
+												console.log("Make " + val.name + " disabled " + c + "_" + v);
+												indivdis.push([c,v]);
 											}
 									}
 							
 							}));
 						
-							console.log("controldep", c, depmet);
+							console.log("check individual disable"); 
+							
+							array.forEach(formWidgets, lang.hitch(this,function(widg, w){
+									if (widg.declaredClass.indexOf("RadioButton") > -1) {
+										array.forEach(indivdis, lang.hitch(this,function(indiv, di){
+											console.log(indiv, widg.data.control)
+											if ((indiv[0] == widg.data.control)  && (indiv[1] == widg.data.value)) {	
+												if (widg.checked == true) {alert('You have made an invalid selection.  Please Adjust')}
+												//console.log(widg)
+												widg.setAttribute('disabled', true);
+											}
+										}));
+									} else {
+									
+									}
+									
+							}));
 
+							console.log("controldep", c, depmet);
+								
 							if ((depmet == false) && (nsel > 0)) {
 								//disable all widgets from current tab or layout	
 								
@@ -663,6 +683,7 @@ define([
 						console.log(lid, this.map.getLayer(lid));
 					}));
 				
+				this.changeOpacity();
 			   
 			   },
 				 
@@ -1002,7 +1023,11 @@ define([
 				
 				changeOpacity: function(e) {
 					
-					this.translevel = e;
+					console.log(e);
+					
+					if (e != undefined) {
+						this.translevel = e;
+					}
 					
 					array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){						
 						clayer.setOpacity(1 - this.translevel);
@@ -1097,8 +1122,6 @@ define([
 					parser.parse();
 					
 
-					
-		
 					
 					this.buttonpane = new ContentPane({
 					  style:"border-top-style:groove !important; height:100px;overflow: hidden !important;background-color:#F3F3F3 !important;padding:10px !important;"
