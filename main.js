@@ -748,7 +748,19 @@ define([
 					   if (ctabrec.titles != undefined) {
 							if (ctabrec.titles[c] != undefined) {
 							
-								nodetitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;font-size: 120%;", innerHTML: ctabrec.titles[c].name});
+								if (ctabrec.titles[c].help != undefined) {
+								
+									thelpButton = "<a style='color:black' href='#' title='" + 'Click for more information.' + "'><img style='margin-right:3px;' src='" + this.infoIcon + "'></a>";
+								
+								} else {
+								
+									thelpButton = "";
+								
+								}
+							
+								ttext = "<span style='color:#000' >" + thelpButton + ctabrec.titles[c].name + "</span>"	 
+								
+								nodetitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;font-size: 120%;", innerHTML: ttext});
 								ctab.domNode.appendChild(nodetitle);
 							
 							}
@@ -756,7 +768,7 @@ define([
 						
 						if (control.help != undefined) {
 						
-							chelpButton = "<a style='color:black' href='#' title='" + 'Click for more information.' + "'><img style='margin-left:3px;' src='" + this.infoIcon + "'></a>";
+							chelpButton = "<a style='color:black' href='#' title='" + 'Click for more information.' + "'><img style='margin-right:3px;' src='" + this.infoIcon + "'></a>";
 						
 						} else {
 						
@@ -764,7 +776,7 @@ define([
 						
 						}
 						
-						ctext = "<span style='color:#000' >" + control.name + chelpButton + "</span>"	
+						ctext = "<span style='color:#000' >" + chelpButton + control.name + "</span>"	
 						
 						nodesubtitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;", innerHTML: ctext});
 						ctab.domNode.appendChild(nodesubtitle);
@@ -946,7 +958,7 @@ define([
 
 										if (val.help != undefined) {
 										
-											helpButton = "<a style='color:black' href='#' title='" + 'Click for more information.' + "'><img style='margin-left:3px;' src='" + this.infoIcon + "'></a>";
+											helpButton = "<a style='color:black' href='#' title='" + 'Click for more information.' + "'><img style='margin-right:3px;' src='" + this.infoIcon + "'></a>";
 										
 										} else {
 										
@@ -954,7 +966,7 @@ define([
 										
 										}
 										
-										textNode = domConstruct.create("span", {innerHTML: "<span style='color:#000' >" + val.name + helpButton + "</span>"});									
+										textNode = domConstruct.create("span", {innerHTML: "<span style='color:#000' >" + helpButton + val.name + "</span>"});									
 										
 									//on(nslidernodeheader, "click", lang.hitch(this,function(e){
 										//domStyle.set(this.infoarea.domNode, 'display', '');
