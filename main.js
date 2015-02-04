@@ -762,6 +762,32 @@ define([
 								
 								nodetitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;font-size: 120%;", innerHTML: ttext});
 								ctab.domNode.appendChild(nodetitle);
+								
+									a = dojoquery(nodetitle).children();
+									if (a.children.length > 0) {
+										
+										b = a.children()
+										iconNode = dojoquery(b[0])
+										
+										on(iconNode, "click", lang.hitch(this,function(e){
+											//alert('you clicked info');
+											//pos = domGeom.position(iconNode);
+											cdg = domGeom.position(this.container);
+											console.log(cdg)
+											
+											toppos = e.y - cdg.y // + 10
+											leftpos = e.x - cdg.x  // + 10
+											console.log(toppos, leftpos)
+											
+											//domStyle.set(this.infoarea.domNode, 'top', toppos + 'px');
+											//domStyle.set(this.infoarea.domNode, 'left', leftpos + 'px');
+											domStyle.set(this.infoarea.domNode, { "display": "" });
+											this.infoareacontent.innerHTML = ctabrec.titles[c].help;
+
+										}));
+									
+									}
+									
 							
 							}
 						}

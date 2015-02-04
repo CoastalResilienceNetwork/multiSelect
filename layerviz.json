@@ -1,0 +1,121 @@
+{
+    "height": 570,
+    "url": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer",
+	"methods": "methods/CRV_Hazards_Mapping_Technical_Report.pdf",
+    "controls": [
+        {
+            "type": "header",
+            "text": "1. Select the hazard to view"
+        },
+        {
+            "type": "group",
+            "control": "radio",
+			"options": [
+                {
+                    "text": "Tidal Inundation (monthly in feet)",
+                    "help": "These zones show the area and depth of inundation (given in feet) caused simply by rising tide levels (not considering storms, erosion, or river discharge). The water level mapped in these inundation areas is the Extreme Monthly High Water (EMHW) level, which occurs approximately once a month. <br><br> <img src='plugins/flood_slr/images/RisingTide1.png' />",
+                    "selected": true,
+                    "value": "Tidal Inundation (monthly in feet)"
+                },
+                {
+                    "text": "Wave Impact (large storm)",
+                    "help": "The coastal storm wave impact area is the subset of the coastal storm flood hazard zone in which water could potentially rush inland due to waves breaking at the coast and damage structures, move cars, and knock people off their feet.  <img src='http://jasontheodor.com/wp-content/uploads//2012/02/things.jpg' />",
+                    "selected": false,
+                    "value": "Wave Impact (large storm)"
+                },
+                {
+                    "text": "Flood Inundation (large storm)",
+                    "help": "This layer represents two types of flooding: flooding caused by storm waves rushing inland (Wave Impact) and flooding due to other ocean storm characteristics such as storm surge (a rise in the ocean water level caused by waves and pressure changes during a storm). The zones were developed using representative wave conditions based on observed historical events, with added sea level rise. This hazard zone also takes into account areas that are projected to erode in the future, sometimes leading to additional flooding through new hydraulic connections between the ocean and low-lying areas.",
+                    "selected": false,
+                    "value": "Flood Inundation (large storm)"
+                },
+                {
+                    "text": "River Flood Inundation (large storm)",
+                    "help": "This layer shows the projected future floodplains (1% annual chance flood) for the Santa Clara and Ventura Rivera, based on hydraulic modeling driven by future run-off projections and increasing ocean water levels. The future run-off projections were derived using downscaled climate models.",
+                    "selected": false,
+                    "value": "River Flood Inundation (large storm)"
+				},
+                {
+                    "text": "Erosion Risk",
+                    "help": "This layer represents future coastal erosion hazard zones, incorporating site-specific historic trends in erosion, additional erosion caused by accelerating sea level rise, and the potential erosion impact of a large storm wave event.",
+                    "selected": false,
+                    "value": "Erosion Risk"
+                },
+				{
+                    "text": "Combined Erosion Risk",
+                    "help": "This polygon represents the spatial aggregation of coastal erosion hazard zones for all sea level rise and wave climate scenarios at the selected planning horizon. At each planning horizon, the hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios that are projected to be hazardous at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise and wave scenarios and which areas may only hazardous for the worst case scenarios.",
+                    "selected": false,
+                    "value": "Combined Erosion Risk"
+                },
+				{
+                    "text": "Combined Hazards",
+                    "help": "This polygon represents the number of future scenarios projecting storm-induced flooding for the selected planning horizon. At each planning horizon, the combined storm flood hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios projected to cause flooding at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise scenarios and which areas may only be hazardous for the worst case scenarios, for a given planning horizon.",
+                    "selected": false,
+                    "value": "Combined Hazards"
+                }
+            ]
+        },
+        {
+            "type": "header",
+            "text": "2. Select the time and amount of sea level rise"
+        },
+        {
+            "type": "group",
+            "title": "Year",
+            "control": "slider",
+			"options": [
+				{
+                    "text": "Current",
+                    "selected": false,
+                    "value": "Current"
+                },
+				{
+                    "text": "2030",
+                    "selected": false,
+                    "value": "2030"
+                },
+				{
+                    "text": "2060",
+                    "selected": false,
+                    "value": "2060"
+                },
+                {
+                    "text": "2100",
+                    "selected": true,
+                    "value": "2100"
+                }]
+        },
+        {
+            "type": "group",
+            "title": "Sea Level Rise Scenario",
+            "control": "slider",
+            "options": [
+                {
+                    "text": "Low",
+                    "help": "17.3 in (44cm) by 2100, relative to the 2010 height",
+                    "selected": false,
+                    "value": "Low"
+                },
+                {
+                    "text": "Medium",
+                    "help": "36.6 in (93 cm) by 2100, relative to the 2010 height",
+                    "selected": false,
+                    "value": "Medium"
+                },
+                {
+                    "text": "High",
+                    "help": "58.3 in (148 cm) by 2100, relative to the 2010 height",
+                    "selected": true,
+                    "value": "High"
+                }
+            ]
+        },
+        {
+            "type": "group",
+            "title": "Large Storm Wave Event (for Erosion Risk)",
+            "control": "radio"
+        }
+    ]
+}
+
+
