@@ -636,6 +636,9 @@ define([
 							}
 							);						
 						
+							this.map.addLayer(Naddlayer);
+							console.log(Naddlayer);
+							newarry.push(Naddlayer);
 							tiledLayers.push(Naddlayer);
 							
 						}						

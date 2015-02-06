@@ -1,0 +1,382 @@
+{
+    "name": "Flood and Sea Level Rise",
+	"pluginHeight": 450,
+	"windowStyles": {"opacity": 0.75},
+	"regions": [
+		{
+			"name": "Ventura",
+            "extent": {
+                "xmin": -13288721.369912772,
+                "ymin": 4035936.3860100782,
+                "xmax": -13245012.962495957,
+                "ymax": 4075072.7842828752,
+                "spatialReference": {
+                    "wkid": 102100,
+                    "latestWkid": 3857
+                }
+            },
+			"methods": "methods/SLR.pdf",
+			"tabs" : [
+				{
+					"name": "Management Actions",
+					"controls": [
+						{"name":"Select the hazard to view", "group": "main", "values":[{"name":"Tidal Inundation (monthly in feet)","value":"TI", "help": "These zones show the area and depth of inundation (given in feet) caused simply by rising tide levels (not considering storms, erosion, or river discharge). The water level mapped in these inundation areas is the Extreme Monthly High Water (EMHW) level, which occurs approximately once a month. <br><br> <img src='plugins/flood_slr/images/RisingTide1.png' />"},
+																						{"name":"Wave Impact (large storm)", "value":"WI", "help": "The coastal storm wave impact area is the subset of the coastal storm flood hazard zone in which water could potentially rush inland due to waves breaking at the coast and damage structures, move cars, and knock people off their feet.  <img src='http://jasontheodor.com/wp-content/uploads//2012/02/things.jpg' />"},
+																						{"name":"Flood Inundation (large storm)", "value":"FI", "help": "This layer represents two types of flooding: flooding caused by storm waves rushing inland (Wave Impact) and flooding due to other ocean storm characteristics such as storm surge (a rise in the ocean water level caused by waves and pressure changes during a storm). The zones were developed using representative wave conditions based on observed historical events, with added sea level rise. This hazard zone also takes into account areas that are projected to erode in the future, sometimes leading to additional flooding through new hydraulic connections between the ocean and low-lying areas."},
+																						{"name":"River Flood Inundation (large storm)", "value":"RFI", "help": "This layer shows the projected future floodplains (1% annual chance flood) for the Santa Clara and Ventura Rivera, based on hydraulic modeling driven by future run-off projections and increasing ocean water levels. The future run-off projections were derived using downscaled climate models."},
+																						{"name":"Erosion Risk", "value":"ER", "help": "This layer represents future coastal erosion hazard zones, incorporating site-specific historic trends in erosion, additional erosion caused by accelerating sea level rise, and the potential erosion impact of a large storm wave event."},
+																						{"name":"Combined Erosion Risk", "value":"CER", "help": "This polygon represents the spatial aggregation of coastal erosion hazard zones for all sea level rise and wave climate scenarios at the selected planning horizon. At each planning horizon, the hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios that are projected to be hazardous at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise and wave scenarios and which areas may only hazardous for the worst case scenarios."},
+																						{"name":"Combined Hazards", "value":"CH", "help": "This polygon represents the number of future scenarios projecting storm-induced flooding for the selected planning horizon. At each planning horizon, the combined storm flood hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios projected to cause flooding at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise scenarios and which areas may only be hazardous for the worst case scenarios, for a given planning horizon."}
+																						], "type": "radio"},
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI"},{"name":"2030", "value":"2030", "selected": true},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "dependent" : "TI|WI|FI|RFI|ER&2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true, "help": "17.3 in (44cm) by 2100, relative to the 2010 height"},{"name":"Medium", "value":"Med","help": "36.6 in (93 cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"High", "help": "58.3 in (148 cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
+						{"name":"Large Storm Wave Event (for Erosion Risk)", "dependent" : "ER", "group": "main", "values":[{"name":"Existing Wave Climate","value":"EWC", "selected": true},{"name":"Doubling of El Nino Frequency", "value":"DENF"},{"name":"Addition of ARkStorm", "value":"AOA"}], "type": "radio"}
+					], 
+					"combos": {
+						"CER|2030": [{"type":"dynamic","show":[0]}],
+						"CER|2060": [{"type":"dynamic","show":[1]}],
+						"CER|2100": [{"type":"dynamic","show":[2]}],
+						"CH|2030": [{"type":"dynamic","show":[3]}],
+						"CH|2060": [{"type":"dynamic","show":[4]}],
+						"CH|2100": [{"type":"dynamic","show":[5]}],
+						
+						"TI|CT": [{"type":"dynamic","show":[6]}],
+						"TI|2030|Low": [{"type":"dynamic","show":[7]}],
+						"TI|2060|Low": [{"type":"dynamic","show":[8]}],
+						"TI|2100|Low": [{"type":"dynamic","show":[9]}],
+						"TI|2030|Med": [{"type":"dynamic","show":[10]}],
+						"TI|2060|Med": [{"type":"dynamic","show":[11]}],
+						"TI|2100|Med": [{"type":"dynamic","show":[12]}],
+						"TI|2030|High": [{"type":"dynamic","show":[13]}],
+						"TI|2060|High": [{"type":"dynamic","show":[14]}],
+						"TI|2100|High": [{"type":"dynamic","show":[15]}],
+						
+						"ER|2030|Low|EWC": [{"type":"dynamic","show":[16]}],
+						"ER|2030|Low|DENF": [{"type":"dynamic","show":[17]}],
+						"ER|2030|Low|AOA": [{"type":"dynamic","show":[18]}],
+
+						"ER|2030|Med|EWC": [{"type":"dynamic","show":[19]}],
+						"ER|2030|Med|DENF": [{"type":"dynamic","show":[20]}],
+						"ER|2030|Med|AOA": [{"type":"dynamic","show":[21]}],
+						
+						"ER|2030|High|EWC": [{"type":"dynamic","show":[22]}],
+						"ER|2030|High|DENF": [{"type":"dynamic","show":[23]}],
+						"ER|2030|High|AOA": [{"type":"dynamic","show":[24]}],
+
+						"ER|2060|Low|EWC": [{"type":"dynamic","show":[25]}],
+						"ER|2060|Low|DENF": [{"type":"dynamic","show":[26]}],
+						"ER|2060|Low|AOA": [{"type":"dynamic","show":[27]}],
+
+						"ER|2060|Med|EWC": [{"type":"dynamic","show":[28]}],
+						"ER|2060|Med|DENF": [{"type":"dynamic","show":[29]}],
+						"ER|2060|Med|AOA": [{"type":"dynamic","show":[30]}],
+						
+						"ER|2060|High|EWC": [{"type":"dynamic","show":[31]}],
+						"ER|2060|High|DENF": [{"type":"dynamic","show":[32]}],
+						"ER|2060|High|AOA": [{"type":"dynamic","show":[33]}],
+
+						"ER|2100|Low|EWC": [{"type":"dynamic","show":[34]}],
+						"ER|2100|Low|DENF": [{"type":"dynamic","show":[35]}],
+						"ER|2100|Low|AOA": [{"type":"dynamic","show":[36]}],
+
+						"ER|2100|Med|EWC": [{"type":"dynamic","show":[37]}],
+						"ER|2100|Med|DENF": [{"type":"dynamic","show":[38]}],
+						"ER|2100|Med|AOA": [{"type":"dynamic","show":[39]}],
+						
+						"ER|2100|High|EWC": [{"type":"dynamic","show":[40]}],
+						"ER|2100|High|DENF": [{"type":"dynamic","show":[41]}],
+						"ER|2100|High|AOA": [{"type":"dynamic","show":[42]}],
+						
+						"WI|CT": [{"type":"dynamic","show":[43]}],
+						"WI|2030|Low": [{"type":"dynamic","show":[44]}],
+						"WI|2060|Low": [{"type":"dynamic","show":[45]}],
+						"WI|2100|Low": [{"type":"dynamic","show":[46]}],
+						"WI|2030|Med": [{"type":"dynamic","show":[47]}],
+						"WI|2060|Med": [{"type":"dynamic","show":[48]}],
+						"WI|2100|Med": [{"type":"dynamic","show":[49]}],
+						"WI|2030|High": [{"type":"dynamic","show":[50]}],
+						"WI|2060|High": [{"type":"dynamic","show":[51]}],
+						"WI|2100|High": [{"type":"dynamic","show":[52]}],
+
+						"FI|CT": [{"type":"dynamic","show":[53]}],
+						"FI|2030|Low": [{"type":"dynamic","show":[54]}],
+						"FI|2060|Low": [{"type":"dynamic","show":[55]}],
+						"FI|2100|Low": [{"type":"dynamic","show":[56]}],
+						"FI|2030|Med": [{"type":"dynamic","show":[57]}],
+						"FI|2060|Med": [{"type":"dynamic","show":[58]}],
+						"FI|2100|Med": [{"type":"dynamic","show":[59]}],
+						"FI|2030|High": [{"type":"dynamic","show":[60]}],
+						"FI|2060|High": [{"type":"dynamic","show":[61]}],
+						"FI|2100|High": [{"type":"dynamic","show":[62]}],
+						
+						"RFI|CT": [{"type":"dynamic","show":[63]}],
+						"RFI|2030|Med": [{"type":"dynamic","show":[64]}],
+						"RFI|2060|Med": [{"type":"dynamic","show":[65]}],
+						"RFI|2100|Med": [{"type":"dynamic","show":[66]}],
+						"RFI|2030|High": [{"type":"dynamic","show":[67]}],
+						"RFI|2060|High": [{"type":"dynamic","show":[68]}],
+						"RFI|2100|High": [{"type":"dynamic","show":[69]}]
+						
+					},
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer"
+				
+				}			
+			]
+		},
+		{
+			"name": "Monterey",
+            "extent": {
+                "xmin": -1.36189391907E7,
+                "ymin": 4362453.298600003,
+                "xmax": -1.3538941220800001E7,
+                "ymax": 4486926.618699998,
+                "spatialReference": {
+                    "wkid": 102100,
+                    "latestWkid": 3857
+                }
+            },
+			"methods": "methods/SLR.pdf",
+			"tabs" : [
+				{
+					"name": "Management Actions",
+					"titles": [{"name":"1. Select the hazard to view"}, {"name":"2. Select the time and amount of sea level rise"}, undefined, {"name":"3. Select the Erosion options"}],
+					"controls": [
+						{"name":"", "group": "main", "values":[{"name":"Rising Tide","value":"tide_area", "help": "Year 2010", "selected": true, "help": "Help Goes Here"},
+																						{"name":"Aggregated Rising Tide", "value":"tide_area_aggr", "help": "Help Goes Here"},
+																						{"name":"Dune Erosion Hazard Zone", "value":"dhz", "style":"padding-top:7px", "help": "Help Goes Here"},
+																						{"name":"Aggregated Dune Erosion Hazard Zone", "value":"dhz_aggr", "help": "Help Goes Here"},
+																						{"name":"Cliff Erosion Hazard Zone", "value":"chz" , "style":"padding-top:7px", "help": "Help Goes Here"},
+																						{"name":"Aggregated Cliff Erosion Hazard Zone", "value":"chz_aggr", "help": "Help Goes Here"},
+																						{"name":"Coastal Storm Flood Hazard Zone", "value":"coastal_floodhz", "style":"padding-top:7px", "help": "Help Goes Here"},
+																						{"name":"Aggregated Coastal Storm Flood Hazard Zone", "value":"coastal_floodhz_aggr", "help": "Help Goes Here"}
+																						], "type": "radio"},
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"2010", "selected": true, "dependent" : "chz|dhz|coastal_floodhz|tide_area"},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true},{"name":"Medium", "value":"s2"},{"name":"High", "value":"s3"}], "type": "slider"},	
+						{"name":"Erosion projection", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"Long Term","value":"longterm", "selected": true},{"name":"Long Term and Large Storm", "value":"wstorm"}], "type": "radio"},
+						{"name":"Future Erosion Scenarios", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"No Change","value":"nochange", "selected": true},{"name":"Sand Mining Cessation", "value":"stopmining", "dependent" : "dhz"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"stormier"}], "type": "radio"}
+					
+					], 
+					"combos": {
+					
+						"tide_area|2010": [{"type":"dynamic","show":[122]}],
+						"tide_area|2030|s1": [{"type":"dynamic","show":[123]}],
+						"tide_area|2030|s2": [{"type":"dynamic","show":[126]}],
+						"tide_area|2030|s3": [{"type":"dynamic","show":[129]}],
+						"tide_area|2060|s1": [{"type":"dynamic","show":[124]}],
+						"tide_area|2060|s2": [{"type":"dynamic","show":[127]}],
+						"tide_area|2060|s3": [{"type":"dynamic","show":[130]}],
+						"tide_area|2100|s1": [{"type":"dynamic","show":[125]}],
+						"tide_area|2100|s2": [{"type":"dynamic","show":[128]}],
+						"tide_area|2100|s3": [{"type":"dynamic","show":[131]}],
+						
+						
+						"tide_area_aggr|2010": [{"type":"dynamic","show":[122]}],
+						"tide_area_aggr|2030|s1": [{"type":"dynamic","show":[119]}],
+						"tide_area_aggr|2030|s2": [{"type":"dynamic","show":[119]}],
+						"tide_area_aggr|2030|s3": [{"type":"dynamic","show":[119]}],
+						"tide_area_aggr|2060|s1": [{"type":"dynamic","show":[120]}],
+						"tide_area_aggr|2060|s2": [{"type":"dynamic","show":[120]}],
+						"tide_area_aggr|2060|s3": [{"type":"dynamic","show":[120]}],
+						"tide_area_aggr|2100|s1": [{"type":"dynamic","show":[121]}],
+						"tide_area_aggr|2100|s2": [{"type":"dynamic","show":[121]}],
+						"tide_area_aggr|2100|s3": [{"type":"dynamic","show":[121]}],
+						
+						
+						"dhz_aggr|2010": [{"type":"dynamic","show":[59]}],
+						"dhz_aggr|2030|s1": [{"type":"dynamic","show":[56]}],
+						"dhz_aggr|2030|s2": [{"type":"dynamic","show":[56]}],
+						"dhz_aggr|2030|s3": [{"type":"dynamic","show":[56]}],
+						"dhz_aggr|2060|s1": [{"type":"dynamic","show":[57]}],
+						"dhz_aggr|2060|s2": [{"type":"dynamic","show":[57]}],
+						"dhz_aggr|2060|s3": [{"type":"dynamic","show":[57]}],
+						"dhz_aggr|2100|s1": [{"type":"dynamic","show":[58]}],
+						"dhz_aggr|2100|s2": [{"type":"dynamic","show":[58]}],
+						"dhz_aggr|2100|s3": [{"type":"dynamic","show":[58]}],
+						
+						
+						"chz_aggr|2010": [{"type":"dynamic","show":[3]}],
+						"chz_aggr|2030|s1": [{"type":"dynamic","show":[0]}],
+						"chz_aggr|2030|s2": [{"type":"dynamic","show":[0]}],
+						"chz_aggr|2030|s3": [{"type":"dynamic","show":[0]}],
+						"chz_aggr|2060|s1": [{"type":"dynamic","show":[1]}],
+						"chz_aggr|2060|s2": [{"type":"dynamic","show":[1]}],
+						"chz_aggr|2060|s3": [{"type":"dynamic","show":[1]}],
+						"chz_aggr|2100|s1": [{"type":"dynamic","show":[2]}],
+						"chz_aggr|2100|s2": [{"type":"dynamic","show":[2]}],
+						"chz_aggr|2100|s3": [{"type":"dynamic","show":[2]}],
+						
+						
+						"coastal_floodhz|2010": [{"type":"dynamic","show":[46]}],
+						"coastal_floodhz|2030|s1": [{"type":"dynamic","show":[47]}],
+						"coastal_floodhz|2030|s2": [{"type":"dynamic","show":[50]}],
+						"coastal_floodhz|2030|s3": [{"type":"dynamic","show":[53]}],
+						"coastal_floodhz|2060|s1": [{"type":"dynamic","show":[48]}],
+						"coastal_floodhz|2060|s2": [{"type":"dynamic","show":[51]}],
+						"coastal_floodhz|2060|s3": [{"type":"dynamic","show":[54]}],
+						"coastal_floodhz|2100|s1": [{"type":"dynamic","show":[49]}],
+						"coastal_floodhz|2100|s2": [{"type":"dynamic","show":[52]}],
+						"coastal_floodhz|2100|s3": [{"type":"dynamic","show":[55]}],
+
+
+						"coastal_floodhz_aggr|2010": [{"type":"dynamic","show":[46]}],
+						"coastal_floodhz_aggr|2030|s1": [{"type":"dynamic","show":[43]}],
+						"coastal_floodhz_aggr|2030|s2": [{"type":"dynamic","show":[43]}],
+						"coastal_floodhz_aggr|2030|s3": [{"type":"dynamic","show":[43]}],
+						"coastal_floodhz_aggr|2060|s1": [{"type":"dynamic","show":[44]}],
+						"coastal_floodhz_aggr|2060|s2": [{"type":"dynamic","show":[44]}],
+						"coastal_floodhz_aggr|2060|s3": [{"type":"dynamic","show":[44]}],
+						"coastal_floodhz_aggr|2100|s1": [{"type":"dynamic","show":[45]}],
+						"coastal_floodhz_aggr|2100|s2": [{"type":"dynamic","show":[45]}],
+						"coastal_floodhz_aggr|2100|s3": [{"type":"dynamic","show":[45]}],
+						
+						
+						"dhz|2010|longterm|nochange": [{"type":"dynamic","show":[59]}], 
+						"dhz|2010|longterm|stopmining": [{"type":"dynamic","show":[69]}],
+						"dhz|2010|longterm|stormier": [{"type":"dynamic","show":[79]}],
+						"dhz|2010|wstorm|nochange": [{"type":"dynamic","show":[89]}], 
+						"dhz|2010|wstorm|stopmining": [{"type":"dynamic","show":[99]}],
+						"dhz|2010|wstorm|stormier": [{"type":"dynamic","show":[109]}],
+						
+						"dhz|2030|s1|longterm|nochange": [{"type":"dynamic","show":[60]}],
+						"dhz|2030|s1|longterm|stopmining": [{"type":"dynamic","show":[70]}],
+						"dhz|2030|s1|longterm|stormier": [{"type":"dynamic","show":[80]}],
+						"dhz|2030|s1|wstorm|nochange": [{"type":"dynamic","show":[90]}],
+						"dhz|2030|s1|wstorm|stopmining": [{"type":"dynamic","show":[100]}],
+						"dhz|2030|s1|wstorm|stormier": [{"type":"dynamic","show":[110]}],
+
+						"dhz|2030|s2|longterm|nochange": [{"type":"dynamic","show":[63]}],
+						"dhz|2030|s2|longterm|stopmining": [{"type":"dynamic","show":[73]}],
+						"dhz|2030|s2|longterm|stormier": [{"type":"dynamic","show":[83]}],
+						"dhz|2030|s2|wstorm|nochange": [{"type":"dynamic","show":[93]}],
+						"dhz|2030|s2|wstorm|stopmining": [{"type":"dynamic","show":[103]}],
+						"dhz|2030|s2|wstorm|stormier": [{"type":"dynamic","show":[113]}],
+
+						"dhz|2030|s3|longterm|nochange": [{"type":"dynamic","show":[66]}],
+						"dhz|2030|s3|longterm|stopmining": [{"type":"dynamic","show":[76]}],
+						"dhz|2030|s3|longterm|stormier": [{"type":"dynamic","show":[86]}],
+						"dhz|2030|s3|wstorm|nochange": [{"type":"dynamic","show":[96]}],
+						"dhz|2030|s3|wstorm|stopmining": [{"type":"dynamic","show":[106]}],
+						"dhz|2030|s3|wstorm|stormier": [{"type":"dynamic","show":[116]}],
+
+						"dhz|2060|s1|longterm|nochange": [{"type":"dynamic","show":[61]}],
+						"dhz|2060|s1|longterm|stopmining": [{"type":"dynamic","show":[71]}],
+						"dhz|2060|s1|longterm|stormier": [{"type":"dynamic","show":[81]}],
+						"dhz|2060|s1|wstorm|nochange": [{"type":"dynamic","show":[91]}],
+						"dhz|2060|s1|wstorm|stopmining": [{"type":"dynamic","show":[101]}],
+						"dhz|2060|s1|wstorm|stormier": [{"type":"dynamic","show":[111]}],
+
+						"dhz|2060|s2|longterm|nochange": [{"type":"dynamic","show":[64]}],
+						"dhz|2060|s2|longterm|stopmining": [{"type":"dynamic","show":[74]}],
+						"dhz|2060|s2|longterm|stormier": [{"type":"dynamic","show":[84]}],
+						"dhz|2060|s2|wstorm|nochange": [{"type":"dynamic","show":[94]}],
+						"dhz|2060|s2|wstorm|stopmining": [{"type":"dynamic","show":[104]}],
+						"dhz|2060|s2|wstorm|stormier": [{"type":"dynamic","show":[114]}],
+
+						"dhz|2060|s3|longterm|nochange": [{"type":"dynamic","show":[67]}],
+						"dhz|2060|s3|longterm|stopmining": [{"type":"dynamic","show":[77]}],
+						"dhz|2060|s3|longterm|stormier": [{"type":"dynamic","show":[87]}],
+						"dhz|2060|s3|wstorm|nochange": [{"type":"dynamic","show":[97]}],
+						"dhz|2060|s3|wstorm|stopmining": [{"type":"dynamic","show":[107]}],
+						"dhz|2060|s3|wstorm|stormier": [{"type":"dynamic","show":[117]}],	
+
+						"dhz|2100|s1|longterm|nochange": [{"type":"dynamic","show":[62]}],
+						"dhz|2100|s1|longterm|stopmining": [{"type":"dynamic","show":[72]}],
+						"dhz|2100|s1|longterm|stormier": [{"type":"dynamic","show":[82]}],
+						"dhz|2100|s1|wstorm|nochange": [{"type":"dynamic","show":[92]}],
+						"dhz|2100|s1|wstorm|stopmining": [{"type":"dynamic","show":[102]}],
+						"dhz|2100|s1|wstorm|stormier": [{"type":"dynamic","show":[112]}],
+
+						"dhz|2100|s2|longterm|nochange": [{"type":"dynamic","show":[65]}],
+						"dhz|2100|s2|longterm|stopmining": [{"type":"dynamic","show":[75]}],
+						"dhz|2100|s2|longterm|stormier": [{"type":"dynamic","show":[85]}],
+						"dhz|2100|s2|wstorm|nochange": [{"type":"dynamic","show":[95]}],
+						"dhz|2100|s2|wstorm|stopmining": [{"type":"dynamic","show":[96]}],
+						"dhz|2100|s2|wstorm|stormier": [{"type":"dynamic","show":[97]}],
+
+						"dhz|2100|s3|longterm|nochange": [{"type":"dynamic","show":[68]}],
+						"dhz|2100|s3|longterm|stopmining": [{"type":"dynamic","show":[78]}],
+						"dhz|2100|s3|longterm|stormier": [{"type":"dynamic","show":[88]}],
+						"dhz|2100|s3|wstorm|nochange": [{"type":"dynamic","show":[98]}],
+						"dhz|2100|s3|wstorm|stopmining": [{"type":"dynamic","show":[108]}],
+						"dhz|2100|s3|wstorm|stormier": [{"type":"dynamic","show":[118]}],	
+
+
+						"chz|2010|longterm|nochange": [{"type":"dynamic","show":[3]}], 
+						"chz|2010|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2010|longterm|stormier": [{"type":"dynamic","show":[13]}],
+						"chz|2010|wstorm|nochange": [{"type":"dynamic","show":[23]}], 
+						"chz|2010|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2010|wstorm|stormier": [{"type":"dynamic","show":[33]}],
+						
+						"chz|2030|s1|longterm|nochange": [{"type":"dynamic","show":[4]}],
+						"chz|2030|s1|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2030|s1|longterm|stormier": [{"type":"dynamic","show":[14]}],
+						"chz|2030|s1|wstorm|nochange": [{"type":"dynamic","show":[24]}],
+						"chz|2030|s1|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2030|s1|wstorm|stormier": [{"type":"dynamic","show":[34]}],
+
+						"chz|2030|s2|longterm|nochange": [{"type":"dynamic","show":[7]}],
+						"chz|2030|s2|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2030|s2|longterm|stormier": [{"type":"dynamic","show":[17]}],
+						"chz|2030|s2|wstorm|nochange": [{"type":"dynamic","show":[27]}],
+						"chz|2030|s2|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2030|s2|wstorm|stormier": [{"type":"dynamic","show":[37]}],
+
+						"chz|2030|s3|longterm|nochange": [{"type":"dynamic","show":[10]}],
+						"chz|2030|s3|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2030|s3|longterm|stormier": [{"type":"dynamic","show":[20]}],
+						"chz|2030|s3|wstorm|nochange": [{"type":"dynamic","show":[30]}],
+						"chz|2030|s3|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2030|s3|wstorm|stormier": [{"type":"dynamic","show":[40]}],
+
+						"chz|2060|s1|longterm|nochange": [{"type":"dynamic","show":[5]}],
+						"chz|2060|s1|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2060|s1|longterm|stormier": [{"type":"dynamic","show":[15]}],
+						"chz|2060|s1|wstorm|nochange": [{"type":"dynamic","show":[25]}],
+						"chz|2060|s1|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2060|s1|wstorm|stormier": [{"type":"dynamic","show":[35]}],
+
+						"chz|2060|s2|longterm|nochange": [{"type":"dynamic","show":[8]}],
+						"chz|2060|s2|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2060|s2|longterm|stormier": [{"type":"dynamic","show":[18]}],
+						"chz|2060|s2|wstorm|nochange": [{"type":"dynamic","show":[28]}],
+						"chz|2060|s2|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2060|s2|wstorm|stormier": [{"type":"dynamic","show":[38]}],
+
+						"chz|2060|s3|longterm|nochange": [{"type":"dynamic","show":[11]}],
+						"chz|2060|s3|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2060|s3|longterm|stormier": [{"type":"dynamic","show":[21]}],
+						"chz|2060|s3|wstorm|nochange": [{"type":"dynamic","show":[31]}],
+						"chz|2060|s3|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2060|s3|wstorm|stormier": [{"type":"dynamic","show":[41]}],	
+
+						"chz|2100|s1|longterm|nochange": [{"type":"dynamic","show":[6]}],
+						"chz|2100|s1|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2100|s1|longterm|stormier": [{"type":"dynamic","show":[16]}],
+						"chz|2100|s1|wstorm|nochange": [{"type":"dynamic","show":[26]}],
+						"chz|2100|s1|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2100|s1|wstorm|stormier": [{"type":"dynamic","show":[36]}],
+
+						"chz|2100|s2|longterm|nochange": [{"type":"dynamic","show":[9]}],
+						"chz|2100|s2|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2100|s2|longterm|stormier": [{"type":"dynamic","show":[19]}],
+						"chz|2100|s2|wstorm|nochange": [{"type":"dynamic","show":[29]}],
+						"chz|2100|s2|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2100|s2|wstorm|stormier": [{"type":"dynamic","show":[39]}],
+
+						"chz|2100|s3|longterm|nochange": [{"type":"dynamic","show":[12]}],
+						"chz|2100|s3|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2100|s3|longterm|stormier": [{"type":"dynamic","show":[22]}],
+						"chz|2100|s3|wstorm|nochange": [{"type":"dynamic","show":[32]}],
+						"chz|2100|s3|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
+						"chz|2100|s3|wstorm|stormier": [{"type":"dynamic","show":[42]}]							
+
+						
+					},
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/CR_CA/Monterey_SLR/MapServer"
+				
+				}			
+			]
+		}
+	]
+}
