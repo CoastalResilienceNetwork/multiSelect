@@ -19,8 +19,8 @@
 				{
 					"name": "NA",
 					"controls": [
-						{"name":"Map Type", "group": "main", "values":[{"name":"Probability of Inundation","value":"PInn", selected: true},{"name":"Inundation","value":"Inn" }	], "type": "radio"},
-						{"name":"Sea Level Rise", "group": "main", "values":[{"name":"1 Foot","value":"1ft", "selected": true},{"name":"2 Feet", "value":"2ft"},{"name":"3 Feet", "value":"3ft"}], "type": "slider"}
+						{"name":"SE Florida Climate Change Compact Inundation Mapping", "group": "main", "values":[{"name":"Probability of Inundation","value":"PInn", selected: true},{"name":"Inundation","value":"Inn" }	], "type": "radio"},
+						{"name":"Choose Sea Level Rise (SLR) Inundation", "group": "main", "values":[{"name":"1 Foot","value":"1ft", "selected": true},{"name":"2 Feet", "value":"2ft"},{"name":"3 Feet", "value":"3ft"}], "type": "slider"}
 					], 
 					"combos": {
 						"PInn|1ft": [{"type":"dynamic","show":[3]}],
@@ -52,8 +52,8 @@
 				{
 					"name": "NA",
 					"controls": [
-						{"name":"Map Type", "group": "main", "values":[{"name":"Storm","value":"storm", selected: true},{"name":"No Storm","value":"nostorm" }	], "type": "radio"},
-						{"name":"Sea Level Rise", "group": "main", "values":[{"name":"None","value":"none", "dependent": "storm"},{"name":"1 Foot","value":"1ft", "selected": true},{"name":"2 Feet", "value":"2ft"},{"name":"3 Feet", "value":"3ft"},{"name":"4 Feet", "value":"4ft"}], "type": "slider"}
+						{"name":"Storm Surge", "group": "main", "values":[{"name":"None","value":"nostorm" },{"name":"Storm (Hurricane Wilma)","value":"storm", selected: true}	], "type": "radio"},
+						{"name":"Choose Sea Level Rise (SLR) Inundation", "group": "main", "values":[{"name":"None","value":"none", "dependent": "storm"},{"name":"1 Foot","value":"1ft", "selected": true},{"name":"2 Feet", "value":"2ft"},{"name":"3 Feet", "value":"3ft"},{"name":"4 Feet", "value":"4ft"}], "type": "slider"}
 					], 
 					"combos": {
 						"nostorm|1ft": [{"type":"dynamic","show":[6]}],
@@ -88,7 +88,7 @@
 				{
 					"name": "NA",
 					"controls": [
-						{"name":"Choose SLR", "group": "main", "values":[{"name":"Current","value":"0", "selected": true},{"name":"1 ft", "value":"1"}, {"name":"2 ft", "value":"2"}, {"name":"3 ft", "value":"3"}, {"name":"4 ft", "value":"4"}, {"name":"5 ft", "value":"5"}, {"name":"6 ft", "value":"6"}], "type": "slider"}
+						{"name":"Choose Sea Level Rise (SLR) Inundation", "group": "main", "values":[{"name":"Current","value":"0", "selected": true, "help": "Mean Higher High Water Inundation"},{"name":"1 ft", "value":"1", "help": "1ft SLR inundation"}, {"name":"2 ft", "value":"2", "help": "2ft SLR inundation"}, {"name":"3 ft", "value":"3", "help": "3ft SLR inundation"}, {"name":"4 ft", "value":"4", "help": "4ft SLR inundation"}, {"name":"5 ft", "value":"5"}, {"name":"6 ft", "value":"6", "help": "5ft SLR inundation"}], "type": "slider"}
 						],
 					combos: {
 				
