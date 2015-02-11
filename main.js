@@ -161,6 +161,8 @@ define([
 					
 						this.render();
 						
+						this.resize();
+						
 						//this.currentLayer.setVisibility(true);
 					
 					
@@ -169,6 +171,8 @@ define([
 						if (this.currentLayer != undefined)  {
 						
 						//	this.currentLayer.setVisibility(true);
+						
+						this.resize();
 						
 						}
 						
@@ -1167,11 +1171,13 @@ define([
 				
 				render: function() {
 				
+				
 					this.myLayers = new Array();
 						
 					a = dojoquery(this.container).parent();
 					
 					domStyle.set(this.container, 'overflow', 'hidden');
+					
 					
 					this.infoarea = new ContentPane({
 					  style:"z-index:10000; !important;position:absolute !important;left:310px !important;top:0px !important;width:350px !important;background-color:#FFF !important;padding:10px !important;border-style:solid;border-width:4px;border-color:#444;border-radius:5px;display: none",
@@ -1295,8 +1301,8 @@ define([
 						this.buttonpane.domNode.appendChild(this.methodsButton.domNode);
 
 					domStyle.set(this.methodsButton.domNode, "display", "none");
-					
-					this.resize();
+
+					//this.resize();
 						
 
 				},
@@ -1485,9 +1491,10 @@ define([
 				
                getState: function () { 
 			   
-				console.log(this.controls);
+			    //console.log("save Geo MS");
+				//console.log(this.currentgeography);
 			   
-				state = this.controls;
+				state = this.currentgeography;
 			   
 				return state;
 	
@@ -1497,10 +1504,14 @@ define([
 				
                setState: function (state) { 
 				
-				this.controls = state;
+				//aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (event) {
 				
+				console.log("STATE");
+				
+				//this.controls = state;
+				//alert('');
 				this.render();
-				
+				this.changeGeography(state);
 				
 				},
            });
