@@ -1173,7 +1173,10 @@ define([
 					
 					if (e != undefined) {
 						this.translevel = e;
+					} else {
+						this.translevel = 0;
 					}
+					
 					
 					array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){						
 						clayer.setOpacity(1 - this.translevel);
@@ -1323,8 +1326,7 @@ define([
 
 					domStyle.set(this.methodsButton.domNode, "display", "none");
 
-					//this.resize();
-						
+					//this.resize();					
 
 				},
 					
@@ -1534,7 +1536,7 @@ define([
 				this.render();
 				this.changeGeography(state);
 				
-				},
+				}
            });
        });
 
