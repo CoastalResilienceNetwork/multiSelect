@@ -14,7 +14,7 @@
                     "latestWkid": 3857
                 }
             },
-			"methods": "methods/SLR.pdf",
+			"methods": {"title": "Methods", "url": "methods/SLR.pdf"},
 			"tabs" : [
 				{
 					"name": "NA",
@@ -47,7 +47,7 @@
                     "latestWkid": 3857
                 }
             },
-			"methods": "methods/SLR.pdf",
+			"methods": {"title": "Methods", "url": "methods/SLR.pdf"},
 			"tabs" : [
 				{
 					"name": "NA",
@@ -83,23 +83,31 @@
                     "latestWkid": 3857
                 }
             },
-			"methods": "methods/SLR.pdf",
+			"methods": {"title": "Methods", "url": "methods/SLR.pdf"},
 			"tabs" : [
 				{
 					"name": "NA",
 					"controls": [
-						{"name":"Choose Sea Level Rise (SLR) Inundation", "group": "main", "values":[{"name":"Current","value":"0", "selected": true, "help": "Mean Higher High Water Inundation"},{"name":"1 ft", "value":"1", "help": "1ft SLR inundation"}, {"name":"2 ft", "value":"2", "help": "2ft SLR inundation"}, {"name":"3 ft", "value":"3", "help": "3ft SLR inundation"}, {"name":"4 ft", "value":"4", "help": "4ft SLR inundation"}, {"name":"5 ft", "value":"5"}, {"name":"6 ft", "value":"6", "help": "5ft SLR inundation"}], "type": "slider"}
+					{"name":"Storm Surge", "group": "main", "values":[{"name":"Confidence ","value":"confidence" },{"name":"Inundation","value":"inundation", selected: true}	], "type": "radio"},
+						{"name":"Choose Sea Level Rise (SLR) Inundation", "group": "main", "values":[{"name":"Current","value":"0", "selected": true, "help": "Mean Higher High Water Inundation"},{"name":"1 foot", "value":"1", "help": "1ft SLR inundation"}, {"name":"2 feet", "value":"2", "help": "2ft SLR inundation"}, {"name":"3 feet", "value":"3", "help": "3ft SLR inundation"}, {"name":"4 feet", "value":"4", "help": "4ft SLR inundation"}, {"name":"5 feet", "value":"5"}, {"name":"6 feet", "value":"6", "help": "5ft SLR inundation"}], "type": "slider"}
 						],
 					combos: {
 				
 	
-						"0": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_0ft/MapServer"}],
-						"1": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_1ft/MapServer"}], 
-						"2": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_2ft/MapServer"}],
-						"3": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_3ft/MapServer"}],	
-						"4": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_4ft/MapServer"}],
-						"5": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_5ft/MapServer"}], 
-						"6": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_6ft/MapServer"}]
+						"inundation|0": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_0ft/MapServer"}],
+						"inundation|1": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_1ft/MapServer"}], 
+						"inundation|2": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_2ft/MapServer"}],
+						"inundation|3": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_3ft/MapServer"}],	
+						"inundation|4": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_4ft/MapServer"}],
+						"inundation|5": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_5ft/MapServer"}], 
+						"inundation|6": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/slr_6ft/MapServer"}],
+						"confidence|0": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/conf_0ft/MapServer"}],
+						"confidence|1": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/conf_1ft/MapServer"}], 
+						"confidence|2": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/conf_2ft/MapServer"}],
+						"confidence|3": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/conf_3ft/MapServer"}],	
+						"confidence|4": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/conf_4ft/MapServer"}],
+						"confidence|5": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/conf_5ft/MapServer"}], 
+						"confidence|6": [{"type":"tiled", "url": "http://www.csc.noaa.gov/ArcGISPUB/rest/services/dc_slr/conf_6ft/MapServer"}]
 					
 					}
 				

@@ -708,7 +708,28 @@ define([
 			   
 					this.currentgeography = geography;
 					
-					console.log(geography);
+					if (geography.methods != undefined) {
+					
+						if (typeof geography.methods == "string") {
+
+							methodsTitle = "View Full Report";
+							
+							url = geography.methods; 
+							
+							geography.methods = {}
+							geography.methods.url = url;
+							geography.methods.title = methodsTitle;
+				
+						} 
+
+						domStyle.set(this.methodsButton.domNode, "display", "");
+						this.methodsButton.set("label", geography.methods.title); 
+					
+					} else { 
+					
+						domStyle.set(this.methodsButton.domNode, "display", "none");
+					
+					}
 					
 					ext = new Extent(this.currentgeography.extent);
 					this.map.setExtent(ext);		
@@ -1296,7 +1317,7 @@ define([
 						this.methodsButton = new Button({
 							label: "View Full Report",
 							style:  "position: absolute; right:5px; bottom:5px !important;",
-							onClick: lang.hitch(this,function(){window.open(this.currentgeography.methods)})  //function(){window.open(this.configVizObject.methods)}
+							onClick: lang.hitch(this,function(){window.open(this.currentgeography.methods.url)})  //function(){window.open(this.configVizObject.methods)}
 							});	
 						this.buttonpane.domNode.appendChild(this.methodsButton.domNode);
 
