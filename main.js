@@ -935,6 +935,8 @@ define([
 									style: "width:250px;margin-top:10px;margin-bottom:20px"
 								}, nslidernode);
 								
+								nbr = domConstruct.create("br");
+								ctab.domNode.appendChild(nbr); 
 								
 								parser.parse()								
 						   
