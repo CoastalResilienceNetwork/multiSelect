@@ -184,11 +184,7 @@ define([
 			  
 			   },
 			   
-               deactivate: function () {
-
-				array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
-					this.map.removeLayer(clayer);
-				}));				
+               deactivate: function () {				
 			   
 			   },
 			   
