@@ -211,7 +211,7 @@ define([
 				
 					declare.safeMixin(this, frameworkParameters);
 			
-					domClass.add(this.container, "claro");
+					domClass.add(this.container, "tundra");
 					
 					this.infoIcon = dojo.eval("[" + configData + "]")[0].infoIcon;
 					
