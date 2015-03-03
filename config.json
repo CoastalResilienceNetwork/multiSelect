@@ -3,6 +3,7 @@
 	"pluginHeight": 450,
 	"windowStyles": {"opacity": 0.75},
 	"transparency": 0.25,
+	"dojoTheme": "tundra",
 	"regions": [
 		{
 			"name": "Ventura",

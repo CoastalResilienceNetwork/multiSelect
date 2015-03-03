@@ -211,7 +211,6 @@ define([
 				
 					declare.safeMixin(this, frameworkParameters);
 			
-					domClass.add(this.container, "claro");
 					
 					this.infoIcon = dojo.eval("[" + configData + "]")[0].infoIcon;
 					
@@ -224,6 +223,16 @@ define([
 					mainData = dojo.eval("[" + configData + "]")[0]
 					
 					this.windowStyles = mainData.windowStyles;
+					
+					this.dojoTheme = mainData.dojoTheme;
+					
+					if (this.dojoTheme == undefined) {
+
+						this.dojoTheme = "claro" 
+					
+					}
+					
+					domClass.add(this.container, this.dojoTheme);
 					
 					if (this.windowStyles != undefined) {
 					
@@ -244,8 +253,8 @@ define([
 					console.log(this.configVizObject);
 					
 					menu = new DropDownMenu({ style: "display: none;"});
-					
-					domClass.add(menu.domNode, "claro");
+				
+					domClass.add(menu.domNode, this.dojoTheme);
 					
 					this.isClipped = false;
 					
@@ -743,6 +752,7 @@ define([
 					if (this.currentgeography.tabs.length == 1) {
 					
 						this.tabpan = new ContentPane({
+							style:"padding: 8px"
 							//style: "height: 100%; width: 100%;"
 						});
 						
@@ -764,6 +774,7 @@ define([
 					array.forEach(this.currentgeography.tabs, lang.hitch(this,function(ctabrec, i){
 					
 						ctab = new ContentPane({
+							style:"padding: 8px",
 						//  style:"height:" + this.sph + "px !important",
 						//style: "height: 100%; width: 100%;",
 						  title: ctabrec.name,
@@ -938,7 +949,7 @@ define([
 									//index: groupid,
 									//onChange: lang.hitch(this,function(e) {this.updateUnique(e, groupid)}),
 									onChange: lang.hitch(this,function(e) { this.updateSlider({"tab": i, "control": c, "type": control.type}, e) }),
-									style: "width:250px;margin-top:10px;margin-bottom:20px"
+									style: "width:250px;margin-top:10px;margin-bottom:20px; margin-left:10px"
 								}, nslidernode);
 								
 								nbr = domConstruct.create("br");
@@ -1250,21 +1261,24 @@ define([
 					//});
 					
 					this.mainpane = new ContentPane({
+						style:"padding: 8px"
 					  //style:"overflow:hidden !important",
 					 //style: "height: 100%; width: 100%;",
 					 // title: "Choose Parameters"
 					});
 					
+					
 					domStyle.set(this.mainpane.domNode, 'overflow', 'hidden');
-					domClass.add(this.mainpane.domNode, "claro");
+					
+					domClass.add(this.mainpane.domNode, this.dojoTheme);
 					parser.parse();
-					domClass.add(this.mainpane.domNode, "claro");
+					domClass.add(this.mainpane.domNode, this.dojoTheme);
 					
 					
 					//dom.byId(this.container).appendChild(this.tabpan.domNode);
 					
 					dom.byId(this.container).appendChild(this.mainpane.domNode);
-					domClass.add(this.mainpane.domNode, "claro");
+					domClass.add(this.mainpane.domNode, this.dojoTheme);
 					//this.tabpan.addChild(this.mainpane);
 					//this.tabpan.addChild(this.chartpane);
 					
