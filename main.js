@@ -146,7 +146,7 @@ define([
            return declare(PluginBase, {
 		       toolbarName: _config.name,
                toolbarType: "sidebar",
-               allowIdentifyWhenActive: false,
+               allowIdentifyWhenActive: true,
 			   width: 420,
 			   infoGraphic: _infographic, 
 			   height: _config.pluginHeight,
@@ -205,7 +205,19 @@ define([
 					domConstruct.empty(this.mainpane.domNode);
 					
 			   },
-			   
+			
+/*			
+			identify: function(mapPoint, clickPoint, processResults) {
+			
+					array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
+						console.log(clayer);
+					}));
+					
+                var text = "",
+                   identifyWidth = 300;
+                processResults(text, identifyWidth);
+            },
+	*/		   
 			   
 				initialize: function (frameworkParameters) {
 				
