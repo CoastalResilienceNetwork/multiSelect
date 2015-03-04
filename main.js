@@ -745,6 +745,26 @@ define([
 						domStyle.set(this.methodsButton.domNode, "display", "none");
 					
 					}
+			
+					domConstruct.empty(this.ButtonsLocation);
+					
+					if (geography.buttons != undefined) {
+						
+						array.forEach(geography.buttons, lang.hitch(this,function(cbutton, i){
+						
+							newButt = new Button({
+								label: cbutton.title,
+								onClick: lang.hitch(this,function(){window.open(cbutton.url)})  //function(){window.open(this.configVizObject.methods)}
+								});	
+								
+							this.ButtonsLocation.appendChild(newButt.domNode);
+							
+						
+						}));
+					
+
+					}
+						
 					
 					ext = new Extent(this.currentgeography.extent);
 					this.map.setExtent(ext);		
@@ -1344,6 +1364,10 @@ define([
 						this.buttonpane.domNode.appendChild(this.methodsButton.domNode);
 
 					domStyle.set(this.methodsButton.domNode, "display", "none");
+					
+					this.ButtonsLocation = domConstruct.create("span", {style: "float:right"});
+					
+					this.buttonpane.domNode.appendChild(this.ButtonsLocation);
 
 					//this.resize();					
 

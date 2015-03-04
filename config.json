@@ -17,7 +17,7 @@
                     "latestWkid": 3857
                 }
             },
-			"methods": "methods/CRV_Hazards_Mapping_Technical_Report.pdf",
+			"buttons": [{"title": "Download Data", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Technical Report", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Overview", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"}],
 			"tabs" : [
 				{
 					"name": "Management Actions",
@@ -138,7 +138,7 @@
                     "latestWkid": 3857
                 }
             },
-			"methods": "methods/SLR.pdf",
+			"buttons": [{"title": "Download Data", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Technical Report", "url": "methods/SLR.pdf"},{"title": "View Overview", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"}],
 			"tabs" : [
 				{
 					"name": "Management Actions",
