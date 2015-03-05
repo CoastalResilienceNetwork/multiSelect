@@ -195,14 +195,10 @@ define([
 					
 					}
 					
-					
-					array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
-						this.map.removeLayer(clayer);
-					}));
-					
 					this.button.set("label",_ddText);
-					
 					domConstruct.empty(this.mainpane.domNode);
+					
+					this.removeLayers();
 					
 			   },
 			
@@ -218,6 +214,22 @@ define([
                 processResults(text, identifyWidth);
             },
 	*/		   
+			   
+			   removeLayers: function() {
+				   
+				   	lastlayer = {}
+					array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
+						this.map.removeLayer(clayer);
+						lastlayer = clayer;
+					}));
+					
+					//legend = dijit.byId("legend-0");
+					//legend.refresh();
+					
+					this.map.addLayer(lastlayer);
+					this.map.removeLayer(lastlayer);
+			   
+			   },
 			   
 				initialize: function (frameworkParameters) {
 				
@@ -679,10 +691,10 @@ define([
 				}));
 				
 					
-				array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
-					this.map.removeLayer(clayer);
-				}));
-				
+				//array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
+				//	this.map.removeLayer(clayer);
+				//}));
+				this.removeLayers();
 				
 				for (lurl in dynamicLayers) {
 							
@@ -779,7 +791,15 @@ define([
 						
 					
 					ext = new Extent(this.currentgeography.extent);
-					this.map.setExtent(ext);		
+					this.map.setExtent(ext);	
+
+					if (this.currentgeography.tabs == undefined) {
+						
+						this.currentgeography.tabs = new Array();
+						rec = {"controls": this.currentgeography.controls, "combos": this.currentgeography.combos, "mainURL": this.currentgeography.mainURL}
+						this.currentgeography.tabs.push(rec)
+						
+					}					
 					
 					if (this.currentgeography.tabs.length == 1) {
 					
@@ -1120,9 +1140,10 @@ define([
 					aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (event) {
 						this.resize();
 						
-						array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
-							this.map.removeLayer(clayer);
-						}));
+						//array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
+						//	this.map.removeLayer(clayer);
+						//}));
+						this.removeLayers();
 						
 						this.makeSandwidches();
 						
