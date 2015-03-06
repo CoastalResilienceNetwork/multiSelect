@@ -256,6 +256,12 @@ define([
 					
 					}
 					
+					if (this.hideDisableds == undefined) {
+
+						this.hideDisableds = true; 
+					
+					}
+					
 					domClass.add(this.container, this.dojoTheme);
 					
 					if (this.windowStyles != undefined) {
@@ -546,7 +552,7 @@ define([
 											}
 										}));
 									} else {
-									
+									   // Put slider disabled code here
 									}
 									
 							}));
@@ -620,6 +626,28 @@ define([
 				console.log(sandWitchList);
 				
 				this.updateMap(sandWitchList);
+				
+				
+				if (this.hideDisableds == true) {
+				
+					array.forEach(this.controlNodes, lang.hitch(this,function(cgroup, i){
+								
+						cGroupWidgets = registry.findWidgets(cgroup);
+						hideit = true;
+						array.forEach(cGroupWidgets, lang.hitch(this,function(widg, j){
+						  if (widg.get('disabled') == false) {hideit = false;}
+						}));
+						
+						if (hideit == true) {
+							domAttr.set(cgroup, "style", "display:none");
+						} else {	
+							domAttr.set(cgroup, "style", "display:");
+						}
+								
+					}));
+				
+				}
+				
 				
 			   },
 			   
@@ -744,6 +772,8 @@ define([
 			   changeGeography: function(geography, zoomto) {
 			   
 					domConstruct.empty(this.mainpane.domNode);
+					
+					this.controlNodes = new Array();
 			   
 					this.currentgeography = geography;
 					
@@ -839,11 +869,15 @@ define([
 						
 						array.forEach(ctabrec.controls, lang.hitch(this,function(control, c){
 						
-									//dep = control.dependent;
-					//			if (dep == undefined) {dep = ""};	
+						// This is the node that can be hidden						
+
 
 					   if (ctabrec.titles != undefined) {
 							if (ctabrec.titles[c] != undefined) {
+								
+								controlNode = domConstruct.create("div");
+								ctab.domNode.appendChild(controlNode);
+								this.controlNodes.push(controlNode);
 							
 								if (ctabrec.titles[c].help != undefined) {
 								
@@ -858,7 +892,7 @@ define([
 								ttext = "<span style='color:#000' >" + thelpButton + ctabrec.titles[c].name + "</span>"	 
 								
 								nodetitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;font-size: 120%;", innerHTML: ttext});
-								ctab.domNode.appendChild(nodetitle);
+								controlNode.appendChild(nodetitle);
 								
 									a = dojoquery(nodetitle).children();
 									if (a.children.length > 0) {
@@ -886,8 +920,21 @@ define([
 									}
 									
 							
+							} else {
+
+							    controlNode = lastControlNode;
+							
 							}
+						} else {
+
+								controlNode = domConstruct.create("div")
+								ctab.domNode.appendChild(controlNode);	
+								this.controlNodes.push(controlNode);								
+						
 						}
+						
+						
+						
 						
 						if (control.help != undefined) {
 						
@@ -902,7 +949,7 @@ define([
 						ctext = "<span style='color:#000' >" + chelpButton + control.name + "</span>"	
 						
 						nodesubtitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;", innerHTML: ctext});
-						ctab.domNode.appendChild(nodesubtitle);
+						controlNode.appendChild(nodesubtitle);
 						
 				
 									
@@ -980,7 +1027,7 @@ define([
 								  })); 
 								
 								nslidernode = domConstruct.create("div");
-								ctab.domNode.appendChild(nslidernode); 
+								controlNode.appendChild(nslidernode); 
 								
 								labelsnode = domConstruct.create("ol", {"data-dojo-type":"dijit/form/HorizontalRuleLabels", container:"bottomDecoration", style:"height:0.25em;padding-top: 10px !important;color:black !important", innerHTML: outslid})
 								nslidernode.appendChild(labelsnode);
@@ -1005,7 +1052,7 @@ define([
 								}, nslidernode);
 								
 								nbr = domConstruct.create("br");
-								ctab.domNode.appendChild(nbr); 
+								controlNode.appendChild(nbr); 
 								
 								parser.parse()								
 						   
@@ -1035,7 +1082,7 @@ define([
 								}
 								
 								   ncontrolsnode = domConstruct.create("div", {style:val.style});
-								   ctab.domNode.appendChild(ncontrolsnode);
+								   controlNode.appendChild(ncontrolsnode);
 								   
 								   
 								   sel = val.selected;
@@ -1131,6 +1178,8 @@ define([
 								parser.parse()							
 						
 							  }
+						
+						lastControlNode = controlNode;
 						
 						}));
 					
