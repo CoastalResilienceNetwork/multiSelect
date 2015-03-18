@@ -21,7 +21,7 @@
 			"tabs" : [
 				{
 					"name": "Management Actions",
-					"titles": [{"name":"1. Select the hazard to view", "help": "Select the hazard to view"}, {"name":"2. Select the time and amount of sea level rise", "help": "amount of sea level rise"}, undefined, {"name":"3. Select the Erosion options", "help": "Erosion options"}],					
+					"titles": [{"name":"1. Select the hazard to view", "help": "Select the hazard to view"}, {"name":"2. Select the time and amount of sea level rise", "help": "amount of sea level rise"}, {"name":""}, {"name":"3. Select the Erosion options", "help": "Erosion options"}],					
 					"controls": [
 						{"name":"Select the hazard to view", "group": "main", "help": "Hazards", "values":[{"name":"Tidal Inundation (monthly in feet)","value":"TI", "help": "These zones show the area and depth of inundation (given in feet) caused simply by rising tide levels (not considering storms, erosion, or river discharge). The water level mapped in these inundation areas is the Extreme Monthly High Water (EMHW) level, which occurs approximately once a month. <br><br> <img src='plugins/flood_slr/images/RisingTide1.png' />"},
 						{"name":"Wave Impact (large storm)", "value":"WI", "help": "The coastal storm wave impact area is the subset of the coastal storm flood hazard zone in which water could potentially rush inland due to waves breaking at the coast and damage structures, move cars, and knock people off their feet.  <img src='http://jasontheodor.com/wp-content/uploads//2012/02/things.jpg' />"},
@@ -142,7 +142,7 @@
 			"tabs" : [
 				{
 					"name": "Management Actions",
-					"titles": [{"name":"1. Select the hazard to view", "help": "Select the hazard to view"}, {"name":"2. Select the time and amount of sea level rise", "help": "amount of sea level rise"}, undefined, {"name":"3. Select the Erosion options", "help": "Erosion options"}],	
+					"titles": [{"name":"1. Select the hazard to view", "help": "Select the hazard to view"}, {"name":"2. Select the time and amount of sea level rise", "help": "amount of sea level rise"}, {"name":""}, {"name":"3. Select the Erosion options", "help": "Erosion options"}],	
 					"controls": [
 						{"name":"", "group": "main", "values":[{"name":"Rising Tide","value":"tide_area", "help": "Year 2010", "selected": true, "help": "Areas will be regularly flooded by high tides under future sea level rise (not considering storm events)."},
 						{"name":"Aggregated Rising Tide", "value":"tide_area_aggr", "help": "The rising tide hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
