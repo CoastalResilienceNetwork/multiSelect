@@ -1513,7 +1513,16 @@ define([
 				this.render();
 				this.changeGeography(state);
 				
-				}
+				},
+				
+            subregionActivated: function(subregion) {
+                console.debug('now using subregion ' + subregion.display);
+            },
+            
+            subregionDeactivated: function(subregion) {
+                console.debug('now leaving subregion ' + subregion.display);
+            }
+			
            });
        });
 
