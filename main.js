@@ -142,6 +142,16 @@ define([
 				_ddText = "Choose a Region";
 			
 			}
+			
+			if (_config.regionLabeler != undefined) {
+			
+				_regionLabeler = _config.regionLabeler;
+			
+			} else {
+			
+				_regionLabeler = "Selected Region: #";
+			
+			}
 					
            return declare(PluginBase, {
 		       toolbarName: _config.name,
@@ -198,6 +208,7 @@ define([
 					if (this.mainpane != undefined) {
 						this.button.set("label",_ddText);
 						domConstruct.empty(this.mainpane.domNode);
+						this.regionLabelNode.innerHTML = "";
 					}
 					
 					this.removeLayers();
@@ -310,12 +321,15 @@ define([
 						dropDown: menu
 					});
 					
+					this.regionLabelNode = domConstruct.create("span"); //, innerHTML: "<img src=" + this.spinnerURL + ">" 
+					
 					dom.byId(this.container).appendChild(this.button.domNode);
+					dom.byId(this.container).appendChild(this.regionLabelNode);
 					
 					this.spinnerURL = localrequire.toUrl("./images/spinner.gif");
 					
 					this.refreshnode = domConstruct.create("span", {style: "display:none"}); //, innerHTML: "<img src=" + this.spinnerURL + ">" 
-					spinnernode = domConstruct.create("span", {style: "background: url(" + this.spinnerURL + ") no-repeat center center; height: 32px; width: 32px; display: inline-block; position: absolute; left: 45%;" });
+					spinnernode = domConstruct.create("span", {style: "background: url(" + this.spinnerURL + ") no-repeat center center; height: 32px; width: 32px; display: inline-block; position: absolute; right: 5px;" });
 					//domClass.add(this.refreshnode, "plugin-report-spinner");
 					this.refreshnode.appendChild(spinnernode);
 					dom.byId(this.container).appendChild(this.refreshnode);
@@ -774,6 +788,10 @@ define([
 			   changeGeography: function(geography, zoomto) {
 			   
 					domConstruct.empty(this.mainpane.domNode);
+					
+					//this.button.set("label",geography.name);
+
+					this.regionLabelNode.innerHTML = _regionLabeler.replace("#", [geography.name]);
 					
 					this.controlNodes = new Array();
 			   

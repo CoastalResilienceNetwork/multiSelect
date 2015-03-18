@@ -1,9 +1,9 @@
 {
     "name": "Flood and Sea Level Rise",
 	"pluginHeight": 450,
-	"windowStyles": {"opacity": 0.75},
 	"transparency": 0.25,
 	"dojoTheme": "tundra",
+	"regionLabeler": "Selected Region: #",
 	"regions": [
 		{
 			"name": "Ventura",
@@ -17,7 +17,7 @@
                     "latestWkid": 3857
                 }
             },
-			"buttons": [{"title": "Download Data", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Technical Report", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Overview", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"}],
+			"buttons": [{"title": "Download Data", "url": "methods/Download_V.zip"},{"title": "View Technical Report", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Overview", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"}],
 			"tabs" : [
 				{
 					"name": "Management Actions",
@@ -31,8 +31,8 @@
 						{"name":"Combined Erosion Risk", "value":"CER", "help": "This polygon represents the spatial aggregation of coastal erosion hazard zones for all sea level rise and wave climate scenarios at the selected planning horizon. At each planning horizon, the hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios that are projected to be hazardous at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise and wave scenarios and which areas may only hazardous for the worst case scenarios."},
 						{"name":"Combined Hazards", "value":"CH", "help": "This polygon represents the number of future scenarios projecting storm-induced flooding for the selected planning horizon. At each planning horizon, the combined storm flood hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios projected to cause flooding at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise scenarios and which areas may only be hazardous for the worst case scenarios, for a given planning horizon."}
 						], "type": "radio"},
-						{"name":"Year", "group": "main", "help": "Year", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI"},{"name":"2030", "value":"2030", "selected": true},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
-						{"name":"Sea Level Rise Scenario", "dependent" : "TI|WI|FI|RFI|ER&2030|2060|2100", "help": "Sea Level Rise", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true, "help": "17.3 in (44cm) by 2100, relative to the 2010 height"},{"name":"Medium", "value":"Med","help": "36.6 in (93 cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"High", "help": "58.3 in (148 cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI", "help": "Current"},{"name":"2030", "value":"2030", "selected": true, "help": "2030"},{"name":"2060", "value":"2060", "help": "2060"},{"name":"2100", "value":"2100", "help": "2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "dependent" : "TI|WI|FI|RFI|ER&2030|2060|2100", "help": "Sea Level Rise", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true,"help": "17.3 in (44cm) by 2100, relative to the 2010 height"},{"name":"Medium","value":"Med", "help": "36.6 in (93 cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"High", "help": "58.3 in (148 cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
 						{"name":"Large Storm Wave Event (for Erosion Risk)", "dependent" : "ER", "help": "Large Storm", "group": "main", "values":[{"name":"Existing Wave Climate","value":"EWC", "selected": true, "help": "EWC",},{"name":"Doubling of El Nino Frequency", "value":"DENF", "help": "DENF",},{"name":"Addition of ARkStorm", "value":"AOA", "help": "Addition of ARkStorm",}], "type": "radio"}
 					], 
 					"combos": {
@@ -138,7 +138,7 @@
                     "latestWkid": 3857
                 }
             },
-			"buttons": [{"title": "Download Data", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Technical Report", "url": "methods/SLR.pdf"},{"title": "View Overview", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"}],
+			"buttons": [{"title": "Download Data", "url": "methods/Download_M.zip"},{"title": "View Technical Report", "url": "methods/Monterey Technical Methods Report v2_FINAL.pdf"},{"title": "View Overview", "url": "methods/Monterey Technical Methods Report v2_FINAL.pdf"}],
 			"tabs" : [
 				{
 					"name": "Management Actions",
@@ -153,8 +153,8 @@
 						{"name":"Coastal Storm Flood", "value":"coastal_floodhz", "style":"padding-top:7px", "help": "Flooding caused by storm waves rushing inland and to ocean storm characteristics such as storm surge (a rise in the ocean water level caused by waves and pressure changes during a storm)."},
 						{"name":"Aggregated Coastal Storm Flood", "value":"coastal_floodhz_aggr", "help": "The Coastal Storm Flood hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"}
 						], "type": "radio"},
-						{"name":"Year", "group": "main", "help": "Year", "values":[{"name":"Current","value":"2010", "selected": true, "dependent" : "chz|dhz|coastal_floodhz|tide_area"},{"name":"2030", "value":"2030"},{"name":"2060", "value":"2060"},{"name":"2100", "value":"2100"}], "type": "slider"},
-						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "help": "SLR", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true},{"name":"Medium", "value":"s2"},{"name":"High", "value":"s3"}], "type": "slider"},	
+						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI", "help": "Current"},{"name":"2030", "value":"2030", "selected": true, "help": "2030"},{"name":"2060", "value":"2060", "help": "2060"},{"name":"2100", "value":"2100", "help": "2100"}], "type": "slider"},
+						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "help": "SLR", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true, "help": "17.3 in (44cm) by 2100, relative to the 2010 height"},{"name":"Medium", "value":"s2","help": "36.6 in (93 cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"s3","help": "58.3 in (148 cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
 						{"name":"i. Erosion Projection", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"Long Term","value":"longterm", "selected": true, "help": "LT"},{"name":"Long Term and Large Storm", "value":"wstorm", "help": "LTLS"}], "type": "radio"},
 						{"name":"ii. Future Erosion Scenarios", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"No Change","value":"nochange", "selected": true, "help": "NO Change"},{"name":"Sand Mining Cessation", "value":"stopmining", "dependent" : "dhz", "help": "Sandmining"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"stormier", "help": "DEN"}], "type": "radio"}
 					
