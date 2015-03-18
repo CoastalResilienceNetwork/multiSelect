@@ -1,8 +1,9 @@
 {
     "name": "Flood and Sea Level Rise",
 	"pluginHeight": 450,
-	"transparency": 0.25,
+	"transparency": 0.37,
 	"dojoTheme": "tundra",
+	"infoGraphic": "slr_flooding_c.jpg",
 	"regionLabeler": "Selected Region: #",
 	"regions": [
 		{
@@ -33,7 +34,7 @@
 						], "type": "radio"},
 						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI", "help": "Current"},{"name":"2030", "value":"2030", "selected": true, "help": "2030"},{"name":"2060", "value":"2060", "help": "2060"},{"name":"2100", "value":"2100", "help": "2100"}], "type": "slider"},
 						{"name":"Sea Level Rise Scenario", "dependent" : "TI|WI|FI|RFI|ER&2030|2060|2100", "help": "Sea Level Rise", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true,"help": "17.3 in (44cm) by 2100, relative to the 2010 height"},{"name":"Medium","value":"Med", "help": "36.6 in (93 cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"High", "help": "58.3 in (148 cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
-						{"name":"Large Storm Wave Event (for Erosion Risk)", "dependent" : "ER", "help": "Large Storm", "group": "main", "values":[{"name":"Existing Wave Climate","value":"EWC", "selected": true, "help": "EWC",},{"name":"Doubling of El Nino Frequency", "value":"DENF", "help": "DENF",},{"name":"Addition of ARkStorm", "value":"AOA", "help": "Addition of ARkStorm",}], "type": "radio"}
+						{"name":"Large Storm Wave Event (for Erosion Risk)", "dependent" : "ER", "help": "", "group": "main", "values":[{"name":"Existing Wave Climate","value":"EWC", "selected": true, "help": "Existing Wave Climate",},{"name":"Doubling of El Nino Frequency", "value":"DENF", "help": "Increased storminess (doubling of El Niño storm impacts in a decade)",},{"name":"Addition of ARkStorm", "value":"AOA", "help": "A hypothetical but scientifically realistic “superstorm” scenario published by the USGS. More information is available here: http://pubs.usgs.gov/of/2010/1312/",}], "type": "radio"}
 					], 
 					"combos": {
 						"CER|2030": [{"type":"dynamic","show":[0]}],
@@ -146,17 +147,17 @@
 					"controls": [
 						{"name":"", "group": "main", "values":[{"name":"Rising Tide","value":"tide_area", "help": "Year 2010", "selected": true, "help": "Areas will be regularly flooded by high tides under future sea level rise (not considering storm events)."},
 						{"name":"Aggregated Rising Tide", "value":"tide_area_aggr", "help": "The rising tide hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
+						{"name":"Coastal Storm Flood", "value":"coastal_floodhz", "style":"padding-top:7px", "help": "Flooding caused by storm waves rushing inland and to ocean storm characteristics such as storm surge (a rise in the ocean water level caused by waves and pressure changes during a storm)."},
+						{"name":"Aggregated Coastal Storm Flood", "value":"coastal_floodhz_aggr", "help": "The Coastal Storm Flood hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
 						{"name":"Dune Erosion", "value":"dhz", "style":"padding-top:7px", "help": "Future dune erosion hazard zones, incorporating site-specific historic trends in erosion, additional erosion caused by accelerating sea level rise, and the potential erosion impact of a large storm wave event"},
 						{"name":"Aggregated Dune Erosion", "value":"dhz_aggr", "help": "The dune erosion hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
 						{"name":"Cliff Erosion", "value":"chz" , "style":"padding-top:7px", "help": "Future cliff erosion hazard zones, incorporating site-specific historic trends in erosion, additional erosion caused by accelerating sea level rise, and the potential erosion impact of a large storm wave event"},
-						{"name":"Aggregated Cliff Erosion", "value":"chz_aggr", "help": "The cliff erosion hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
-						{"name":"Coastal Storm Flood", "value":"coastal_floodhz", "style":"padding-top:7px", "help": "Flooding caused by storm waves rushing inland and to ocean storm characteristics such as storm surge (a rise in the ocean water level caused by waves and pressure changes during a storm)."},
-						{"name":"Aggregated Coastal Storm Flood", "value":"coastal_floodhz_aggr", "help": "The Coastal Storm Flood hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"}
+						{"name":"Aggregated Cliff Erosion", "value":"chz_aggr", "help": "The cliff erosion hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"}
 						], "type": "radio"},
 						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI", "help": "Current"},{"name":"2030", "value":"2030", "selected": true, "help": "2030"},{"name":"2060", "value":"2060", "help": "2060"},{"name":"2100", "value":"2100", "help": "2100"}], "type": "slider"},
-						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "help": "SLR", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true, "help": "17.3 in (44cm) by 2100, relative to the 2010 height"},{"name":"Medium", "value":"s2","help": "36.6 in (93 cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"s3","help": "58.3 in (148 cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
-						{"name":"i. Erosion Projection", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"Long Term","value":"longterm", "selected": true, "help": "LT"},{"name":"Long Term and Large Storm", "value":"wstorm", "help": "LTLS"}], "type": "radio"},
-						{"name":"ii. Future Erosion Scenarios", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"No Change","value":"nochange", "selected": true, "help": "NO Change"},{"name":"Sand Mining Cessation", "value":"stopmining", "dependent" : "dhz", "help": "Sandmining"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"stormier", "help": "DEN"}], "type": "radio"}
+						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "help": "SLR", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true, "help": "16.1in (41cm) by 2100, relative to the 2010 height"},{"name":"Medium", "value":"s2","help": "34.6in (88cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"s3","help": "62.6 in (159cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
+						{"name":"i. Erosion Projection", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"Long Term","value":"longterm", "selected": true, "help": "A continuation of historic erosion with additional erosion caused by sea level rise. Does not include potential impacts of a large storm."},{"name":"Long Term and Large Storm", "value":"wstorm", "help": "Includes long-term erosion and the potential erosion of a large storm event (e.g. 100-year storm)"}], "type": "radio"},
+						{"name":"ii. Future Erosion Scenarios", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"No Change","value":"nochange", "selected": true, "help": "A continuation of existing wave climate and sand mining"},{"name":"Sand Mining Cessation", "value":"stopmining", "dependent" : "dhz", "help": "Stop sand mining (only applies to southern Monterey Bay)"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"stormier", "help": "Increased storminess (doubling of El Niño storm impacts in a decade)"}], "type": "radio"}
 					
 					], 
 					"combos": {
