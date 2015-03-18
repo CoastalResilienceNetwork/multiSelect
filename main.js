@@ -195,8 +195,10 @@ define([
 					
 					}
 					
-					this.button.set("label",_ddText);
-					domConstruct.empty(this.mainpane.domNode);
+					if (this.mainpane != undefined) {
+						this.button.set("label",_ddText);
+						domConstruct.empty(this.mainpane.domNode);
+					}
 					
 					this.removeLayers();
 					
