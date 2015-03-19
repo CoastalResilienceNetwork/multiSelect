@@ -191,9 +191,9 @@ define([
 					
 					//_eventHandles.click = dojo.connect(this.map, "onClick", function() {});
 					
-					if ((this._hasactivated == false) && (this.explorerObject.regions.length == 1)) {
+					if ((this._hasactivated == false) && (this.usableRegions.length == 1)) {
 					
-						this.changeGeography( , true);
+						this.changeGeography(this.usableRegions[0], true);
 					
 					};
 					
