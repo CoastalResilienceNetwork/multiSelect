@@ -158,6 +158,7 @@ define([
                toolbarType: "sidebar",
                allowIdentifyWhenActive: true,
 			   width: 420,
+			   _hasactivated: false,
 			   infoGraphic: _infographic, 
 			   height: _config.pluginHeight,
 			   rendered: false,
@@ -189,6 +190,14 @@ define([
 					} 
 					
 					//_eventHandles.click = dojo.connect(this.map, "onClick", function() {});
+					
+					if ((this._hasactivated == false) && (this.explorerObject.regions.length == 1)) {
+					
+						this.changeGeography( , true);
+					
+					};
+					
+					this._hasactivated = true;
 					
 			  
 			   },
@@ -291,8 +300,7 @@ define([
 					}
 					
 					
-					this.configVizObject = this.mainData.regions;
-					
+					this.usableRegions = this.mainData.regions;
 					
 					this.isClipped = false;
 					
@@ -303,7 +311,7 @@ define([
 					dom.byId(this.container).appendChild(this.regionChooserContainer);
 					dom.byId(this.container).appendChild(this.regionLabelNode);
 					
-					this.rebuildOptions(this.configVizObject);
+					this.rebuildOptions(this.usableRegions);
 					
 					this.spinnerURL = localrequire.toUrl("./images/spinner.gif");
 					
@@ -348,6 +356,7 @@ define([
 					
 					this.regionChooserContainer.appendChild(newbutton.domNode);
 					
+					this._hasactivated = false;
 					 
 				 },
 				
@@ -1532,11 +1541,11 @@ define([
 				
 				console.log(this);
 				
-				useregion = [];
+				this.usableRegions = new Array();
 				
 				array.forEach(this.mainData.regions, lang.hitch(this,function(region, i){
 					if (region.name == subregion.id) {
-						useregion.push(region);
+						this.usableRegions.push(region);
 					}
 				}));
 				
@@ -1544,7 +1553,7 @@ define([
 				
 				console.log(this.mainData);
 				//insert
-				this.rebuildOptions(useregion);
+				this.rebuildOptions(this.usableRegions);
 				
             },
             
