@@ -163,7 +163,27 @@ define([
 			   height: _config.pluginHeight,
 			   rendered: false,
 			   
-               activate: function () { 					
+               activate: function () { 
+
+			   
+					//This is a hack to get the form to resize after closing continue button if infographic exists
+			   
+					console.log(this.container);
+					codearea = dojoquery(this.container).parent().parent();
+					
+					formWidgets = registry.findWidgets(codearea[0]);
+					
+					array.forEach(formWidgets , lang.hitch(this,function(formWidget, i){
+						
+						on(formWidget, "click", lang.hitch(this,function(e){
+							this.resize();
+						}));
+						
+					}))
+					
+					
+					
+					
 			   			   
 					if (this.rendered == false) {
 					
@@ -357,6 +377,7 @@ define([
 					this.regionChooserContainer.appendChild(newbutton.domNode);
 					
 					this._hasactivated = false;
+					
 					 
 				 },
 				
@@ -1433,7 +1454,6 @@ define([
 					//dom.byId(this.container).appendChild(this.mainpane.domNode);
 					parser.parse();
 					
-
 					
 					this.buttonpane = new ContentPane({
 					  style:"border-top-style:groove !important; height:100px;overflow: hidden !important;background-color:#F3F3F3 !important;padding:10px !important;"
