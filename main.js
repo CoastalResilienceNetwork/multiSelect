@@ -293,11 +293,6 @@ define([
 					
 					this.configVizObject = this.mainData.regions;
 					
-					console.log(this.configVizObject);
-					
-					menu = new DropDownMenu({ style: "display: none;"});
-				
-					domClass.add(menu.domNode, this.dojoTheme);
 					
 					this.isClipped = false;
 					
@@ -327,11 +322,13 @@ define([
 				
 				 rebuildOptions: function(Inregions) {
 
-					console.log("@@@@@@@@@@@@", Inregions, this);
+				 	menu = new DropDownMenu({ style: "display: none;"});
+				
+					domClass.add(menu.domNode, this.dojoTheme);
 					
 					array.forEach(Inregions, lang.hitch(this,function(entry, i){
 					
-						console.log(entry);
+						//alert(entry.name);
 						
 						menuItem1 = new MenuItem({
 							label: entry.name,
@@ -1530,26 +1527,35 @@ define([
 				},
 				
             subregionActivated: function(subregion) {
-				console.log(subregion);
+				
                 console.debug('now using subregion ' + subregion.display);
 				
 				console.log(this);
 				
-				//array.forEach(this.configVizObject, lang.hitch(this,function(region, i){
-				//	console.log(region.name);
-				//}));
+				useregion = [];
+				
+				array.forEach(this.mainData.regions, lang.hitch(this,function(region, i){
+					if (region.name == subregion.id) {
+						useregion.push(region);
+					}
+				}));
 				
 				domConstruct.empty(this.regionChooserContainer);
 				
 				console.log(this.mainData);
 				//insert
-				this.rebuildOptions(this.mainData.regions);
+				this.rebuildOptions(useregion);
 				
             },
             
             subregionDeactivated: function(subregion) {
 				console.log(subregion);
                 console.debug('now leaving subregion ' + subregion.display);
+				
+				domConstruct.empty(this.regionChooserContainer);
+				
+				this.rebuildOptions(this.mainData.regions);
+				
             }
 			
            });
