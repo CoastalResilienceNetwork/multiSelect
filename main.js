@@ -206,7 +206,7 @@ define([
 					}
 					
 					if (this.mainpane != undefined) {
-						this.button.set("label",_ddText);
+						//this.button.set("label",_ddText);
 						domConstruct.empty(this.mainpane.domNode);
 						this.regionLabelNode.innerHTML = "";
 					}
@@ -257,11 +257,11 @@ define([
 					
 					}
 					
-					mainData = dojo.eval("[" + configData + "]")[0]
+					this.mainData = dojo.eval("[" + configData + "]")[0]
 					
-					this.windowStyles = mainData.windowStyles;
+					this.windowStyles = this.mainData.windowStyles;
 					
-					this.dojoTheme = mainData.dojoTheme;
+					this.dojoTheme = this.mainData.dojoTheme;
 					
 					if (this.dojoTheme == undefined) {
 
@@ -284,14 +284,14 @@ define([
 					
 					}
 					
-					this.translevel = mainData.transparency;
+					this.translevel = this.mainData.transparency;
 					
 					if (this.translevel == undefined) {
 						this.translevel = 0;
 					}
 					
 					
-					this.configVizObject = mainData.regions;
+					this.configVizObject = this.mainData.regions;
 					
 					console.log(this.configVizObject);
 					
@@ -301,30 +301,14 @@ define([
 					
 					this.isClipped = false;
 					
-					array.forEach(this.configVizObject, lang.hitch(this,function(entry, i){
-					
-						console.log(entry);
-						
-						menuItem1 = new MenuItem({
-							label: entry.name,
-							//iconClass:"dijitEditorIcon dijitEditorIconSave",
-							onClick: lang.hitch(this,function(e){this.changeGeography(entry)})
-						});
-						menu.addChild(menuItem1);
-						
-					}));
-					
-
-					this.button = new DropDownButton({
-						label: _ddText,
-						style: "margin-bottom:6px !important",
-						dropDown: menu
-					});
-					
 					this.regionLabelNode = domConstruct.create("span"); //, innerHTML: "<img src=" + this.spinnerURL + ">" 
 					
-					dom.byId(this.container).appendChild(this.button.domNode);
+					this.regionChooserContainer = domConstruct.create("span"); //, innerHTML: "<img src=" + this.spinnerURL + ">" 
+					
+					dom.byId(this.container).appendChild(this.regionChooserContainer);
 					dom.byId(this.container).appendChild(this.regionLabelNode);
+					
+					this.rebuildOptions(this.configVizObject);
 					
 					this.spinnerURL = localrequire.toUrl("./images/spinner.gif");
 					
@@ -339,6 +323,36 @@ define([
 					dom.byId(this.container).appendChild(this.messagenode);
 					
 				},
+				
+				
+				 rebuildOptions: function(Inregions) {
+
+					console.log("@@@@@@@@@@@@", Inregions, this);
+					
+					array.forEach(Inregions, lang.hitch(this,function(entry, i){
+					
+						console.log(entry);
+						
+						menuItem1 = new MenuItem({
+							label: entry.name,
+							//iconClass:"dijitEditorIcon dijitEditorIconSave",
+							onClick: lang.hitch(this,function(e){this.changeGeography(entry)})
+						});
+						menu.addChild(menuItem1);
+						
+					}));
+					
+
+					newbutton = new DropDownButton({
+						label: _ddText,
+						style: "margin-bottom:6px !important",
+						dropDown: menu
+					});
+					
+					this.regionChooserContainer.appendChild(newbutton.domNode);
+					
+					 
+				 },
 				
 			     resize: function(w, h) {
 				 
@@ -1516,10 +1530,25 @@ define([
 				},
 				
             subregionActivated: function(subregion) {
+				console.log(subregion);
                 console.debug('now using subregion ' + subregion.display);
+				
+				console.log(this);
+				
+				//array.forEach(this.configVizObject, lang.hitch(this,function(region, i){
+				//	console.log(region.name);
+				//}));
+				
+				domConstruct.empty(this.regionChooserContainer);
+				
+				console.log(this.mainData);
+				//insert
+				this.rebuildOptions(this.mainData.regions);
+				
             },
             
             subregionDeactivated: function(subregion) {
+				console.log(subregion);
                 console.debug('now leaving subregion ' + subregion.display);
             }
 			
