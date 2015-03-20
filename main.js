@@ -164,8 +164,15 @@ define([
 			   rendered: false,
 			   
                activate: function () { 
-
-			   
+			   			   
+					if (this.rendered == false) {
+					
+						this.rendered = true;
+					
+						this.render();
+						
+						this.resize();
+						
 					//This is a hack to get the form to resize after closing continue button if infographic exists
 			   
 					console.log(this.container);
@@ -179,19 +186,7 @@ define([
 							this.resize();
 						}));
 						
-					}))
-					
-					
-					
-					
-			   			   
-					if (this.rendered == false) {
-					
-						this.rendered = true;
-					
-						this.render();
-						
-						this.resize();
+					}));
 						
 						//this.currentLayer.setVisibility(true);
 					
