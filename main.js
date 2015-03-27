@@ -162,9 +162,10 @@ define([
 			   infoGraphic: _infographic, 
 			   height: _config.pluginHeight,
 			   rendered: false,
+			   stateRestore: false,
 			   
                activate: function () { 
-			   			   
+			   		
 					if (this.rendered == false) {
 					
 						this.rendered = true;
@@ -204,15 +205,29 @@ define([
 
 					} 
 					
-					//_eventHandles.click = dojo.connect(this.map, "onClick", function() {});
+					if (this.stateRestore == false) {
+				
 					
-					if ((this._hasactivated == false) && (this.usableRegions.length == 1)) {
+						//_eventHandles.click = dojo.connect(this.map, "onClick", function() {});
+						
+						if ((this._hasactivated == false) && (this.usableRegions.length == 1)) {
+						
+							this.changeGeography(this.usableRegions[0], true);
+						
+						};
 					
-						this.changeGeography(this.usableRegions[0], true);
+					} else {
+						
+						if (this._hasactivated == false) {
 					
-					};
+							this.changeGeography(this.currentgeography, true);
+						
+						}
 					
-					this._hasactivated = true;
+					}
+						
+						this._hasactivated = true;
+						
 					
 			  
 			   },
@@ -799,6 +814,7 @@ define([
 					Naddlayer.on("UpdateEnd", lang.hitch(this,function () {
 							console.log("Update Ended...");
 							domAttr.set(this.refreshnode, "style", "display:none");
+							this.resize();
 						} ));							
 				
 				}
@@ -1244,7 +1260,7 @@ define([
 					
 					aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (event) {
 						this.resize();
-						
+						alert('');
 						//array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
 						//	this.map.removeLayer(clayer);
 						//}));
@@ -1539,22 +1555,16 @@ define([
 				
                setState: function (state) { 
 				
-				//aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (event) {
+				this.stateRestore = true;
 				
-				console.log("STATE");
+				this.currentgeography = state;
 				
-				//this.controls = state;
-				//alert('');
-				this.render();
-				this.changeGeography(state);
 				
 				},
 				
             subregionActivated: function(subregion) {
 				
                 console.debug('now using subregion ' + subregion.display);
-				
-				console.log(this);
 				
 				this.usableRegions = new Array();
 				
