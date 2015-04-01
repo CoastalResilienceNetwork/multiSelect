@@ -220,7 +220,7 @@ define([
 						
 						if (this._hasactivated == false) {
 					
-							this.changeGeography(this.currentgeography, true);
+							this.changeGeography(this.currentgeography, false);
 						
 						}
 					
@@ -890,11 +890,13 @@ define([
 					
 
 					}
+								
+					if (zoomto != false) {
 						
+						ext = new Extent(this.currentgeography.extent);
+						this.map.setExtent(ext);	
+					}
 					
-					ext = new Extent(this.currentgeography.extent);
-					this.map.setExtent(ext);	
-
 					if (this.currentgeography.tabs == undefined) {
 						
 						this.currentgeography.tabs = new Array();
@@ -1555,8 +1557,7 @@ define([
 				
                setState: function (state) { 
 				
-				this.stateRestore = true;
-				
+				this.stateRestore = true;	
 				this.currentgeography = state;
 				
 				
