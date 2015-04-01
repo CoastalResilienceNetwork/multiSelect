@@ -1547,7 +1547,9 @@ define([
 			    //console.log("save Geo MS");
 				//console.log(this.currentgeography);
 			   
-				state = this.currentgeography;
+				state = new Object();
+			   
+				state.geo = this.currentgeography;
 			   
 				return state;
 	
@@ -1558,7 +1560,7 @@ define([
                setState: function (state) { 
 				
 				this.stateRestore = true;	
-				this.currentgeography = state;
+				this.currentgeography = state.geo;
 				
 				
 				},
