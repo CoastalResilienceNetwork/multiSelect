@@ -1262,7 +1262,6 @@ define([
 					
 					aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (event) {
 						this.resize();
-						alert('');
 						//array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
 						//	this.map.removeLayer(clayer);
 						//}));
