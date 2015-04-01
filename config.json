@@ -1,10 +1,6 @@
 {
-    "name": "Flood and Sea Level Rise",
+    "name": "Economic App",
 	"pluginHeight": 450,
-	"transparency": 0.37,
-	"dojoTheme": "tundra",
-	"infoGraphic": "slr_flooding_c.jpg",
-	"regionLabeler": "Selected Region: #",
 	"regions": [
 		{
 			"name": "Ventura",
@@ -18,367 +14,1615 @@
                     "latestWkid": 3857
                 }
             },
-			"buttons": [{"title": "Download Data", "url": "methods/Download_V.zip"},{"title": "View Technical Report", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"},{"title": "View Overview", "url": "methods/CRV_Hazards_Mapping_Technical_Report.pdf"}],
+			"methods": "methods/SLR.pdf",
 			"tabs" : [
-				{
+{
 					"name": "Management Actions",
-					"titles": [{"name":"1. Select the hazard to view", "help": "Select the hazard to view"}, {"name":"2. Select the time and amount of sea level rise", "help": "amount of sea level rise"}, {"name":""}, {"name":"3. Select the Erosion options", "help": "Erosion options"}],					
 					"controls": [
-						{"name":"Select the hazard to view", "group": "main", "help": "Hazards", "values":[{"name":"Tidal Inundation (monthly in feet)","value":"TI", "help": "These zones show the area and depth of inundation (given in feet) caused simply by rising tide levels (not considering storms, erosion, or river discharge). The water level mapped in these inundation areas is the Extreme Monthly High Water (EMHW) level, which occurs approximately once a month. <br><br> <img src='plugins/flood_slr/images/RisingTide1.png' />"},
-						{"name":"Wave Impact (large storm)", "value":"WI", "help": "The coastal storm wave impact area is the subset of the coastal storm flood hazard zone in which water could potentially rush inland due to waves breaking at the coast and damage structures, move cars, and knock people off their feet.  <img src='http://jasontheodor.com/wp-content/uploads//2012/02/things.jpg' />"},
-						{"name":"Flood Inundation (large storm)", "value":"FI", "help": "This layer represents two types of flooding: flooding caused by storm waves rushing inland (Wave Impact) and flooding due to other ocean storm characteristics such as storm surge (a rise in the ocean water level caused by waves and pressure changes during a storm). The zones were developed using representative wave conditions based on observed historical events, with added sea level rise. This hazard zone also takes into account areas that are projected to erode in the future, sometimes leading to additional flooding through new hydraulic connections between the ocean and low-lying areas."},
-						{"name":"River Flood Inundation (large storm)", "value":"RFI", "help": "This layer shows the projected future floodplains (1% annual chance flood) for the Santa Clara and Ventura Rivera, based on hydraulic modeling driven by future run-off projections and increasing ocean water levels. The future run-off projections were derived using downscaled climate models."},
-						{"name":"Erosion Risk", "value":"ER", "help": "This layer represents future coastal erosion hazard zones, incorporating site-specific historic trends in erosion, additional erosion caused by accelerating sea level rise, and the potential erosion impact of a large storm wave event."},
-						{"name":"Combined Erosion Risk", "value":"CER", "help": "This polygon represents the spatial aggregation of coastal erosion hazard zones for all sea level rise and wave climate scenarios at the selected planning horizon. At each planning horizon, the hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios that are projected to be hazardous at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise and wave scenarios and which areas may only hazardous for the worst case scenarios."},
-						{"name":"Combined Hazards", "value":"CH", "help": "This polygon represents the number of future scenarios projecting storm-induced flooding for the selected planning horizon. At each planning horizon, the combined storm flood hazard zones for all scenarios are overlaid into a single spatially aggregated layer that counts the number of scenarios projected to cause flooding at a particular location. This is intended to be a planning tool that helps identify which areas will be hazardous for all sea level rise scenarios and which areas may only be hazardous for the worst case scenarios, for a given planning horizon."}
-						], "type": "radio"},
-						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI", "help": "Current"},{"name":"2030", "value":"2030", "selected": true, "help": "2030"},{"name":"2060", "value":"2060", "help": "2060"},{"name":"2100", "value":"2100", "help": "2100"}], "type": "slider"},
-						{"name":"Sea Level Rise Scenario", "dependent" : "TI|WI|FI|RFI|ER&2030|2060|2100", "help": "Sea Level Rise", "group": "main", "values":[{"name":"Low","value":"Low", "selected": true,"help": "17.3 in (44cm) by 2100, relative to the 2010 height"},{"name":"Medium","value":"Med", "help": "36.6 in (93 cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"High", "help": "58.3 in (148 cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
-						{"name":"Large Storm Wave Event (for Erosion Risk)", "dependent" : "ER", "help": "", "group": "main", "values":[{"name":"Existing Wave Climate","value":"EWC", "selected": true, "help": "Existing Wave Climate",},{"name":"Doubling of El Nino Frequency", "value":"DENF", "help": "Increased storminess (doubling of El Niño storm impacts in a decade)",},{"name":"Addition of ARkStorm", "value":"AOA", "help": "A hypothetical but scientifically realistic “superstorm” scenario published by the USGS. More information is available here: http://pubs.usgs.gov/of/2010/1312/",}], "type": "radio"}
-					], 
-					"combos": {
-						"CER|2030": [{"type":"dynamic","show":[0]}],
-						"CER|2060": [{"type":"dynamic","show":[1]}],
-						"CER|2100": [{"type":"dynamic","show":[2]}],
-						"CH|2030": [{"type":"dynamic","show":[3]}],
-						"CH|2060": [{"type":"dynamic","show":[4]}],
-						"CH|2100": [{"type":"dynamic","show":[5]}],
-						
-						"TI|CT": [{"type":"dynamic","show":[6]}],
-						"TI|2030|Low": [{"type":"dynamic","show":[7]}],
-						"TI|2060|Low": [{"type":"dynamic","show":[8]}],
-						"TI|2100|Low": [{"type":"dynamic","show":[9]}],
-						"TI|2030|Med": [{"type":"dynamic","show":[10]}],
-						"TI|2060|Med": [{"type":"dynamic","show":[11]}],
-						"TI|2100|Med": [{"type":"dynamic","show":[12]}],
-						"TI|2030|High": [{"type":"dynamic","show":[13]}],
-						"TI|2060|High": [{"type":"dynamic","show":[14]}],
-						"TI|2100|High": [{"type":"dynamic","show":[15]}],
-						
-						"ER|2030|Low|EWC": [{"type":"dynamic","show":[16]}],
-						"ER|2030|Low|DENF": [{"type":"dynamic","show":[17]}],
-						"ER|2030|Low|AOA": [{"type":"dynamic","show":[18]}],
-
-						"ER|2030|Med|EWC": [{"type":"dynamic","show":[19]}],
-						"ER|2030|Med|DENF": [{"type":"dynamic","show":[20]}],
-						"ER|2030|Med|AOA": [{"type":"dynamic","show":[21]}],
-						
-						"ER|2030|High|EWC": [{"type":"dynamic","show":[22]}],
-						"ER|2030|High|DENF": [{"type":"dynamic","show":[23]}],
-						"ER|2030|High|AOA": [{"type":"dynamic","show":[24]}],
-
-						"ER|2060|Low|EWC": [{"type":"dynamic","show":[25]}],
-						"ER|2060|Low|DENF": [{"type":"dynamic","show":[26]}],
-						"ER|2060|Low|AOA": [{"type":"dynamic","show":[27]}],
-
-						"ER|2060|Med|EWC": [{"type":"dynamic","show":[28]}],
-						"ER|2060|Med|DENF": [{"type":"dynamic","show":[29]}],
-						"ER|2060|Med|AOA": [{"type":"dynamic","show":[30]}],
-						
-						"ER|2060|High|EWC": [{"type":"dynamic","show":[31]}],
-						"ER|2060|High|DENF": [{"type":"dynamic","show":[32]}],
-						"ER|2060|High|AOA": [{"type":"dynamic","show":[33]}],
-
-						"ER|2100|Low|EWC": [{"type":"dynamic","show":[34]}],
-						"ER|2100|Low|DENF": [{"type":"dynamic","show":[35]}],
-						"ER|2100|Low|AOA": [{"type":"dynamic","show":[36]}],
-
-						"ER|2100|Med|EWC": [{"type":"dynamic","show":[37]}],
-						"ER|2100|Med|DENF": [{"type":"dynamic","show":[38]}],
-						"ER|2100|Med|AOA": [{"type":"dynamic","show":[39]}],
-						
-						"ER|2100|High|EWC": [{"type":"dynamic","show":[40]}],
-						"ER|2100|High|DENF": [{"type":"dynamic","show":[41]}],
-						"ER|2100|High|AOA": [{"type":"dynamic","show":[42]}],
-						
-						"WI|CT": [{"type":"dynamic","show":[43]}],
-						"WI|2030|Low": [{"type":"dynamic","show":[44]}],
-						"WI|2060|Low": [{"type":"dynamic","show":[45]}],
-						"WI|2100|Low": [{"type":"dynamic","show":[46]}],
-						"WI|2030|Med": [{"type":"dynamic","show":[47]}],
-						"WI|2060|Med": [{"type":"dynamic","show":[48]}],
-						"WI|2100|Med": [{"type":"dynamic","show":[49]}],
-						"WI|2030|High": [{"type":"dynamic","show":[50]}],
-						"WI|2060|High": [{"type":"dynamic","show":[51]}],
-						"WI|2100|High": [{"type":"dynamic","show":[52]}],
-
-						"FI|CT": [{"type":"dynamic","show":[53]}],
-						"FI|2030|Low": [{"type":"dynamic","show":[54]}],
-						"FI|2060|Low": [{"type":"dynamic","show":[55]}],
-						"FI|2100|Low": [{"type":"dynamic","show":[56]}],
-						"FI|2030|Med": [{"type":"dynamic","show":[57]}],
-						"FI|2060|Med": [{"type":"dynamic","show":[58]}],
-						"FI|2100|Med": [{"type":"dynamic","show":[59]}],
-						"FI|2030|High": [{"type":"dynamic","show":[60]}],
-						"FI|2060|High": [{"type":"dynamic","show":[61]}],
-						"FI|2100|High": [{"type":"dynamic","show":[62]}],
-						
-						"RFI|CT": [{"type":"dynamic","show":[63]}],
-						"RFI|2030|Med": [{"type":"dynamic","show":[64]}],
-						"RFI|2060|Med": [{"type":"dynamic","show":[65]}],
-						"RFI|2100|Med": [{"type":"dynamic","show":[66]}],
-						"RFI|2030|High": [{"type":"dynamic","show":[67]}],
-						"RFI|2060|High": [{"type":"dynamic","show":[68]}],
-						"RFI|2100|High": [{"type":"dynamic","show":[69]}]
-						
-					},
-					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_County/Ventura_SLR/MapServer"
-				
-				}			
-			]
-		},
-		{
-			"name": "Monterey",
-            "extent": {
-                "xmin": -1.36189391907E7,
-                "ymin": 4362453.298600003,
-                "xmax": -1.3538941220800001E7,
-                "ymax": 4486926.618699998,
-                "spatialReference": {
-                    "wkid": 102100,
-                    "latestWkid": 3857
-                }
-            },
-			"buttons": [{"title": "Download Data", "url": "methods/Download_M.zip"},{"title": "View Technical Report", "url": "methods/Monterey Technical Methods Report v2_FINAL.pdf"},{"title": "View Overview", "url": "methods/Monterey Technical Methods Report v2_FINAL.pdf"}],
-			"tabs" : [
-				{
-					"name": "Management Actions",
-					"titles": [{"name":"1. Select the hazard to view", "help": "Select the hazard to view"}, {"name":"2. Select the time and amount of sea level rise", "help": "amount of sea level rise"}, {"name":""}, {"name":"3. Select the Erosion options", "help": "Erosion options"}],	
-					"controls": [
-						{"name":"", "group": "main", "values":[{"name":"Rising Tide","value":"tide_area", "help": "Year 2010", "selected": true, "help": "Areas will be regularly flooded by high tides under future sea level rise (not considering storm events)."},
-						{"name":"Aggregated Rising Tide", "value":"tide_area_aggr", "help": "The rising tide hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
-						{"name":"Coastal Storm Flood", "value":"coastal_floodhz", "style":"padding-top:7px", "help": "Flooding caused by storm waves rushing inland and to ocean storm characteristics such as storm surge (a rise in the ocean water level caused by waves and pressure changes during a storm)."},
-						{"name":"Aggregated Coastal Storm Flood", "value":"coastal_floodhz_aggr", "help": "The Coastal Storm Flood hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
-						{"name":"Dune Erosion", "value":"dhz", "style":"padding-top:7px", "help": "Future dune erosion hazard zones, incorporating site-specific historic trends in erosion, additional erosion caused by accelerating sea level rise, and the potential erosion impact of a large storm wave event"},
-						{"name":"Aggregated Dune Erosion", "value":"dhz_aggr", "help": "The dune erosion hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"},
-						{"name":"Cliff Erosion", "value":"chz" , "style":"padding-top:7px", "help": "Future cliff erosion hazard zones, incorporating site-specific historic trends in erosion, additional erosion caused by accelerating sea level rise, and the potential erosion impact of a large storm wave event"},
-						{"name":"Aggregated Cliff Erosion", "value":"chz_aggr", "help": "The cliff erosion hazard zones for all scenarios overlaid into a single “spatially aggregated” layer that counts the number of scenarios (time horizon and climate scenario) that are projected to be hazardous at a particular location"}
-						], "type": "radio"},
-						{"name":"Year", "group": "main", "values":[{"name":"Current","value":"CT", "dependent" : "TI|WI|FI|RFI", "help": "Current"},{"name":"2030", "value":"2030", "selected": true, "help": "2030"},{"name":"2060", "value":"2060", "help": "2060"},{"name":"2100", "value":"2100", "help": "2100"}], "type": "slider"},
-						{"name":"Sea Level Rise Scenario", "dependent" : "2030|2060|2100", "help": "SLR", "group": "main", "values":[{"name":"Low","value":"s1", "selected": true, "help": "16.1in (41cm) by 2100, relative to the 2010 height"},{"name":"Medium", "value":"s2","help": "34.6in (88cm) by 2100, relative to the 2010 height"},{"name":"High", "value":"s3","help": "62.6 in (159cm) by 2100, relative to the 2010 height"}], "type": "slider"},	
-						{"name":"i. Erosion Projection", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"Long Term","value":"longterm", "selected": true, "help": "A continuation of historic erosion with additional erosion caused by sea level rise. Does not include potential impacts of a large storm."},{"name":"Long Term and Large Storm", "value":"wstorm", "help": "Includes long-term erosion and the potential erosion of a large storm event (e.g. 100-year storm)"}], "type": "radio"},
-						{"name":"ii. Future Erosion Scenarios", "dependent" : "dhz|chz", "group": "main", "values":[{"name":"No Change","value":"nochange", "selected": true, "help": "A continuation of existing wave climate and sand mining"},{"name":"Sand Mining Cessation", "value":"stopmining", "dependent" : "dhz", "help": "Stop sand mining (only applies to southern Monterey Bay)"},{"name":"Doubling of El Niño storm impacts in a decade", "value":"stormier", "help": "Increased storminess (doubling of El Niño storm impacts in a decade)"}], "type": "radio"}
+						{"name": "Management Scenarios", "group": "MS", "help": "Management Things", "values": [{"name":"Using Armoring","value":"Concrete", "help": "Concrete Things"},{"name":"Nature Based Approach", "value":"marshmallows", "help": "Mashmellows Note"}], "type": "checkbox"}	
 					
 					], 
 					"combos": {
-					
-						"tide_area|2010": [{"type":"dynamic","show":[122]}],
-						"tide_area|2030|s1": [{"type":"dynamic","show":[123]}],
-						"tide_area|2030|s2": [{"type":"dynamic","show":[126]}],
-						"tide_area|2030|s3": [{"type":"dynamic","show":[129]}],
-						"tide_area|2060|s1": [{"type":"dynamic","show":[124]}],
-						"tide_area|2060|s2": [{"type":"dynamic","show":[127]}],
-						"tide_area|2060|s3": [{"type":"dynamic","show":[130]}],
-						"tide_area|2100|s1": [{"type":"dynamic","show":[125]}],
-						"tide_area|2100|s2": [{"type":"dynamic","show":[128]}],
-						"tide_area|2100|s3": [{"type":"dynamic","show":[131]}],
-						
-						
-						"tide_area_aggr|2010": [{"type":"dynamic","show":[122]}],
-						"tide_area_aggr|2030|s1": [{"type":"dynamic","show":[119]}],
-						"tide_area_aggr|2030|s2": [{"type":"dynamic","show":[119]}],
-						"tide_area_aggr|2030|s3": [{"type":"dynamic","show":[119]}],
-						"tide_area_aggr|2060|s1": [{"type":"dynamic","show":[120]}],
-						"tide_area_aggr|2060|s2": [{"type":"dynamic","show":[120]}],
-						"tide_area_aggr|2060|s3": [{"type":"dynamic","show":[120]}],
-						"tide_area_aggr|2100|s1": [{"type":"dynamic","show":[121]}],
-						"tide_area_aggr|2100|s2": [{"type":"dynamic","show":[121]}],
-						"tide_area_aggr|2100|s3": [{"type":"dynamic","show":[121]}],
-						
-						
-						"dhz_aggr|2010": [{"type":"dynamic","show":[59]}],
-						"dhz_aggr|2030|s1": [{"type":"dynamic","show":[56]}],
-						"dhz_aggr|2030|s2": [{"type":"dynamic","show":[56]}],
-						"dhz_aggr|2030|s3": [{"type":"dynamic","show":[56]}],
-						"dhz_aggr|2060|s1": [{"type":"dynamic","show":[57]}],
-						"dhz_aggr|2060|s2": [{"type":"dynamic","show":[57]}],
-						"dhz_aggr|2060|s3": [{"type":"dynamic","show":[57]}],
-						"dhz_aggr|2100|s1": [{"type":"dynamic","show":[58]}],
-						"dhz_aggr|2100|s2": [{"type":"dynamic","show":[58]}],
-						"dhz_aggr|2100|s3": [{"type":"dynamic","show":[58]}],
-						
-						
-						"chz_aggr|2010": [{"type":"dynamic","show":[3]}],
-						"chz_aggr|2030|s1": [{"type":"dynamic","show":[0]}],
-						"chz_aggr|2030|s2": [{"type":"dynamic","show":[0]}],
-						"chz_aggr|2030|s3": [{"type":"dynamic","show":[0]}],
-						"chz_aggr|2060|s1": [{"type":"dynamic","show":[1]}],
-						"chz_aggr|2060|s2": [{"type":"dynamic","show":[1]}],
-						"chz_aggr|2060|s3": [{"type":"dynamic","show":[1]}],
-						"chz_aggr|2100|s1": [{"type":"dynamic","show":[2]}],
-						"chz_aggr|2100|s2": [{"type":"dynamic","show":[2]}],
-						"chz_aggr|2100|s3": [{"type":"dynamic","show":[2]}],
-						
-						
-						"coastal_floodhz|2010": [{"type":"dynamic","show":[46]}],
-						"coastal_floodhz|2030|s1": [{"type":"dynamic","show":[47]}],
-						"coastal_floodhz|2030|s2": [{"type":"dynamic","show":[50]}],
-						"coastal_floodhz|2030|s3": [{"type":"dynamic","show":[53]}],
-						"coastal_floodhz|2060|s1": [{"type":"dynamic","show":[48]}],
-						"coastal_floodhz|2060|s2": [{"type":"dynamic","show":[51]}],
-						"coastal_floodhz|2060|s3": [{"type":"dynamic","show":[54]}],
-						"coastal_floodhz|2100|s1": [{"type":"dynamic","show":[49]}],
-						"coastal_floodhz|2100|s2": [{"type":"dynamic","show":[52]}],
-						"coastal_floodhz|2100|s3": [{"type":"dynamic","show":[55]}],
-
-
-						"coastal_floodhz_aggr|2010": [{"type":"dynamic","show":[46]}],
-						"coastal_floodhz_aggr|2030|s1": [{"type":"dynamic","show":[43]}],
-						"coastal_floodhz_aggr|2030|s2": [{"type":"dynamic","show":[43]}],
-						"coastal_floodhz_aggr|2030|s3": [{"type":"dynamic","show":[43]}],
-						"coastal_floodhz_aggr|2060|s1": [{"type":"dynamic","show":[44]}],
-						"coastal_floodhz_aggr|2060|s2": [{"type":"dynamic","show":[44]}],
-						"coastal_floodhz_aggr|2060|s3": [{"type":"dynamic","show":[44]}],
-						"coastal_floodhz_aggr|2100|s1": [{"type":"dynamic","show":[45]}],
-						"coastal_floodhz_aggr|2100|s2": [{"type":"dynamic","show":[45]}],
-						"coastal_floodhz_aggr|2100|s3": [{"type":"dynamic","show":[45]}],
-						
-						
-						"dhz|2010|longterm|nochange": [{"type":"dynamic","show":[59]}], 
-						"dhz|2010|longterm|stopmining": [{"type":"dynamic","show":[69]}],
-						"dhz|2010|longterm|stormier": [{"type":"dynamic","show":[79]}],
-						"dhz|2010|wstorm|nochange": [{"type":"dynamic","show":[89]}], 
-						"dhz|2010|wstorm|stopmining": [{"type":"dynamic","show":[99]}],
-						"dhz|2010|wstorm|stormier": [{"type":"dynamic","show":[109]}],
-						
-						"dhz|2030|s1|longterm|nochange": [{"type":"dynamic","show":[60]}],
-						"dhz|2030|s1|longterm|stopmining": [{"type":"dynamic","show":[70]}],
-						"dhz|2030|s1|longterm|stormier": [{"type":"dynamic","show":[80]}],
-						"dhz|2030|s1|wstorm|nochange": [{"type":"dynamic","show":[90]}],
-						"dhz|2030|s1|wstorm|stopmining": [{"type":"dynamic","show":[100]}],
-						"dhz|2030|s1|wstorm|stormier": [{"type":"dynamic","show":[110]}],
-
-						"dhz|2030|s2|longterm|nochange": [{"type":"dynamic","show":[63]}],
-						"dhz|2030|s2|longterm|stopmining": [{"type":"dynamic","show":[73]}],
-						"dhz|2030|s2|longterm|stormier": [{"type":"dynamic","show":[83]}],
-						"dhz|2030|s2|wstorm|nochange": [{"type":"dynamic","show":[93]}],
-						"dhz|2030|s2|wstorm|stopmining": [{"type":"dynamic","show":[103]}],
-						"dhz|2030|s2|wstorm|stormier": [{"type":"dynamic","show":[113]}],
-
-						"dhz|2030|s3|longterm|nochange": [{"type":"dynamic","show":[66]}],
-						"dhz|2030|s3|longterm|stopmining": [{"type":"dynamic","show":[76]}],
-						"dhz|2030|s3|longterm|stormier": [{"type":"dynamic","show":[86]}],
-						"dhz|2030|s3|wstorm|nochange": [{"type":"dynamic","show":[96]}],
-						"dhz|2030|s3|wstorm|stopmining": [{"type":"dynamic","show":[106]}],
-						"dhz|2030|s3|wstorm|stormier": [{"type":"dynamic","show":[116]}],
-
-						"dhz|2060|s1|longterm|nochange": [{"type":"dynamic","show":[61]}],
-						"dhz|2060|s1|longterm|stopmining": [{"type":"dynamic","show":[71]}],
-						"dhz|2060|s1|longterm|stormier": [{"type":"dynamic","show":[81]}],
-						"dhz|2060|s1|wstorm|nochange": [{"type":"dynamic","show":[91]}],
-						"dhz|2060|s1|wstorm|stopmining": [{"type":"dynamic","show":[101]}],
-						"dhz|2060|s1|wstorm|stormier": [{"type":"dynamic","show":[111]}],
-
-						"dhz|2060|s2|longterm|nochange": [{"type":"dynamic","show":[64]}],
-						"dhz|2060|s2|longterm|stopmining": [{"type":"dynamic","show":[74]}],
-						"dhz|2060|s2|longterm|stormier": [{"type":"dynamic","show":[84]}],
-						"dhz|2060|s2|wstorm|nochange": [{"type":"dynamic","show":[94]}],
-						"dhz|2060|s2|wstorm|stopmining": [{"type":"dynamic","show":[104]}],
-						"dhz|2060|s2|wstorm|stormier": [{"type":"dynamic","show":[114]}],
-
-						"dhz|2060|s3|longterm|nochange": [{"type":"dynamic","show":[67]}],
-						"dhz|2060|s3|longterm|stopmining": [{"type":"dynamic","show":[77]}],
-						"dhz|2060|s3|longterm|stormier": [{"type":"dynamic","show":[87]}],
-						"dhz|2060|s3|wstorm|nochange": [{"type":"dynamic","show":[97]}],
-						"dhz|2060|s3|wstorm|stopmining": [{"type":"dynamic","show":[107]}],
-						"dhz|2060|s3|wstorm|stormier": [{"type":"dynamic","show":[117]}],	
-
-						"dhz|2100|s1|longterm|nochange": [{"type":"dynamic","show":[62]}],
-						"dhz|2100|s1|longterm|stopmining": [{"type":"dynamic","show":[72]}],
-						"dhz|2100|s1|longterm|stormier": [{"type":"dynamic","show":[82]}],
-						"dhz|2100|s1|wstorm|nochange": [{"type":"dynamic","show":[92]}],
-						"dhz|2100|s1|wstorm|stopmining": [{"type":"dynamic","show":[102]}],
-						"dhz|2100|s1|wstorm|stormier": [{"type":"dynamic","show":[112]}],
-
-						"dhz|2100|s2|longterm|nochange": [{"type":"dynamic","show":[65]}],
-						"dhz|2100|s2|longterm|stopmining": [{"type":"dynamic","show":[75]}],
-						"dhz|2100|s2|longterm|stormier": [{"type":"dynamic","show":[85]}],
-						"dhz|2100|s2|wstorm|nochange": [{"type":"dynamic","show":[95]}],
-						"dhz|2100|s2|wstorm|stopmining": [{"type":"dynamic","show":[96]}],
-						"dhz|2100|s2|wstorm|stormier": [{"type":"dynamic","show":[97]}],
-
-						"dhz|2100|s3|longterm|nochange": [{"type":"dynamic","show":[68]}],
-						"dhz|2100|s3|longterm|stopmining": [{"type":"dynamic","show":[78]}],
-						"dhz|2100|s3|longterm|stormier": [{"type":"dynamic","show":[88]}],
-						"dhz|2100|s3|wstorm|nochange": [{"type":"dynamic","show":[98]}],
-						"dhz|2100|s3|wstorm|stopmining": [{"type":"dynamic","show":[108]}],
-						"dhz|2100|s3|wstorm|stormier": [{"type":"dynamic","show":[118]}],	
-
-
-						"chz|2010|longterm|nochange": [{"type":"dynamic","show":[3]}], 
-						"chz|2010|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2010|longterm|stormier": [{"type":"dynamic","show":[13]}],
-						"chz|2010|wstorm|nochange": [{"type":"dynamic","show":[23]}], 
-						"chz|2010|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2010|wstorm|stormier": [{"type":"dynamic","show":[33]}],
-						
-						"chz|2030|s1|longterm|nochange": [{"type":"dynamic","show":[4]}],
-						"chz|2030|s1|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2030|s1|longterm|stormier": [{"type":"dynamic","show":[14]}],
-						"chz|2030|s1|wstorm|nochange": [{"type":"dynamic","show":[24]}],
-						"chz|2030|s1|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2030|s1|wstorm|stormier": [{"type":"dynamic","show":[34]}],
-
-						"chz|2030|s2|longterm|nochange": [{"type":"dynamic","show":[7]}],
-						"chz|2030|s2|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2030|s2|longterm|stormier": [{"type":"dynamic","show":[17]}],
-						"chz|2030|s2|wstorm|nochange": [{"type":"dynamic","show":[27]}],
-						"chz|2030|s2|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2030|s2|wstorm|stormier": [{"type":"dynamic","show":[37]}],
-
-						"chz|2030|s3|longterm|nochange": [{"type":"dynamic","show":[10]}],
-						"chz|2030|s3|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2030|s3|longterm|stormier": [{"type":"dynamic","show":[20]}],
-						"chz|2030|s3|wstorm|nochange": [{"type":"dynamic","show":[30]}],
-						"chz|2030|s3|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2030|s3|wstorm|stormier": [{"type":"dynamic","show":[40]}],
-
-						"chz|2060|s1|longterm|nochange": [{"type":"dynamic","show":[5]}],
-						"chz|2060|s1|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2060|s1|longterm|stormier": [{"type":"dynamic","show":[15]}],
-						"chz|2060|s1|wstorm|nochange": [{"type":"dynamic","show":[25]}],
-						"chz|2060|s1|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2060|s1|wstorm|stormier": [{"type":"dynamic","show":[35]}],
-
-						"chz|2060|s2|longterm|nochange": [{"type":"dynamic","show":[8]}],
-						"chz|2060|s2|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2060|s2|longterm|stormier": [{"type":"dynamic","show":[18]}],
-						"chz|2060|s2|wstorm|nochange": [{"type":"dynamic","show":[28]}],
-						"chz|2060|s2|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2060|s2|wstorm|stormier": [{"type":"dynamic","show":[38]}],
-
-						"chz|2060|s3|longterm|nochange": [{"type":"dynamic","show":[11]}],
-						"chz|2060|s3|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2060|s3|longterm|stormier": [{"type":"dynamic","show":[21]}],
-						"chz|2060|s3|wstorm|nochange": [{"type":"dynamic","show":[31]}],
-						"chz|2060|s3|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2060|s3|wstorm|stormier": [{"type":"dynamic","show":[41]}],	
-
-						"chz|2100|s1|longterm|nochange": [{"type":"dynamic","show":[6]}],
-						"chz|2100|s1|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2100|s1|longterm|stormier": [{"type":"dynamic","show":[16]}],
-						"chz|2100|s1|wstorm|nochange": [{"type":"dynamic","show":[26]}],
-						"chz|2100|s1|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2100|s1|wstorm|stormier": [{"type":"dynamic","show":[36]}],
-
-						"chz|2100|s2|longterm|nochange": [{"type":"dynamic","show":[9]}],
-						"chz|2100|s2|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2100|s2|longterm|stormier": [{"type":"dynamic","show":[19]}],
-						"chz|2100|s2|wstorm|nochange": [{"type":"dynamic","show":[29]}],
-						"chz|2100|s2|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2100|s2|wstorm|stormier": [{"type":"dynamic","show":[39]}],
-
-						"chz|2100|s3|longterm|nochange": [{"type":"dynamic","show":[12]}],
-						"chz|2100|s3|longterm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2100|s3|longterm|stormier": [{"type":"dynamic","show":[22]}],
-						"chz|2100|s3|wstorm|nochange": [{"type":"dynamic","show":[32]}],
-						"chz|2100|s3|wstorm|stopmining": [{"type":"dynamic","show":[-1]}],
-						"chz|2100|s3|wstorm|stormier": [{"type":"dynamic","show":[42]}]							
-
-						
+						"Concrete": [{"type":"dynamic","show":[2,4]}],
+						"marshmallows":  [{"type":"dynamic","show":[1,3,5]}]
 					},
-					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/CR_CA/Monterey_SLR/MapServer"
-				
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/California/Ventura_Economics/MapServer"
+				},
+				{
+				    "selected": true,
+					"name": "Hazard Zones",
+					"controls": [
+						{"name":"Management Scenarios", "group": "main", "help": "This is the help message for Management Scenarios", "values":[{"name":"Coastal Armoring","value":"EBA", "help": "More Help"},{"name":"Nature Based Approach", "value":"NBA", "help": "More Help"}], "type": "radio"},
+						{"name":"Hazard Zone Type", "group": "main", "values":[{"name":"Coastal Erosion","value":"CE", "help": "More Help"},{"name":"Rising Tide", "value":"RT", "help": "More Help"},{"name":"Coastal Storm Flood", "value":"CSF", "help": "More Help"},{"name":"Coastal Storm Wave Impact", "value":"CSWI", "help": "More Help"}], "type": "radio"},
+						{"name":"Year / Sea Level Rise", "group": "main", "help": "More Help", "values":[{"name":"Current / Existing Conditions","value":"CEC", "selected": true, "help": "More Help"},{"name":"2030 / High", "value":"2030", "help": "More Help"},{"name":"2060 / High", "value":"2060", "help": "More Help"},{"name":"2100 / High", "value":"2100", "help": "More Help"}], "type": "radio"}	
+					
+					], 
+					"combos": {
+						"Concrete": [{"type":"dynamic","show":[2,4]}],
+						"marshmallows":  [{"type":"dynamic","show":[1,3,5]}],
+						"EBA|CE|CEC": [{"type":"dynamic","show":[15]}],
+						"EBA|CE|2030": [{"type":"dynamic","show":[16]}],
+						"EBA|CE|2060": [{"type":"dynamic","show":[17]}],
+						"EBA|CE|2100": [{"type":"dynamic","show":[18]}],
+						"EBA|RT|CEC": [{"type":"dynamic","show":[19]}],
+						"EBA|RT|2030": [{"type":"dynamic","show":[20]}],
+						"EBA|RT|2060": [{"type":"dynamic","show":[21]}],
+						"EBA|RT|2100": [{"type":"dynamic","show":[22]}],
+						"EBA|CSF|CEC": [{"type":"dynamic","show":[7]}],
+						"EBA|CSF|2030": [{"type":"dynamic","show":[8]}],
+						"EBA|CSF|2060": [{"type":"dynamic","show":[9]}],
+						"EBA|CSF|2100": [{"type":"dynamic","show":[10]}],
+						"EBA|CSWI|CEC": [{"type":"dynamic","show":[11]}],
+						"EBA|CSWI|2030": [{"type":"dynamic","show":[12]}],
+						"EBA|CSWI|2060": [{"type":"dynamic","show":[13]}],
+						"EBA|CSWI|2100": [{"type":"dynamic","show":[14]}],
+						"NBA|CE|CEC": [{"type":"dynamic","show":[32]}],
+						"NBA|CE|2030": [{"type":"dynamic","show":[33]}],
+						"NBA|CE|2060": [{"type":"dynamic","show":[34]}],
+						"NBA|CE|2100": [{"type":"dynamic","show":[35]}],
+						"NBA|RT|CEC": [{"type":"dynamic","show":[36]}],
+						"NBA|RT|2030": [{"type":"dynamic","show":[37]}],
+						"NBA|RT|2060": [{"type":"dynamic","show":[38]}],
+						"NBA|RT|2100": [{"type":"dynamic","show":[39]}],
+						"NBA|CSF|CEC": [{"type":"dynamic","show":[24]}],
+						"NBA|CSF|2030": [{"type":"dynamic","show":[25]}],
+						"NBA|CSF|2060": [{"type":"dynamic","show":[26]}],
+						"NBA|CSF|2100": [{"type":"dynamic","show":[27]}],
+						"NBA|CSWI|CEC": [{"type":"dynamic","show":[28]}],
+						"NBA|CSWI|2030": [{"type":"dynamic","show":[29]}],
+						"NBA|CSWI|2060": [{"type":"dynamic","show":[30]}],
+						"NBA|CSWI|2100": [{"type":"dynamic","show":[31]}]
+					},
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/California/Ventura_Economics/MapServer"
+				},
+				{
+					"name": "EBA NBA Damage Estimates",
+					"controls": [
+						{"name": "Management Scenarios", "group": "main", "help": "More Help", "values": [{"name":"Existing Conditions","value":"Cur", "help": "More Help"},{"name":"Coastal Armoring","value":"EBA", "help": "More Help"},{"name":"Nature Based Approach","value":"NBA", "help": "More Help"}], "type": "radio"},
+						{"name":"Damage Estimates", "group": "main", "help": "More Help", "values":[{"name":"$ value amount of public buildings losses","value":"Pub", "help": "More Help"},{"name":"$ value amount of residential losses", "value":"Res", "help": "More Help"},{"name":"$ value amount of agricultural losses", "value":"Ag", "help": "More Help"},{"name":"$ value amount of recreational losses", "value":"Rec", "help": "More Help"}], "type": "radio"},
+						{"name":"Hazard Zones", "group": "main", "help": "More Help", "values":[{"name":"Coastal Erosion","value":"ED", "help": "More Help"},{"name":"Rising Tide", "value":"DD", "help": "More Help"},{"name":"Coastal Storm Flood", "value":"SD", "help": "More Help"},{"name":"Coastal Storm Wave Impact", "value":"WD", "help": "More Help"}], "type": "radio"},
+						{"name":"Year / Sea Level Rise", "group": "main", "help": "More Help", "values":[{"name":"Current / Existing Conditions","value":"ex", "help": "More Help"},{"name":"2030 / High", "value":"2030", "help": "More Help"},{"name":"2060 / High", "value":"2060", "help": "More Help"},{"name":"2100 / High", "value":"2100", "help": "More Help"}], "type": "radio"}	
+					
+					], 
+					"mainURL": "http://dev.services2.coastalresilience.org:6080/arcgis/rest/services/Ventura_Economics/Ventura_Damage_Estimates/MapServer",
+					"combos": {
+							"Cur|Ag|DD|2030": [
+								{
+									"show": [
+										0
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|DD|2060": [
+								{
+									"show": [
+										1
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|DD|2100": [
+								{
+									"show": [
+										2
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|DD|ex": [
+								{
+									"show": [
+										3
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|2030": [
+								{
+									"show": [
+										4
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|2060": [
+								{
+									"show": [
+										5
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|2100": [
+								{
+									"show": [
+										6
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|2030": [
+								{
+									"show": [
+										7
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|2060": [
+								{
+									"show": [
+										8
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|2100": [
+								{
+									"show": [
+										9
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|SD|ex": [
+								{
+									"show": [
+										10
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|2030": [
+								{
+									"show": [
+										11
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|2060": [
+								{
+									"show": [
+										12
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|2100": [
+								{
+									"show": [
+										13
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Ag|WD|ex": [
+								{
+									"show": [
+										14
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|2030": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|2060": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|2100": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|DD|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|2030": [
+								{
+									"show": [
+										15
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|2060": [
+								{
+									"show": [
+										16
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|2100": [
+								{
+									"show": [
+										17
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|2030": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|2060": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|2100": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|SD|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|2030": [
+								{
+									"show": [
+										18
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|2060": [
+								{
+									"show": [
+										19
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|2100": [
+								{
+									"show": [
+										20
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Pub|WD|ex": [
+								{
+									"show": [
+										21
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|2030": [
+								{
+									"show": [
+										22
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|2060": [
+								{
+									"show": [
+										23
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|2100": [
+								{
+									"show": [
+										24
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|DD|ex": [
+								{
+									"show": [
+										25
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|2030": [
+								{
+									"show": [
+										26
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|2060": [
+								{
+									"show": [
+										27
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|2100": [
+								{
+									"show": [
+										28
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|2030": [
+								{
+									"show": [
+										29
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|2060": [
+								{
+									"show": [
+										30
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|2100": [
+								{
+									"show": [
+										31
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|SD|ex": [
+								{
+									"show": [
+										32
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|2030": [
+								{
+									"show": [
+										33
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|2060": [
+								{
+									"show": [
+										34
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|2100": [
+								{
+									"show": [
+										35
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Rec|WD|ex": [
+								{
+									"show": [
+										36
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|2030": [
+								{
+									"show": [
+										37
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|2060": [
+								{
+									"show": [
+										38
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|2100": [
+								{
+									"show": [
+										39
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|DD|ex": [
+								{
+									"show": [
+										40
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|2030": [
+								{
+									"show": [
+										41
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|2060": [
+								{
+									"show": [
+										42
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|2100": [
+								{
+									"show": [
+										43
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|2030": [
+								{
+									"show": [
+										44
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|2060": [
+								{
+									"show": [
+										45
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|2100": [
+								{
+									"show": [
+										46
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|SD|ex": [
+								{
+									"show": [
+										47
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|2030": [
+								{
+									"show": [
+										48
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|2060": [
+								{
+									"show": [
+										49
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|2100": [
+								{
+									"show": [
+										50
+									],
+									"type": "dynamic"
+								}
+							],
+							"Cur|Res|WD|ex": [
+								{
+									"show": [
+										51
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|2030": [
+								{
+									"show": [
+										52
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|2060": [
+								{
+									"show": [
+										53
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|2100": [
+								{
+									"show": [
+										54
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|DD|ex": [
+								{
+									"show": [
+										55
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|2030": [
+								{
+									"show": [
+										56
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|2060": [
+								{
+									"show": [
+										57
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|2100": [
+								{
+									"show": [
+										58
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|2030": [
+								{
+									"show": [
+										59
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|2060": [
+								{
+									"show": [
+										60
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|2100": [
+								{
+									"show": [
+										61
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|SD|ex": [
+								{
+									"show": [
+										62
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|2030": [
+								{
+									"show": [
+										63
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|2060": [
+								{
+									"show": [
+										64
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|2100": [
+								{
+									"show": [
+										65
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Ag|WD|ex": [
+								{
+									"show": [
+										66
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|2030": [
+								{
+									"show": [
+										67
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|2060": [
+								{
+									"show": [
+										68
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|2100": [
+								{
+									"show": [
+										69
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|DD|ex": [
+								{
+									"show": [
+										70
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|2030": [
+								{
+									"show": [
+										71
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|2060": [
+								{
+									"show": [
+										72
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|2100": [
+								{
+									"show": [
+										73
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|2030": [
+								{
+									"show": [
+										74
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|2060": [
+								{
+									"show": [
+										75
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|2100": [
+								{
+									"show": [
+										76
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|SD|ex": [
+								{
+									"show": [
+										77
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|2030": [
+								{
+									"show": [
+										78
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|2060": [
+								{
+									"show": [
+										79
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|2100": [
+								{
+									"show": [
+										80
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Pub|WD|ex": [
+								{
+									"show": [
+										81
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|2030": [
+								{
+									"show": [
+										82
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|2060": [
+								{
+									"show": [
+										83
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|2100": [
+								{
+									"show": [
+										84
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|DD|ex": [
+								{
+									"show": [
+										85
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|2030": [
+								{
+									"show": [
+										86
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|2060": [
+								{
+									"show": [
+										87
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|2100": [
+								{
+									"show": [
+										88
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|2030": [
+								{
+									"show": [
+										89
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|2060": [
+								{
+									"show": [
+										90
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|2100": [
+								{
+									"show": [
+										91
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|SD|ex": [
+								{
+									"show": [
+										92
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|2030": [
+								{
+									"show": [
+										93
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|2060": [
+								{
+									"show": [
+										94
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|2100": [
+								{
+									"show": [
+										95
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Rec|WD|ex": [
+								{
+									"show": [
+										96
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|2030": [
+								{
+									"show": [
+										97
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|2060": [
+								{
+									"show": [
+										98
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|2100": [
+								{
+									"show": [
+										99
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|DD|ex": [
+								{
+									"show": [
+										100
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|2030": [
+								{
+									"show": [
+										101
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|2060": [
+								{
+									"show": [
+										102
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|2100": [
+								{
+									"show": [
+										103
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|2030": [
+								{
+									"show": [
+										104
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|2060": [
+								{
+									"show": [
+										105
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|2100": [
+								{
+									"show": [
+										106
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|SD|ex": [
+								{
+									"show": [
+										107
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|2030": [
+								{
+									"show": [
+										108
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|2060": [
+								{
+									"show": [
+										109
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|2100": [
+								{
+									"show": [
+										110
+									],
+									"type": "dynamic"
+								}
+							],
+							"EBA|Res|WD|ex": [
+								{
+									"show": [
+										111
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|2030": [
+								{
+									"show": [
+										112
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|2060": [
+								{
+									"show": [
+										113
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|2100": [
+								{
+									"show": [
+										114
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|DD|ex": [
+								{
+									"show": [
+										115
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|2030": [
+								{
+									"show": [
+										116
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|2060": [
+								{
+									"show": [
+										117
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|2100": [
+								{
+									"show": [
+										118
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|2030": [
+								{
+									"show": [
+										119
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|2060": [
+								{
+									"show": [
+										120
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|2100": [
+								{
+									"show": [
+										121
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|SD|ex": [
+								{
+									"show": [
+										122
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|2030": [
+								{
+									"show": [
+										123
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|2060": [
+								{
+									"show": [
+										124
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|2100": [
+								{
+									"show": [
+										125
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Ag|WD|ex": [
+								{
+									"show": [
+										126
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|2030": [
+								{
+									"show": [
+										127
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|2060": [
+								{
+									"show": [
+										128
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|2100": [
+								{
+									"show": [
+										129
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|DD|ex": [
+								{
+									"show": [
+										130
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|2030": [
+								{
+									"show": [
+										131
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|2060": [
+								{
+									"show": [
+										132
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|2100": [
+								{
+									"show": [
+										133
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|2030": [
+								{
+									"show": [
+										134
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|2060": [
+								{
+									"show": [
+										135
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|2100": [
+								{
+									"show": [
+										136
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|SD|ex": [
+								{
+									"show": [
+										137
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|2030": [
+								{
+									"show": [
+										138
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|2060": [
+								{
+									"show": [
+										139
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|2100": [
+								{
+									"show": [
+										140
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Pub|WD|ex": [
+								{
+									"show": [
+										141
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|2030": [
+								{
+									"show": [
+										142
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|2060": [
+								{
+									"show": [
+										143
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|2100": [
+								{
+									"show": [
+										144
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|DD|ex": [
+								{
+									"show": [
+										145
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|2030": [
+								{
+									"show": [
+										146
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|2060": [
+								{
+									"show": [
+										147
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|2100": [
+								{
+									"show": [
+										148
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|2030": [
+								{
+									"show": [
+										149
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|2060": [
+								{
+									"show": [
+										150
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|2100": [
+								{
+									"show": [
+										151
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|SD|ex": [
+								{
+									"show": [
+										152
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|2030": [
+								{
+									"show": [
+										153
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|2060": [
+								{
+									"show": [
+										154
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|2100": [
+								{
+									"show": [
+										155
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Rec|WD|ex": [
+								{
+									"show": [
+										156
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|2030": [
+								{
+									"show": [
+										157
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|2060": [
+								{
+									"show": [
+										158
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|2100": [
+								{
+									"show": [
+										159
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|DD|ex": [
+								{
+									"show": [
+										160
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|2030": [
+								{
+									"show": [
+										161
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|2060": [
+								{
+									"show": [
+										162
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|2100": [
+								{
+									"show": [
+										163
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|ED|ex": [
+								{
+									"show": [
+										undefined
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|2030": [
+								{
+									"show": [
+										164
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|2060": [
+								{
+									"show": [
+										165
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|2100": [
+								{
+									"show": [
+										166
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|SD|ex": [
+								{
+									"show": [
+										167
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|2030": [
+								{
+									"show": [
+										168
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|2060": [
+								{
+									"show": [
+										169
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|2100": [
+								{
+									"show": [
+										170
+									],
+									"type": "dynamic"
+								}
+							],
+							"NBA|Res|WD|ex": [
+								{
+									"show": [
+										171
+									],
+									"type": "dynamic"
+								}
+							]
+						}
 				}			
 			]
 		}

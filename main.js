@@ -928,7 +928,7 @@ define([
 					this.tabs = new Array()
 					
 					array.forEach(this.currentgeography.tabs, lang.hitch(this,function(ctabrec, i){
-					
+						
 						ctab = new ContentPane({
 							style:"padding: 8px",
 						//  style:"height:" + this.sph + "px !important",
@@ -1256,11 +1256,27 @@ define([
 						lastControlNode = controlNode;
 						
 						}));
-					
+						
+						if (ctabrec.selected) {
+							this.tabpan.selectChild(ctab);
+						}
+						
 					}));
 					
 					
-					aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (event) {
+					aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (e, o) {
+						
+						selindex = o[0].index;
+						
+						array.forEach(this.currentgeography.tabs, lang.hitch(this,function(ctabrec, i){
+							if (i == selindex) {
+								ctabrec.selected = true;
+							} else {
+								ctabrec.selected = false;
+							}
+						}))
+				
+						
 						this.resize();
 						//array.forEach(this.myLayers, lang.hitch(this,function(clayer, i){
 						//	this.map.removeLayer(clayer);
