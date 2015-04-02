@@ -165,6 +165,8 @@ define([
 			   stateRestore: false,
 			   
                activate: function () { 
+			   
+					console.log("**************** ACTIVATE *********************");
 			   		
 					if (this.rendered == false) {
 					
