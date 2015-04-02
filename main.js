@@ -613,7 +613,7 @@ define([
 										array.forEach(indivdis, lang.hitch(this,function(indiv, di){
 											console.log(indiv, widg.data.control)
 											if ((indiv[0] == widg.data.control)  && (indiv[1] == widg.data.value)) {	
-												if (widg.checked == true) {alert('You have made an invalid selection.  Please Adjust')}
+												if (widg.checked == true) {console.log('You have made an invalid selection.  Please Adjust')}
 												//console.log(widg)
 												widg.setAttribute('disabled', true);
 											}
