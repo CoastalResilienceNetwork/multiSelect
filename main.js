@@ -166,8 +166,7 @@ define([
 			   
                activate: function () { 
 			   
-					console.log("**************** ACTIVATE *********************");
-			   		
+								   		
 					if (this.rendered == false) {
 					
 						this.rendered = true;
@@ -196,13 +195,13 @@ define([
 					
 					} else {
 			  
-						if (this.currentLayer != undefined)  {
+						//if (this.currentLayer != undefined)  {
 						
 						//	this.currentLayer.setVisibility(true);
 						
 						this.resize();
 						
-						}
+					//	}
 						
 
 					} 
