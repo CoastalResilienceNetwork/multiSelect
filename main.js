@@ -222,6 +222,7 @@ define([
 						if (this._hasactivated == false) {
 					
 							this.changeGeography(this.currentgeography, false);
+							this.stateRestore = false;
 						
 						}
 					
@@ -252,6 +253,7 @@ define([
 					}
 					
 					this.removeLayers();
+					this.translevel = this.mainData.transparency;
 					
 			   },
 			
@@ -1389,7 +1391,6 @@ define([
 					}));
 				
 					
-				
 				},
 				
 				viewChart: function() {
@@ -1577,7 +1578,6 @@ define([
 				this.currentgeography = state.geo;
 				this.translevel = state.trans;
 				
-				
 				},
 				
             subregionActivated: function(subregion) {
@@ -1601,7 +1601,7 @@ define([
             },
             
             subregionDeactivated: function(subregion) {
-				console.log(subregion);
+
                 console.debug('now leaving subregion ' + subregion.display);
 				
 				domConstruct.empty(this.regionChooserContainer);
