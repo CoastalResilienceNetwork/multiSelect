@@ -625,7 +625,7 @@ define([
 									
 							}));
 
-							console.log("controldep", c, depmet);
+							//console.log("controldep", c, depmet);
 								
 							if ((depmet == false) && (nsel > 0)) {
 								//disable all widgets from current tab or layout	
@@ -640,16 +640,15 @@ define([
 						//}));
 						
 						
-						console.log("sandWitch");
-						console.log(sandWitch);
+						//console.log("sandWitch");
+						//console.log(sandWitch);
 						pretabsandWitches.push(sandWitch);
 			   
 					}));
 					
 					sandWitchList = [];
 					
-					//CHECKDEP
-					console.log('yo');
+
 					console.log(this.tabpan);
 					
 					for (key in pretabsandWitches[0]) {  //Changed 0 from selectedIndex 
@@ -691,7 +690,7 @@ define([
 					
 					}
 					
-				console.log(sandWitchList);
+				//console.log(sandWitchList);
 				
 				this.updateMap(sandWitchList);
 				
@@ -750,8 +749,6 @@ define([
 							clayer.url = this.currentgeography.tabs[selectedIndex].mainURL
 						
 						}
-						
-						console.log("Combo");
 						
 						if (clayer.type == "dynamic") {
 						
@@ -826,9 +823,9 @@ define([
 					this.myLayers.push(clayer);
 				}));		
 				
-				console.log(tiledLayers);
+				//console.log(tiledLayers);
 				
-				console.log(this.map.layerIds);
+				//console.log(this.map.layerIds);
 				
 					array.forEach(this.map.layerIds, lang.hitch(this,function(lid, i){
 						console.log(lid, this.map.getLayer(lid));
@@ -1566,6 +1563,7 @@ define([
 				state = new Object();
 			   
 				state.geo = this.currentgeography;
+				state.trans = this.translevel;
 			   
 				return state;
 	
@@ -1577,6 +1575,7 @@ define([
 				
 				this.stateRestore = true;	
 				this.currentgeography = state.geo;
+				this.translevel = state.trans;
 				
 				
 				},
