@@ -1577,6 +1577,11 @@ define([
 				this.stateRestore = true;
 				this.currentgeography = state.geo;
 				this.translevel = state.trans;
+				
+				if (this._hasactivated) {
+					this.changeGeography(this.currentgeography, false);
+				}
+				
 
 				},
 
