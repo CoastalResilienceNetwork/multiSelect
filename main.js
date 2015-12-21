@@ -163,6 +163,18 @@ define([
 
 			}
 
+			if (_config.hideDisableds != undefined) {
+
+				_hideDisableds = _config.hideDisableds;
+
+			} else {
+
+				_hideDisableds = true;
+
+			}			
+			
+			
+
            return declare(PluginBase, {
 		       toolbarName: _config.name,
                toolbarType: "sidebar",
@@ -323,11 +335,11 @@ define([
 
 					//alert(this.hideDisableds);
 					
-					if (this.hideDisableds == undefined) {
+					//if (this.hideDisableds == undefined) {
 
-						this.hideDisableds = true;
+					//	this.hideDisableds = true;
 
-					}
+					//}
 
 					domClass.add(this.container, this.dojoTheme);
 
@@ -709,7 +721,7 @@ define([
 				this.updateMap(sandWitchList);
 
 
-				if (this.hideDisableds == true) {
+				if (_hideDisableds == true) {
 
 					array.forEach(this.controlNodes, lang.hitch(this,function(cgroup, i){
 
@@ -1149,8 +1161,10 @@ define([
 
 							if (control.type == "radio") {
 									rorc = RadioButton;
+									ichecks = false;
 								} else {
 									rorc = CheckBox;
+									ichecks = true;
 								}
 
 								//nodetitle = domConstruct.create("div", {style:"font-weight: bold;", innerHTML: control.name});
@@ -1172,30 +1186,33 @@ define([
 								   controlNode.appendChild(ncontrolsnode);
 
 
+								   
 								   sel = val.selected;
 
-								   if (sel == undefined) {
+								   if (ichecks == false) {
+								   
+									   if (sel == undefined) {
 
-								    sel = false;
-									val.selected = false;
+										sel = false;
+										val.selected = false;
 
+									   }
+
+									   if (sel == true) { notSelected = false }
+
+									   if (v == control.values.length - 1) {
+
+										if (notSelected == true) {
+
+											sel = true;
+											val.selected = true;
+
+										}
+
+									   }
+
+									   console.log(sel);
 								   }
-
-								   if (sel == true) { notSelected = false }
-
-								   if (v == control.values.length - 1) {
-
-								    if (notSelected == true) {
-
-										sel = true;
-										val.selected = true;
-
-									}
-
-								   }
-
-								   console.log(sel);
-
 
 									ncontrolnode = domConstruct.create("span");
 									ncontrolsnode.appendChild(ncontrolnode);
