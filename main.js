@@ -171,6 +171,16 @@ define([
 
 				_hideDisableds = true;
 
+			}	
+
+			if (_config.noZoom != undefined) {
+
+				_noZoom = _config.noZoom;
+
+			} else {
+
+				_noZoom = false;
+
 			}			
 			
 			
@@ -235,7 +245,8 @@ define([
 
 						if ((this._hasactivated == false) && (this.usableRegions.length == 1)) {
 
-							this.changeGeography(this.usableRegions[0], true);
+							//this.changeGeography(this.usableRegions[0], true);
+							this.changeGeography(this.usableRegions[0], !(_noZoom));
 
 						};
 
@@ -398,7 +409,8 @@ define([
 						menuItem1 = new MenuItem({
 							label: entry.name,
 							//iconClass:"dijitEditorIcon dijitEditorIconSave",
-							onClick: lang.hitch(this,function(e){this.changeGeography(entry)})
+							//onClick: lang.hitch(this,function(e){this.changeGeography(entry)})
+							onClick: lang.hitch(this,function(e){this.changeGeography(entry, !(_noZoom))})
 						});
 						menu.addChild(menuItem1);
 
