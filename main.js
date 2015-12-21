@@ -142,6 +142,16 @@ define([
 				_ddText = "Choose a Region";
 
 			}
+			
+			if (_config.helpWidth != undefined) {
+
+				_helpWidth = _config.helpWidth;
+
+			} else {
+
+				_helpWidth = "400px";
+
+			}
 
 			if (_config.regionLabeler != undefined) {
 
@@ -311,6 +321,8 @@ define([
 
 					}
 
+					//alert(this.hideDisableds);
+					
 					if (this.hideDisableds == undefined) {
 
 						this.hideDisableds = true;
@@ -1410,7 +1422,7 @@ define([
 
 
 					this.infoarea = new ContentPane({
-					  style:"z-index:10000; !important;position:absolute !important;left:310px !important;top:0px !important;width:350px !important;background-color:#FFF !important;padding:10px !important;border-style:solid;border-width:4px;border-color:#444;border-radius:5px;display: none",
+					  style:"z-index:10000; !important;position:absolute !important;left:20px !important;top:0px !important;width:" + _helpWidth + " !important;background-color:#FFF !important;padding:10px !important;border-style:solid;border-width:4px;border-color:#444;border-radius:5px;display: none",
 					  innerHTML: "<div class='infoareacloser' style='float:right !important'><a href='#'>✖</a></div><div class='infoareacontent' style='padding-top:15px'>no content yet</div>"
 					});
 
