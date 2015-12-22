@@ -1154,7 +1154,7 @@ define([
 									maximum: (control.values.length -1),
 									showButtons:false,
 									title: control.name,
-									intermediateChanges: true,
+									intermediateChanges: false,
 									discreteValues: control.values.length,
 									//index: groupid,
 									//onChange: lang.hitch(this,function(e) {this.updateUnique(e, groupid)}),
