@@ -1,92 +1,132 @@
 {
     "name": "Flood & Sea Level Rise",
-	"pluginHeight": 490,
+	"pluginHeight": 450,
 	"ddText": "Choose Data Source",
+	"hideDisableds": false,
+	"helpWidth": "550px",
+	"regionLabeler": "Data Source: #",
+	"noZoom": true,
 	"regions": [
 		{
-			"name": "Coastal Resilience data",
-			"extent": {"xmin":-8279552.773327565,"ymin":4952655.188376434,"xmax":-7983615.836980773,"ymax":5088660.854503088,"spatialReference":{"wkid":102100,"latestWkid":3857}},
-			"methods": "methods/SLR.pdf",
+			"name": "Basic Inundation",
+			"methods": {"title":"View Methodology","url":"methods/basic_inundation_method.docx"},
+			"extent": {"xmin":-8465603.278145544,"ymin":4449501.684258065,"xmax":-8374321.7741455445,"ymax":4584528.084258066,"spatialReference":{"wkid":102100,"latestWkid":3857}},
 			"controls": [
-				{"name":"Choose Year", "index":0, "type": "slider", "values":[{"selected": true, "name":"Current","value":"Current", "help": "Year 2010"},{"name":"2020", "value":"2020"}, {"name":"2050", "value":"2050"}, {"name":"2080", "value":"2080"}]},
-				{"name":"Choose Sea Level Rise", "type": "slider", "dependent" : "2020|2050|2080",  "index":1, "values":[{"name":"Low","value":"Low" , "selected": true},{"name":"Medium","value":"Medium"},{"name":"High","value":"High"}]},
-				{"name":"Choose Storm Surge", "type": "radio", "index":2, "values":[ {"name":"None","value":"None", "dependent" : "2020|2050|2080"},{"name":"Category 2","value":"c2", "selected": true},{"name":"Category 3","value":"c3"}]}
+				{"name":"Choose SLR", "help": "<img src='methods/SLR_simple_graphic.png' />", "index":0, "values":[{"name":"Low","value":"Low", "help": "Low", "selected": true},{"name":"High", "value":"High"}, {"name":"Highest", "value":"Highest"}], "type": "slider"},
+				{"name":"Choose a Scenario Year", "index":0, "values":[{"name":"2025","value":"2025", "help": "Year 2025", "selected": true},{"name":"2040", "value":"2040"}, {"name":"2065", "value":"2065"}, {"name":"2100", "value":"2100"}], "type": "slider"}				
 				],
-			"mainURL": "http://services.coastalresilience.org:6080/arcgis/rest/services/New_York/NY_Flood_and_SLR_Data/MapServer",
 			"combos": {
+			
+				"Low|2025": [{"type":"dynamic","show":[3]}],
+				"Low|2040": [{"type":"dynamic","show":[2]}], 
+				"Low|2065": [{"type":"dynamic","show":[1]}],
+				"Low|2100": [{"type":"dynamic","show":[0]}],
+				
+				"High|2025": [{"type":"dynamic","show":[7]}],
+				"High|2040": [{"type":"dynamic","show":[6]}], 
+				"High|2065": [{"type":"dynamic","show":[5]}],
+				"High|2100": [{"type":"dynamic","show":[4]}],					
 
-				"Current|None": undefined,
-				"2020|None|None": undefined,
-				"2050|None|None": undefined,
-				"2080|None|None": undefined,
-				"Current|Low|None": undefined,
-				"2020|Low|None": [{"type":"dynamic","show":[54,55]}],
-				"2050|Low|None": [{"type":"dynamic","show":[48,49]}],
-				"2080|Low|None": [{"type":"dynamic","show":[20, 21]}],
-				"Current|Medium|None": undefined,
-				"2020|Medium|None": [{"type":"dynamic","show":[56,57]}],
-				"2050|Medium|None": [{"type":"dynamic","show":[50,51]}],
-				"2080|Medium|None": [{"type":"dynamic","show":[40,41,42,43]}],
-				"Current|High|None": undefined,
-				"2020|High|None": [{"type":"dynamic","show":[58,59]}],
-				"2050|High|None": [{"type":"dynamic","show":[52,53]}],
-				"2080|High|None": [{"type":"dynamic","show":[44,45,46,47]}],
+				"Highest|2025": [{"type":"dynamic","show":[11]}],
+				"Highest|2040": [{"type":"dynamic","show":[10]}], 
+				"Highest|2065": [{"type":"dynamic","show":[9]}],
+				"Highest|2100": [{"type":"dynamic","show":[8]}]
 
-				"Current|c2": [{"type":"dynamic","show":[64,65,66,67]}],
-				"2020|None|c2": undefined,
-				"2050|None|c2": undefined,
-				"2080|None|c2": undefined,
-				"Current|Low|c2": undefined,
-				"2020|Low|c2": [{"type":"dynamic","show":[34,35]}],
-				"2050|Low|c2": [{"type":"dynamic","show":[28,29]}],
-				"2080|Low|c2": [{"type":"dynamic","show":[20,21]}],
-				"Current|Medium|c2": undefined,
-				"2020|Medium|c2": [{"type":"dynamic","show":[36,37]}],
-				"2050|Medium|c2": [{"type":"dynamic","show":[30,31]}],
-				"2080|Medium|c2": [{"type":"dynamic","show":[22,23]}],
-				"Current|High|c2": undefined,
-				"2020|High|c2": [{"type":"dynamic","show":[38,39]}],
-				"2050|High|c2": [{"type":"dynamic","show":[32,33]}],
-				"2080|High|c2": [{"type":"dynamic","show":[24,25,26,27]}],
-
-				"Current|c3": [{"type":"dynamic","show":[60,61,62,63]}],
-				"2020|None|c3": undefined,
-				"2050|None|c3": undefined,
-				"2080|None|c3": undefined,
-				"Current|Low|c3": undefined,
-				"2020|Low|c3": [{"type":"dynamic","show":[14,15]}],
-				"2050|Low|c3": [{"type":"dynamic","show":[8,9]}],
-				"2080|Low|c3": [{"type":"dynamic","show":[0,1]}],
-				"Current|Medium|c3": undefined,
-				"2020|Medium|c3": [{"type":"dynamic","show":[16,17]}],
-				"2050|Medium|c3": [{"type":"dynamic","show":[10,11]}],
-				"2080|Medium|c3": [{"type":"dynamic","show":[2,3]}],
-				"Current|High|c3": undefined,
-				"2020|High|c3": [{"type":"dynamic","show":[18,19]}],
-				"2050|High|c3": [{"type":"dynamic","show":[12,13]}],
-				"2080|High|c3": [{"type":"dynamic","show":[4,5,6,7]}]
-
-			}
+			
+			},
+			"mainURL": "http://dev.services2.coastalresilience.org/arcgis/rest/services/Virginia/Inundation/MapServer"
 		},
 		{
-			"name": "NOAA SLR Viewer data",
-			"extent": {"xmin":-8279552.773327565,"ymin":4952655.188376434,"xmax":-7983615.836980773,"ymax":5088660.854503088,"spatialReference":{"wkid":102100,"latestWkid":3857}},
-			"methods": "http://coast.noaa.gov/digitalcoast/tools/slr",
-			controls: [
-				{"name":"Choose SLR", "type": "slider", "index":0, "values":[{"selected": true, "name":"Current","value":"0", "help": "Year 2010"},{"name":"1 ft", "value":"1"}, {"name":"2 ft", "value":"2"}, {"name":"3 ft", "value":"3"}, {"name":"4 ft", "value":"4"}, {"name":"5 ft", "value":"5"}, {"name":"6 ft", "value":"6"}]}
+			"name": "Storm Surge",
+			"extent": {"xmin":-8465603.278145544,"ymin":4449501.684258065,"xmax":-8374321.7741455445,"ymax":4584528.084258066,"spatialReference":{"wkid":102100,"latestWkid":3857}},
+			"controls": [
+				{"name":"Choose a Scenario Year", "help": "<img src='methods/SLR_graphic_storm_surge.png' />", "index":0, "values":[{"name":"Current","value":"Current", "help": "Current Year", "selected": true},{"name":"2040", "value":"2040"}, {"name":"2065", "value":"2065"}], "type": "slider"},
+				
+				{"name":"Choose a Storm Type", "help": "The storms modeled here include multiple theoretical hurricanes and one historic nor’easter. The theoretical storms were selected from a FEMA database containing storms that could potentially occur based on historical records. Storms were selected based on stakeholder-identified areas of interest. <b>These storms do not have a probability of occurrence associated with them</b>, though subjectively a low intensity storm has a higher probability of occurring in any given year than a high intensity storm. What is shown on the map is the <b>maximum storm surge water depth for multiple modeled storms in each intensity category</b>.<br><br><ul><li><b>Low Intensity</b> includes three Category 1 hurricanes with maximum winds of 80 mph</li><li><b>Moderate Intensity</b> includes six Category 1 and 2 hurricanes with maximum winds between 85 and 110 mph.</li><li><b>High Intensity</b> includes seven Category 2 and 3 hurricanes with maximum winds between 95 and 115 mph.</li><li><b>Nor’Ida</b> shows only the storm surge generated by that particular storm, which occurred in 2009.</li><br><br>All storms were modeled under current conditions and under two future sea level rise scenarios.", "index":0, "values":[{"name":"Low Intensity","value":"Low", "help": "Low", "selected": true},{"name":"Moderate Intensity", "value":"Mod"}, {"name":"High Intensity", "value":"High"}, {"name":"Nor'Ida", "value":"Nor"}], "type": "slider"},
+				
+				{"name":"Depth or Difference:", "help": "When the “Current” scenario year is selected, storm surge water depth will be shown on the map. If the 2040 or 2065 scenario year is selected then users may also choose to show differences between the selected year and current conditions. This can be shown as an absolute difference (in feet) or a percent difference. This is important because <b>a given sea level rise (SLR) will not affect all places equally</b>. For the 2040 scenario, which is a 1.35 ft. SLR, the map will show some places with an increase in storm surge of more than 1.35 ft. and some places with less. This is similarly true for the 2065 scenario with a 2.58 ft. SLR.", "index":0, "values":[{"name":"Water Depth (ft)","value":"Depth", "selected": true},{"name":"Absolute Difference", "value":"aDiff"}, {"name":"Percent Difference", "value":"pDiff"}], "type": "radio", "dependent": "2040|2065"},
+				
+				{"name": "Additional Layers:<br>", "values": [{"name":"Show storm tracks", "value":"Tracks", "help": "Checking this box will add tracks to the map for the group of storms representing each storm type.", "selected": false, "dependent": "Low"}], "type": "checkbox"},
+
+				{"name": "", "group": "MS", "values": [{"name":"Show tidal range", "value":"TRange", "help": "All the storm surge modeling was done based on mean tide level. Storm surge water depth will of course vary depending on the tide at which the maximum surge occurs. Checking this box will show tidal range at various locations on the map so users can assess the potential variability in water depth for a given storm type.", "selected": false}], "type": "checkbox"},
+
+				
 				],
-			combos: {
+			"combos": {
+			    "TRange": [{"type":"dynamic","show":[0]}],
+				"Tracks": [{"type":"dynamic","show":[1]}],
+				
+				"Current|Low": [{"type":"dynamic","show":[5]}],
+				"Current|Low|Tracks": [{"type":"dynamic","show":[5,1]}],
+				"2040|Low|Depth": [{"type":"dynamic","show":[6]}],
+				"2040|Low|Depth|Tracks": [{"type":"dynamic","show":[6,1]}],
+				"2065|Low|Depth": [{"type":"dynamic","show":[7]}],
+				"2065|Low|Depth|Tracks": [{"type":"dynamic","show":[7,1]}],
+				
+				"Current|Mod": [{"type":"dynamic","show":[8]}],
+				"Current|Mod|Tracks": [{"type":"dynamic","show":[8,2]}],
+				"2040|Mod|Depth": [{"type":"dynamic","show":[9]}],
+				"2040|Mod|Depth|Tracks": [{"type":"dynamic","show":[9,2]}],
+				"2065|Mod|Depth": [{"type":"dynamic","show":[10]}],
+				"2065|Mod|Depth|Tracks": [{"type":"dynamic","show":[10,2]}],
 
-				"0": [{"type":"tiled", "url": "http://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_0ft/MapServer"}],
-				"1": [{"type":"tiled", "url": "http://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_1ft/MapServer"}],
-				"2": [{"type":"tiled", "url": "http://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_2ft/MapServer"}],
-				"3": [{"type":"tiled", "url": "http://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_3ft/MapServer"}],
-				"4": [{"type":"tiled", "url": "http://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_4ft/MapServer"}],
-				"5": [{"type":"tiled", "url": "http://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_5ft/MapServer"}],
-				"6": [{"type":"tiled", "url": "http://maps1.coast.noaa.gov/arcgis/rest/services/dc_slr/slr_6ft/MapServer"}]
+				"Current|High": [{"type":"dynamic","show":[11]}],
+				"Current|High|Tracks": [{"type":"dynamic","show":[11,3]}],
+				"2040|High|Depth": [{"type":"dynamic","show":[12]}],
+				"2040|High|Depth|Tracks": [{"type":"dynamic","show":[12,3]}],
+				"2065|High|Depth": [{"type":"dynamic","show":[13]}],
+				"2065|High|Depth|Tracks": [{"type":"dynamic","show":[13,3]}],
+				
+				"Current|Nor": [{"type":"dynamic","show":[14]}],
+				"Current|Nor|Tracks": [{"type":"dynamic","show":[14,4]}],
+				"2040|Nor|Depth": [{"type":"dynamic","show":[15]}],
+				"2040|Nor|Depth|Tracks": [{"type":"dynamic","show":[15,4]}],
+				"2065|Nor|Depth": [{"type":"dynamic","show":[16]}],
+				"2065|Nor|Depth|Tracks": [{"type":"dynamic","show":[16,4]}],
 
+				"2040|Low|aDiff": [{"type":"dynamic","show":[21]}],
+				"2065|Low|aDiff": [{"type":"dynamic","show":[29]}],
+				"2040|Low|aDiff|Tracks": [{"type":"dynamic","show":[21,1]}],
+				"2065|Low|aDiff|Tracks": [{"type":"dynamic","show":[29,1]}],
+				
+				"2040|Mod|aDiff": [{"type":"dynamic","show":[22]}],
+				"2065|Mod|aDiff": [{"type":"dynamic","show":[30]}],
+				"2040|Mod|aDiff|Tracks": [{"type":"dynamic","show":[22,2]}],
+				"2065|Mod|aDiff|Tracks": [{"type":"dynamic","show":[30,2]}],
+				
+				"2040|High|aDiff": [{"type":"dynamic","show":[23]}],
+				"2065|High|aDiff": [{"type":"dynamic","show":[31]}],
+				"2040|High|aDiff|Tracks": [{"type":"dynamic","show":[23,3]}],
+				"2065|High|aDiff|Tracks": [{"type":"dynamic","show":[31,3]}],
+				
+				"2040|Nor|aDiff": [{"type":"dynamic","show":[24]}],
+				"2065|Nor|aDiff": [{"type":"dynamic","show":[32]}],				
+				"2040|Nor|aDiff|Tracks": [{"type":"dynamic","show":[24,4]}],
+				"2065|Nor|aDiff|Tracks": [{"type":"dynamic","show":[32,4]}],
+				
+				"2040|Low|pDiff": [{"type":"dynamic","show":[17]}],
+				"2065|Low|pDiff": [{"type":"dynamic","show":[25]}],
+				"2040|Low|pDiff|Tracks": [{"type":"dynamic","show":[17,1]}],
+				"2065|Low|pDiff|Tracks": [{"type":"dynamic","show":[25,1]}],
+				
+				"2040|Mod|pDiff": [{"type":"dynamic","show":[18]}],
+				"2065|Mod|pDiff": [{"type":"dynamic","show":[26]}],
+				"2040|Mod|pDiff|Tracks": [{"type":"dynamic","show":[18,2]}],
+				"2065|Mod|pDiff|Tracks": [{"type":"dynamic","show":[26,2]}],
+				
+				"2040|High|pDiff": [{"type":"dynamic","show":[19]}],
+				"2065|High|pDiff": [{"type":"dynamic","show":[27]}],
+				"2040|High|pDiff|Tracks": [{"type":"dynamic","show":[19,3]}],
+				"2065|High|pDiff|Tracks": [{"type":"dynamic","show":[27,3]}],
+				
+				"2040|Nor|pDiff": [{"type":"dynamic","show":[20]}],
+				"2065|Nor|pDiff": [{"type":"dynamic","show":[28]}],
+				"2040|Nor|pDiff|Tracks": [{"type":"dynamic","show":[20,4]}],
+				"2065|Nor|pDiff|Tracks": [{"type":"dynamic","show":[28,4]}]
 
-			}
+			
+			},
+			"mainURL": "http://dev.services2.coastalresilience.org/arcgis/rest/services/Virginia/Storm_Surge_Complete/MapServer"
 		}
 	]
 }

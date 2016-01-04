@@ -120,12 +120,12 @@ define([
 					dojoquery,
 					NodeListtraverse,
 					localrequire,
-					configData
+					configData_MultiSelect
 					) {
 
-			_config = dojo.eval("[" + configData + "]")[0];
+			_config_MultiSelect = dojo.eval("[" + configData_MultiSelect + "]")[0];
 
-			_infographic = _config.infoGraphic;
+			_infographic = _config_MultiSelect.infoGraphic;
 
 			if (_infographic != undefined) {
 
@@ -133,9 +133,9 @@ define([
 
 			}
 
-			if (_config.ddText != undefined) {
+			if (_config_MultiSelect.ddText != undefined) {
 
-				_ddText = _config.ddText;
+				_ddText = _config_MultiSelect.ddText;
 
 			} else {
 
@@ -143,9 +143,9 @@ define([
 
 			}
 			
-			if (_config.helpWidth != undefined) {
+			if (_config_MultiSelect.helpWidth != undefined) {
 
-				_helpWidth = _config.helpWidth;
+				_helpWidth = _config_MultiSelect.helpWidth;
 
 			} else {
 
@@ -153,9 +153,9 @@ define([
 
 			}
 
-			if (_config.regionLabeler != undefined) {
+			if (_config_MultiSelect.regionLabeler != undefined) {
 
-				_regionLabeler = _config.regionLabeler;
+				_regionLabeler = _config_MultiSelect.regionLabeler;
 
 			} else {
 
@@ -163,9 +163,9 @@ define([
 
 			}
 
-			if (_config.hideDisableds != undefined) {
+			if (_config_MultiSelect.hideDisableds != undefined) {
 
-				_hideDisableds = _config.hideDisableds;
+				_hideDisableds = _config_MultiSelect.hideDisableds;
 
 			} else {
 
@@ -173,9 +173,9 @@ define([
 
 			}	
 
-			if (_config.noZoom != undefined) {
+			if (_config_MultiSelect.noZoom != undefined) {
 
-				_noZoom = _config.noZoom;
+				_noZoom = _config_MultiSelect.noZoom;
 
 			} else {
 
@@ -186,13 +186,13 @@ define([
 			
 
            return declare(PluginBase, {
-		       toolbarName: _config.name,
+		       toolbarName: _config_MultiSelect.name,
                toolbarType: "sidebar",
                allowIdentifyWhenActive: true,
 			   width: 420,
 			   _hasactivated: false,
 			   infoGraphic: _infographic,
-			   height: _config.pluginHeight,
+			   height: _config_MultiSelect.pluginHeight,
 			   rendered: false,
 			   stateRestore: false,
 
@@ -324,7 +324,7 @@ define([
 					declare.safeMixin(this, frameworkParameters);
 
 
-					this.infoIcon = dojo.eval("[" + configData + "]")[0].infoIcon;
+					this.infoIcon = dojo.eval("[" + configData_MultiSelect + "]")[0].infoIcon;
 
 					if (this.infoIcon == undefined) {
 
@@ -332,7 +332,7 @@ define([
 
 					}
 
-					this.mainData = dojo.eval("[" + configData + "]")[0]
+					this.mainData = dojo.eval("[" + configData_MultiSelect + "]")[0]
 
 					this.windowStyles = this.mainData.windowStyles;
 
