@@ -133,13 +133,13 @@ define([
 
 			}
 
-			if (_config_MultiSelect.ddText != undefined) {
+			if (_config_MultiSelect.ddText == undefined) {
 
-				_ddText = _config_MultiSelect.ddText;
+				//_ddText = _config_MultiSelect.ddText;
 
-			} else {
+			//} else {
 
-				_ddText = "Choose a Region";
+				_config_MultiSelect.ddText = "Choose a Region";
 
 			}
 			
@@ -418,7 +418,7 @@ define([
 
 
 					newbutton = new DropDownButton({
-						label: _ddText,
+						label: _config_MultiSelect.ddText,
 						style: "margin-bottom:6px !important",
 						dropDown: menu
 					});
