@@ -153,13 +153,13 @@ define([
 
 			}
 
-			if (_config_MultiSelect.regionLabeler != undefined) {
+			if (_config_MultiSelect.regionLabeler == undefined) {
 
-				_regionLabeler = _config_MultiSelect.regionLabeler;
+				//_regionLabeler = _config_MultiSelect.regionLabeler;
 
-			} else {
+			//} else {
 
-				_regionLabeler = "Selected Region: #";
+				_config_MultiSelect.regionLabeler = "Selected Region: #";
 
 			}
 
@@ -880,7 +880,7 @@ define([
 
 					//this.button.set("label",geography.name);
 
-					this.regionLabelNode.innerHTML = _regionLabeler.replace("#", [geography.name]);
+					this.regionLabelNode.innerHTML = _config_MultiSelect.regionLabeler.replace("#", [geography.name]);
 
 					this.controlNodes = new Array();
 
