@@ -435,7 +435,7 @@ define([
 					cdg = domGeom.position(this.container);
 					console.log(this.mainpane.domNode);
 
-					this.sph = cdg.h-135;
+					this.sph = cdg.h-145;
 
 					//this.tabpan.doLayout = false;
 
@@ -915,11 +915,26 @@ define([
 
 						array.forEach(geography.buttons, lang.hitch(this,function(cbutton, i){
 
+							if (cbutton.url == undefined) {
+							
+							newButt = new Button({
+									label: cbutton.title,
+									onClick: lang.hitch(this,function(){
+										
+											domStyle.set(this.infoarea.domNode, { "display": "" });
+											this.infoareacontent.innerHTML = cbutton.popup;
+											
+										})  //function(){window.open(this.configVizObject.methods)}
+									});								
+							
+							} else {
+						
 							newButt = new Button({
 								label: cbutton.title,
 								onClick: lang.hitch(this,function(){window.open(cbutton.url)})  //function(){window.open(this.configVizObject.methods)}
 								});
-
+							}
+							
 							this.ButtonsLocation.appendChild(newButt.domNode);
 
 
@@ -1524,7 +1539,7 @@ define([
 
 
 					this.buttonpane = new ContentPane({
-					  style:"border-top-style:groove !important; height:100px;overflow: hidden !important;background-color:#F3F3F3 !important;padding:10px !important;"
+					  style:"border-top-style:groove !important; height:130px;overflow: hidden !important;background-color:#F3F3F3 !important;padding:10px !important;"
 					});
 
 
