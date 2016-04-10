@@ -128,7 +128,7 @@
 			
 			},
 			"mainURL": "http://dev.services2.coastalresilience.org/arcgis/rest/services/Virginia/Storm_Surge_Complete/MapServer",
-			"extraText": "Note that the historic sea level trends are available to view from NOAA for <a href='http://tidesandcurrents.noaa.gov/sltrends/sltrends_station.shtml?stnid=8631044' target='_blank'>Wachapreague</a> and <a target='_blank' href='http://tidesandcurrents.noaa.gov/sltrends/sltrends_station.shtml?stnid=8632200'>Kiptopeke</a>."
+			"extraText": "<br> <br>Note that the historic sea level trends are available to view from NOAA for <a href='http://tidesandcurrents.noaa.gov/sltrends/sltrends_station.shtml?stnid=8631044' target='_blank'>Wachapreague</a> and <a target='_blank' href='http://tidesandcurrents.noaa.gov/sltrends/sltrends_station.shtml?stnid=8632200'>Kiptopeke</a>."
 		}
 	]
 }
