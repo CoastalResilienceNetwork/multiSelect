@@ -1319,6 +1319,8 @@ define([
 
 					}));
 
+					textNoder = domConstruct.create("div", {innerHTML: geography.extraText});
+					controlNode.appendChild(textNoder);
 
 					aspect.after(this.tabpan, "selectChild", lang.hitch(this,function (e, o) {
 
@@ -1351,7 +1353,7 @@ define([
 
 					this.resize();
 
-					this.makeSandwidches();
+					this.makeSandwidches(); 
 
 			   },
 
