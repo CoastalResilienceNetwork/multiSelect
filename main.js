@@ -198,7 +198,6 @@ define([
 
                activate: function () {
 
-
 					if (this.rendered == false) {
 
 						this.rendered = true;
@@ -952,7 +951,7 @@ define([
 					if (this.currentgeography.tabs == undefined) {
 
 						this.currentgeography.tabs = new Array();
-						rec = {"controls": this.currentgeography.controls, "combos": this.currentgeography.combos, "mainURL": this.currentgeography.mainURL}
+						rec = {"controls": this.currentgeography.controls, "combos": this.currentgeography.combos, "mainURL": this.currentgeography.mainURL, "titles": this.currentgeography.titles , "htmlIntro": this.currentgeography.htmlIntro}
 						this.currentgeography.tabs.push(rec)
 
 					}
@@ -974,6 +973,8 @@ define([
 
 					}
 
+					
+					
 					dom.byId(this.mainpane.domNode).appendChild(this.tabpan.domNode);
 					parser.parse();
 
@@ -998,7 +999,7 @@ define([
 						// This is the node that can be hidden
 
 
-					   if (ctabrec.titles != undefined) {
+					   if (ctabrec.titles != undefined) { 
 							if (ctabrec.titles[c] != undefined) {
 
 								controlNode = domConstruct.create("div");
@@ -1015,14 +1016,25 @@ define([
 
 								}
 
-								ttext = "<span style='color:#000' >" + thelpButton + ctabrec.titles[c].name + "</span>"
+								if (ctabrec.titles[c].style != undefined) {
+									
+									tstyle = ctabrec.titles[c].style;
+									
+								} else {
+								
+									tstyle = 'font-weight:bold;padding-top:10px;font-size: 120%;color:#000'
+								
+								}
+								
+								ttext = "<span>" + thelpButton + ctabrec.titles[c].name + "</span>";
 
-								nodetitle = domConstruct.create("div", {style:"font-weight:bold;padding-top:10px;font-size: 120%;", innerHTML: ttext});
+								nodetitle = domConstruct.create("div", {style:tstyle, innerHTML: ttext});
 								controlNode.appendChild(nodetitle);
 
 									a = dojoquery(nodetitle).children();
-									if (a.children.length > 0) {
-
+									//if (a.children.length > 0) {
+									if (thelpButton != "") {
+	
 										b = a.children()
 										iconNode = dojoquery(b[0])
 
